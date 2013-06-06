@@ -1,0 +1,30 @@
+<div class="span8">
+  {% for box in site.doc_boxes %}
+  <div class="box">
+    <h4>{{ box.box }}</h4>
+    <ul>
+      {% for item in box.items %}
+      <li class="{% if page.title == item.title %}current{% endif %}">
+        <a href="{{ site.url }}/docs/{{ item.link }}.html">{{ item.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="box-connected clearfix ssb">
+  </div>
+  {% endfor %}
+
+  <div class="box">
+    <h4>API Docs</h4>
+    <ul>
+      {% for item in site.docs %}
+      <li class="{% if page.title == item.title %}current{% endif %}">
+        <a href="{{ site.url }}/docs/{{ item.link }}.html">{{ item.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="box-connected clearfix ssb">
+  </div>

@@ -4,5 +4,33 @@ pygments: true
 download:
     version: 0.15.0
     date: "June 10th, 2013"
-    size: 40kb minified and gzipped
-    blurb: "New Views"
+
+doc_boxes:
+  - box: Getting Started
+    items:
+      - title: Welcome
+        link: index
+      - title: Installation
+        link: installation
+      - title: Basic Usage
+        link: usage
+      - title: Directory Structure
+        link: structure
+      - title: Configuration
+        link: configuration
+  - box: Guides
+    items:
+      - title: Controllers
+        link: controllers
+      - title: Bindings
+        link: bindings
+      - title: Views
+        link: views
+      - title: Models
+        link: models
+      - title: Testing
+        link: testing
+
+docs:
+  - title: Batman.Object
+    link: object

@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>batman.js{% if page.key or page.subkey %} &mdash; {% if page.subkey %}{{ page.subkey }}{% else %}{{ page.key }}{% endif %}{% endif %}</title>
+  <title>batman.js{% if page.key or page.title %} &mdash; {% if page.title %}{{ page.title | downcase }}{% else %}{{ page.key }}{% endif %}{% endif %}</title>
 
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/fancybox.css">
-  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/syntax.css">
 </head>
-<body id="{% if page.key == 'overview' and page.subkey == null %}home{% else %}sub{% endif %}">
+<body id="{% if page.key == 'overview' and page.title == null %}home{% else %}sub{% endif %}">
 
   <div class="header">
     <div class="wrapper">
@@ -20,9 +19,9 @@
         <nav class="nav-top">
           <ul class="nav-primary">
             <li {% if page.key == 'overview' %}class="active"{% endif %}><a href="/">Overview</a></li>
-            <li {% if page.key == 'examples' %}class="active"{% endif %}><a href="examples.html">Examples</a></li>
-            <li><a href="docs/batman.html">Documentation</a></li>
-            <li class="nav-top-highlight {% if page.key == 'download' %}active{% endif %}"><a href="download.html">Download</a></li>
+            <li {% if page.key == 'examples' %}class="active"{% endif %}><a href="/examples.html">Examples</a></li>
+            <li {% if page.key == 'documentation' %}class="active"{% endif %}><a href="/docs/index.html">Documentation</a></li>
+            <li class="nav-top-highlight {% if page.key == 'download' %}active{% endif %}"><a href="/download.html">Download</a></li>
           </ul>
         </nav>
       </div>
@@ -47,7 +46,7 @@
 
     </div>
   </div>
-  <!-- Begin content-wrapper -->
+  <!-- End content-wrapper -->
 
 
   <div class="footer">
@@ -55,7 +54,7 @@
       <div class="row clearfix">
 
         <div class="span12">
-          <a class="shopify-logo" href="http://www.shopify.com" target="_blank"><img src="images/logo-shopify.png"  alt="ecommerce software" /></a>
+          <a class="shopify-logo" href="http://www.shopify.com" target="_blank"><img src="/images/logo-shopify.png"  alt="ecommerce software" /></a>
         </div>
 
         <div class="span12 pt tr">
@@ -72,8 +71,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-  <script src="js/scripts.js"></script>
-  <script src="js/jquery.tweet.js"></script>
+  <script src="/js/scripts.js"></script>
+  <script src="/js/jquery.tweet.js"></script>
   <script>
   // Begin jquery tweet //
   $(document).ready(function(){

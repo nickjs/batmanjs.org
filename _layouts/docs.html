@@ -1,0 +1,31 @@
+---
+key: documentation
+layout: default
+---
+
+
+<div class="plain-row">
+  <div class="wrapper">
+
+    <div class="row clearfix">
+      <div class="span16">
+        <div class="box box-highlight">
+          <div class="page-header">
+            <h2 class="ssb">{{ page.title }}</h2>
+          </div>
+          {{ content }}
+        </div>
+
+        <div class="box-highlight-connected">
+          {% include section_nav.html %}
+        </div>
+      </div>
+
+      {% include docs_contents.html %}
+
+      <div class="clear"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
