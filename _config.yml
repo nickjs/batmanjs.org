@@ -1,0 +1,8 @@
+safe: true
+lsi: false
+pygments: true
+download:
+    version: 0.15.0
+    date: "June 10th, 2013"
+    size: 40kb minified and gzipped
+    blurb: "New Views"

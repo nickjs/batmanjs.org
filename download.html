@@ -1,0 +1,56 @@
+---
+key: download
+layout: default
+---
+
+<div class="plain-row">
+  <div class="wrapper">
+
+    <div class="row clearfix">
+      <div class="span24">
+        <div class="page-header">
+          <div class="version-details">
+            <p><span class="title">Latest version:</span> {{ site.download.version }}</p>
+            <p><span class="title">Released:</span> {{ site.download.date }} (<a href="http://github.com/Shopify/batman/blob/master/CHANGELOG.md">release notes</a>)</p>
+          </div>
+          <h2 class="ssb">Download batman.js</h2>
+        </div>
+      </div>
+
+      <div class="span14">
+        <div class="box box-highlight" style="padding: 47px 20px;"> <!--sry-->
+          <h4>Using the gem</h4>
+          <p class="divider">Automatically vendors the latest version of batman.js for Rails 3.2 in your project. In the Gemfile for your project add <code class="code-highlight">gem "batman-rails"</code>.</p>
+          <p>After modifying your Gemfile:</p>
+          <p class="callout">Requires Rails 3.2, and the rails asset pipeline provided by sprockets.</p>
+          <ul class="bat-list">
+            <li><code>bundle install</code></li>
+            <li><code>rails generate batman:app</code></li>
+          </ul>
+        </div>
+        <div class="box-highlight-connected">
+          <a href="https://github.com/Shopify/batman-rails">Learn more about using the batman-rails gem</a>
+        </div>
+      </div>
+
+      <div class="span10">
+        <div class="box">
+          <h5>Sample project .zip</h5>
+          <p>Includes a minified copy of batman.js and accompanying folder structure to get you building a batman project in no time.</p>
+        </div>
+        <div class="box-connected clearfix ssb">
+          <a href="" class="btn fr">Download .zip <i class="ico-download"></i></a>
+        </div>
+
+        <div class="box">
+          <h5>Standalone </h5>
+          <p>Standalone minified Batman.js file (40Kb, minified and gzipped).</p>
+        </div>
+        <div class="box-connected clearfix">
+          <a href="" class="btn fr">Download batman.min.js <i class="ico-download"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
