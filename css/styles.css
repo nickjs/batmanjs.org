@@ -451,6 +451,15 @@ div[class*="span"] {
 /* homepage > demo feature */
 .demo .files { width: 150px; padding: 15px; }
 
+/* content-wrapper */
+.content-wrapper ul {
+  list-style: disc;
+  padding: 15px;
+}
+.content-wrapper p {
+  margin-bottom: 15px;
+}
+
 
 /* footer */
 .footer{

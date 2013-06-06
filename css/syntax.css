@@ -1,10 +1,11 @@
-div.highlight { 
+div.highlight {
 	background:#FFFFFF;
 	border:1px solid #E0E0E0;
 	font-family:"Courier New",Courier,monospace;
 	overflow: hidden;
-	padding: 7px;
-	margin-bottom: 20px;
+	padding: 9px;
+	margin-top: 10px;
+	margin-bottom: 25px;
 }
 div.highlight pre{
 	width: 100%;
