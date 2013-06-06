@@ -12,10 +12,10 @@ doc_boxes:
         link: index
       - title: Installation
         link: installation
-      - title: Directory Structure
-        link: structure
       - title: Basic Usage
         link: usage
+      - title: Directory Structure
+        link: structure
       - title: Configuration
         link: configuration
   - box: Guides
