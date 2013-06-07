@@ -270,6 +270,14 @@ div[class*="span"] {
   text-decoration: none;
   line-height: 66px;
 }
+.header .logo {
+  background: url(/images/logo-white-small.png);
+  display: inline-block;
+  width: 50px;
+  height: 40px;
+  margin: 9px 10px -9px 0;
+}
+
 
 /* header > nav */
 .header-nav { float: right; }
