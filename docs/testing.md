@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Testing
-prev_section: usage
+prev_section: architecture
 ---
 
 ## 1. Introduction to Testing
@@ -12,7 +12,7 @@ Testing is core to any great software product and `Batman.Testing` aims to make 
 
 `Batman.TestCase` is the base class all of your Batman App's tests will derive from. `TestCase` provides a simple API of common assertions you'll want to perform in your tests.  In most cases, these methods are simple wrappers around their QUnit equivalents but with a focus on making it easy for Rails developers to write these tests.  The testing assertions are modeled after Ruby's [Test::Unit](http://ruby-doc.org/stdlib-2.0/libdoc/test/unit/rdoc/Test/Unit.html), bringing in line expectations for expectation and actual assertion values as well as method signatures.
 
-### Class setup
+#### 2.1 Class setup
 
 To create a basic Batman test, simple create a new class that extends from `Batman.TestCase`.
 
@@ -22,7 +22,7 @@ class SimpleTest extends Batman.TestCase
     @assert true
 {% endhighlight %}
 
-### Setup and Teardown
+#### 2.2 Setup and Teardown
 
 All Batman.TestCase tests are given `setup` and `teardown` methods that are called before each test is run. Use these methods for initializing test data or resetting values that may persist between tests.
 
@@ -42,7 +42,7 @@ class SimpleTest extends Batman.TestCase
     @assert !window.badExample
 {% endhighlight %}
 
-### Assertions
+#### 2.3 Assertions
 
 `Batman.TestCase` comes with a set of basic assertions that Ruby `Test::Unit` users will be familiar with:
 
@@ -62,7 +62,7 @@ class SimpleTest extends Batman.TestCase
 
 `assertRaises(exception, callback)`: Ensures that an exception of type `exception` is raised during the executing of the `callback`.
 
-### Async tests
+#### 2.4 Async tests
 
 If your tests are asynchronous, you can control the flow of them with the `continue` and `wait` functions. These are simple wrappers over QUnit's `start` and `stop` methods.
 
@@ -76,7 +76,7 @@ class SimpleTest extends Batman.TestCase
     @testCase.wait()
 {% endhighlight %}
 
-### Running your tests
+#### 2.5 Running your tests
 
 Batman.TestCase `test` methods simply wrap `QUnit`'s existing `test` method. In order to run your tests, instantiate an instance of your `Batman.TestCase` and call `runTests`. This will add a new `QUnit.module` with your given test class name and queue all tests in the class into `QUnit`'s test runner.
 
@@ -95,7 +95,7 @@ class App.PostsTest extends Batman.ModelTestCase
 
 Everything available to `Batman.TestCase` will be included in your `Batman.ModelTestCase` as well as additional, Model specific assertions and helper functions.
 
-### Batman.ModelTestCase specific assertions
+#### 3.1 Batman.ModelTestCase specific assertions
 
 `assertValid: (model, [msg])`: Ensures the given model has no Batman validation errors
 
@@ -107,7 +107,7 @@ Everything available to `Batman.TestCase` will be included in your `Batman.Model
 
 `assertEncoded: (model, key, expected)`: Ensures the given `model` encodes the `key` property with a value equal to the `expected` value.
 
-### Fixtures
+#### 3.2 Fixtures
 
 There is currently no fixture framework included with `Batman.ModelTestCase` however a simple fixture approach can be achieved by defining simple POJOs in this manner:
 
@@ -131,7 +131,7 @@ class App.PostsTest extends Batman.ModelTestCase
     @assertEqual "Hello world!", @post.get('title')
 {% endhighlight %}
 
-### A few examples
+#### 3.3 A few examples
 
 {% highlight coffeescript %}
 class App.Post extends Batman.Model

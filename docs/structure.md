@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Directory Structure
-prev_section: usage
+prev_section: architecture
 next_section: configuration
 ---
 

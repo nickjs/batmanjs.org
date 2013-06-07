@@ -12,8 +12,8 @@ doc_boxes:
         link: index
       - title: Installation
         link: installation
-      - title: Basic Usage
-        link: usage
+      - title: Architecture
+        link: architecture
       - title: Directory Structure
         link: structure
       - title: Configuration
@@ -22,12 +22,12 @@ doc_boxes:
     items:
       - title: Controllers
         link: controllers
+      - title: Models
+        link: models
       - title: Bindings
         link: bindings
       - title: Views
         link: views
-      - title: Models
-        link: models
       - title: Testing
         link: testing
 
