@@ -6,7 +6,13 @@ div.highlight {
 	padding: 9px;
 	margin-top: 10px;
 	margin-bottom: 25px;
+	box-shadow: inset 0px 0 3px #ccc;
+	border: 1px solid #C4B7D8;
+	font-size: 
 }
+
+.highlight code { font-size: 100%; }
+
 div.highlight pre{
 	width: 100%;
 	overflow: auto;

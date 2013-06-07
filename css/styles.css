@@ -37,7 +37,13 @@ p + p { margin: 0 0 .45em 0;}
 h1 { color: magenta; }
 
 h2, h3, h4, h5 { font-family: ProximaNovaLight; }
-h2 { font-size: 170%; margin-bottom: .5em;}
+h2 { 
+  font-size: 170%; 
+  margin-bottom: .5em; 
+  margin-top: 1.3em; 
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E4E8F5; 
+}
 h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; }
 h4 { font-size: 130%; margin-bottom: .5em; }
 h5 { font-size: 115%; margin-bottom: .5em; }
@@ -49,7 +55,7 @@ code {
   color: #333;
   padding: 0 3px;
   background: #fff;
-  font-size: 85%
+  font-size: 85%;
 }
 .code-highlight {
   background: #fff8d4;
@@ -64,6 +70,8 @@ code {
 div[class*="span"] {
   padding-left: 20px;
   float:left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 .span1 {  width:4.1666667%; }
@@ -196,6 +204,8 @@ div[class*="span"] {
 .box {
   background: #f9f9f9;
   padding: 20px;
+  font-size: 1.1em;
+  line-height: 1.5em;
 }
 .box p { color: #5c5c6e; }
 .box-connected{
@@ -225,6 +235,33 @@ div[class*="span"] {
 .box-highlight-connected a:hover{ text-decoration: underline }
 .box.mh {
   min-height: 155px;
+}
+
+td + td > p, th + th {
+  padding-left: 20px;
+}
+
+.next, .prev {
+  background: #f8f8f8;
+  border-radius: 2px;
+  padding: 5px 10px;
+  box-shadow: 0 1px #cbcdd6;
+  font-size: 1.3em;
+  cursor: pointer;
+  -webkit-transition: background-color 0.2s ease-in;
+  -moz-transition: background-color 0.2s ease-in;
+  transition: background-color 0.2s ease-in;
+}
+
+.next:hover, .prev:hover {
+  text-decoration: none !important;
+  background: #fff;
+}
+
+.disabled, .disabled:hover {
+  color: #999;
+  background: #f3f3f9;
+  cursor: default;
 }
 
 /* lists */
@@ -285,6 +322,8 @@ div[class*="span"] {
   display: block;
   height: 64px;
   line-height: 67px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
   padding: 0 20px;
@@ -313,8 +352,27 @@ div[class*="span"] {
 }
 
 .page-header{
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
+
+.page-header h2 {
+  margin-top: 0.3em;
+}
+
+.box li a {
+  text-decoration: none;
+  line-height: 1.6em;
+}
+
+.current:before {
+  content: "▶";
+  margin-left: -42px;
+  font-size: 16px;
+  padding-right: 23px;
+  color: #f3f4fb;
+  text-shadow: 1px 2px 1px rgb(231, 226, 255);
+}
+
 
 /* homepage mega intro block */
 .intro {
@@ -373,7 +431,6 @@ div[class*="span"] {
 }
 
 /* Code Editor */
-
 .code-editor {
   /* background: #DEDEEB; */
   background: rgba(57, 57, 63, 0.67);
@@ -558,6 +615,8 @@ div[class*="span"] {
   padding: 6px;
   border: solid 1px #ddd;
   font-size: 16px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: ProximaNovaRegular;
   height: 32px;
