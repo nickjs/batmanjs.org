@@ -37,12 +37,12 @@ p + p { margin: 0 0 .45em 0;}
 h1 { color: magenta; }
 
 h2, h3, h4, h5 { font-family: ProximaNovaLight; }
-h2 { 
-  font-size: 170%; 
-  margin-bottom: .5em; 
-  margin-top: 1.3em; 
+h2 {
+  font-size: 170%;
+  margin-bottom: .5em;
+  margin-top: 1.3em;
   padding-bottom: 8px;
-  border-bottom: 1px solid #E4E8F5; 
+  border-bottom: 1px solid #E4E8F5;
 }
 h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; }
 h4 { font-size: 130%; margin-bottom: .5em; }
@@ -387,8 +387,8 @@ td + td > p, th + th {
 .intro h3 { font-size: 18px; line-height: 1.3em; text-align: center; }
 
 .intro-message {
-  margin-top: 175px;
-  margin-bottom: 0px;
+  margin-top: 80px;
+  margin-bottom: 40px;
 }
 
 /* Next Steps */
