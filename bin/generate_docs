@@ -1,0 +1,52 @@
+#!/usr/bin/env coffee
+
+_        = require('underscore')
+fs       = require('fs')
+glob     = require('glob')
+marked   = require('marked')
+mustache = require('mustache')
+hljs     = require('highlight.js')
+
+
+argv     = require('optimist')
+           .usage('Usage: $0 -dir [docs directory]')
+           .demand('dir')
+           .argv
+
+sections = []
+files    = glob.sync("#{argv.dir}/**/*.litcoffee")
+template = fs.readFileSync("#{__dirname}/../templates/api_docs.mustache")
+options  = highlight: (code, lang) -> hljs.highlightAuto(code).value
+
+files.forEach (f) ->
+  content  = fs.readFileSync(f)
+  tokens   = marked.lexer(content.toString(), {})
+
+  tokens.forEach (token) ->
+    if token.type == 'heading' && token.depth == 1
+      sections.push(title: token.text, sub: [], tokens: [])
+
+    else if token.type == 'heading' && token.depth == 2
+      section = _.last(sections)
+      section.sub.push(title: token.text, tokens: [])
+
+    else
+      section = _.last(sections)
+      sub     = _.last(section.sub)
+
+      if sub?
+        sub.tokens.push(token)
+      else
+        section.tokens.push(token)
+
+parseTokens = (tokens, options) ->
+  tokens.links = {}
+  options = _.extend({}, marked.defaults, options)
+  marked.Parser.parse(tokens, options)
+
+sections.forEach (section) ->
+  section.html = parseTokens(section.tokens, options)
+  section.sub.forEach (sub) -> sub.html = parseTokens(sub.tokens, options)
+
+docs = mustache.render(template.toString(), sections: sections)
+fs.writeFileSync("#{__dirname}/../docs/api.html", docs)

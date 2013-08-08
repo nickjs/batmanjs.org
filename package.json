@@ -1,0 +1,19 @@
+{
+  "name": "batmanjs.github.io",
+  "author": "Nick Small <nick@shopify.com> (http://github.com/nickjs)",
+  "version": "0.0.1",
+  "homepage": "http://batmanjs.org",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/batmanjs/batmanjs.github.io.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "glob": "~3.2.6",
+    "highlight.js": "~7.3.0",
+    "marked": "~0.2.9",
+    "mustache": "~0.7.2",
+    "optimist": "~0.6.0",
+    "underscore": "~1.5.1"
+  }
+}

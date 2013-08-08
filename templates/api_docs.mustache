@@ -1,0 +1,11 @@
+<div>
+  {{ #sections }}
+    <h2>{{ title }}</h2>
+    {{{ html }}}
+    {{ #sub }}
+      <h3>{{ title }}</h3>
+      {{{ html }}}
+    {{ /sub }}
+    <hr />
+  {{ /sections }}
+</div>
