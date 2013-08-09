@@ -1,0 +1,23 @@
+---
+layout: api_docs
+title: batman.js
+sub: 
+  - title: Installation
+    tokens: []
+    id: 0_0_Installation
+    html: "<p>Batman is available as a standalone download or as an <code>npm</code> package.</p>\n<h3>Standalone Browser Version</h3>\n<p>Versions of batman suitable for use in a web application are available at GitHub.</p>\n<h3>node.js</h3>\n<p>If you haven&#39;t already, you&#39;ll need to install <a href=\"http://nodejs.org\">node.js</a>. Then:</p>\n<p><code>bash\nnpm install -g batman</code></p>\n<p>Generate a new batman.js app somewhere, called my_app:</p>\n<p><code>bash\ncd ~/code\nbatman new my_app</code></p>\n<p>Fire it up:</p>\n<p><code>bash\ncd my_app\nbatman server # (or just &quot;batman s&quot;)</code></p>\n<p>Now visit <a href=\"http://localhost:1047\"><a href=\"http://localhost:1047\">http://localhost:1047</a></a> and start playing around!</p>\n"
+  - title: Architecture
+    tokens: []
+    id: 0_1_Architecture
+    html: "<p>Batman prescribes an MVC architecture for client side applications which fits together like this:</p>\n<ul>\n<li>Models have validations, lifecycle events, a built-in identity map, and can be told how to persist themselves. (<code>Batman.LocalStorage</code>, <code>Batman.RestStorage</code>, and <code>Batman.RailsStorage</code> are included).</li>\n<li>Views are JavaScript classes which render templates written in pure HTML. The templates use <code>data-*</code> attributes to create bindings to model data and trigger event handlers.</li>\n<li>Controllers are persistent objects which mediate access to the model data, render the views, and handle events from the views.</li>\n</ul>\n<p>A batman.js application is served up in one page load, followed by asynchronous requests for various resources as the user interacts with the app. Navigation within the app can use <a href=\"https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history#Adding_and_modifying_history_entries\">pushState</a> where supported, or fall back on to <a href=\"http://www.w3.org/QA/2011/05/hash_uris.html\">hash-bang fragment identifers</a>.</p>\n"
+tokens: []
+id: 0_batman.js
+html: "<p><a href=\"http://batmanjs.org/\">batman.js</a> is a framework for building rich single-page browser applications. It is written in <a href=\"http://jashkenas.github.com/coffee-script/\">CoffeeScript</a> and its API is developed with CoffeeScript in mind, but of course you can use plain old JavaScript too.</p>\n<h3>It&#39;s got:</h3>\n<ul>\n<li>a stateful MVC architecture</li>\n<li>a powerful binding system</li>\n<li>routable controller actions</li>\n<li>pure HTML views</li>\n<li>toolchain support built on <a href=\"http://nodejs.org\">node.js</a> and <a href=\"http://jashkenas.github.com/coffee-script/#cake\">cake</a></li>\n</ul>\n<p>Batman&#39;s API is heavily inspired by <a href=\"http://rubyonrails.org/\">Rails</a> and designed to make Rails devs feel right at home.</p>\n<h3>Platforms</h3>\n<p>Batman runs in node and the browser. Batman supports node v0.8.x. We&#39;re targeting Chrome, Safari 4+, Firefox 3+, and IE 7+ for compatibility. Batman expects ES5 features like <code>Function::bind</code> and <code>Array::map</code>, so we recommend poly-filling these for older browsers with something like <a href=\"https://github.com/kriskowal/es5-shim\">es5shim</a> or <a href=\"http://augmentjs.com/\">augmentjs</a>. Batman also expects <code>JSON.parse</code>, which can be implemented in browsers without it using <a href=\"https://github.com/douglascrockford/JSON-js\">json2.js</a>.</p>\n"
+
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  {{ s.html }}
+{% endfor %}

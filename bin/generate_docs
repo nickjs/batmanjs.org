@@ -1,21 +1,35 @@
 #!/usr/bin/env coffee
 
-_        = require('underscore')
-fs       = require('fs')
-glob     = require('glob')
-marked   = require('marked')
-mustache = require('mustache')
-hljs     = require('highlight.js')
+_      = require('underscore')
+fs     = require('fs')
+glob   = require('glob')
+hljs   = require('highlight.js')
+yaml   = require('js-yaml')
+marked = require('marked')
 
-
-argv     = require('optimist')
+argv   = require('optimist')
            .usage('Usage: $0 -dir [docs directory]')
            .demand('dir')
            .argv
 
+parseTokens = (tokens, options) ->
+  tokens.links = {}
+  options = _.extend({}, marked.defaults, options)
+  marked.Parser.parse(tokens, options)
+
+generateId = (title, index) ->
+  title = encodeURIComponent(title.replace(/\s/g, '_'))
+  "#{index}_#{title}"
+
+writeTemplate = (template, destination, replacements) ->
+  content = fs.readFileSync("#{__dirname}/../_templates/#{template}").toString()
+  for key, replacement of replacements
+    content = content.replace("#= #{key}", replacement)
+
+  fs.writeFileSync("#{__dirname}/../#{destination}", content)
+
 sections = []
 files    = glob.sync("#{argv.dir}/**/*.litcoffee")
-template = fs.readFileSync("#{__dirname}/../templates/api_docs.mustache")
 options  = highlight: (code, lang) -> hljs.highlightAuto(code).value
 
 files.forEach (f) ->
@@ -39,14 +53,18 @@ files.forEach (f) ->
       else
         section.tokens.push(token)
 
-parseTokens = (tokens, options) ->
-  tokens.links = {}
-  options = _.extend({}, marked.defaults, options)
-  marked.Parser.parse(tokens, options)
-
-sections.forEach (section) ->
+sections.forEach (section, index) ->
+  section.id = generateId(section.title, index)
   section.html = parseTokens(section.tokens, options)
-  section.sub.forEach (sub) -> sub.html = parseTokens(sub.tokens, options)
 
-docs = mustache.render(template.toString(), sections: sections)
-fs.writeFileSync("#{__dirname}/../docs/api.html", docs)
+  section.sub.forEach (sub, subIndex) ->
+    sub.id = "#{index}_#{generateId(sub.title, subIndex)}"
+    sub.html = parseTokens(sub.tokens, options)
+
+  writeTemplate('api.html', "docs/api/#{section.id}.html", api_doc: yaml.dump(section))
+
+index = sections.map (section) ->
+  subIndex = section.sub.map (sub) -> id: sub.id, title: sub.title
+  id: section.id, title: section.title, sub: subIndex
+
+writeTemplate('config.yml', '_config.yml', api_index: yaml.dump(api_index: index))

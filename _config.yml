@@ -34,3 +34,379 @@ doc_boxes:
 docs:
   - title: Batman.Object
     link: object
+
+api_index: 
+  - id: 0_batman.js
+    title: batman.js
+    sub: 
+      - id: 0_0_Installation
+        title: Installation
+      - id: 0_1_Architecture
+        title: Architecture
+  - id: 1_Batman_Helpers
+    title: Batman Helpers
+    sub: 
+      - id: 1_0_container
+        title: container
+      - id: "1_1_typeOf(object)_%3A_string"
+        title: "typeOf(object) : string"
+      - id: "1_2_mixin(subject%2C_objects...)_%3A_subject"
+        title: "mixin(subject, objects...) : subject"
+      - id: "1_3_unmixin(subject%2C_objects...)_%3A_subject"
+        title: "unmixin(subject, objects...) : subject"
+      - id: "1_4_functionName(function)_%3A_string"
+        title: "functionName(function) : string"
+      - id: "1_5_isChildOf(parent_%3A_HTMLElement%2C_child_%3A_HTMLElement)_%3A_boolean"
+        title: "isChildOf(parent : HTMLElement, child : HTMLElement) : boolean"
+      - id: "1_6_setImmediate(callback_%3A_Function)_%3A_object"
+        title: "setImmediate(callback : Function) : object"
+      - id: 1_7_clearImmediate(handle)
+        title: clearImmediate(handle)
+      - id: "1_8_forEach(iterable_%3A_object%2C_iterator_%3A_Function%5B%2C_context_%3A_Object%5D)"
+        title: "forEach(iterable : object, iterator : Function[, context : Object])"
+      - id: "1_9_objectHasKey(object%2C_key)_%3A_boolean"
+        title: "objectHasKey(object, key) : boolean"
+      - id: "1_10_contains(object%2C_item)_%3A_boolean"
+        title: "contains(object, item) : boolean"
+      - id: "1_11_get(object%2C_key)_%3A_value"
+        title: "get(object, key) : value"
+      - id: "1_12_getPath(base%2C_segments)_%3A_string"
+        title: "getPath(base, segments) : string"
+      - id: "1_13_escapeHTML(string)_%3A_string"
+        title: "escapeHTML(string) : string"
+  - id: 2_Batman.helpers
+    title: Batman.helpers
+    sub: 
+      - id: "2_0_ordinalize(value_%3A_%5Bnumber%7Cstring%5D)_%3A_string"
+        title: "ordinalize(value : [number|string]) : string"
+      - id: "2_1_singularize(pluralString_%3A_string)_%3A_string"
+        title: "singularize(pluralString : string) : string"
+      - id: "2_2_pluralize(singularString_%3A_string)_%3A_string"
+        title: "pluralize(singularString : string) : string"
+      - id: "2_3_camelize(string%2C_%5BlowercaseFirstLetter_%3D_false%5D)_%3A_string"
+        title: "camelize(string, [lowercaseFirstLetter = false]) : string"
+      - id: "2_4_underscore(string)_%3A_string"
+        title: "underscore(string) : string"
+      - id: "2_5_capitalize(string)_%3A_string"
+        title: "capitalize(string) : string"
+      - id: "2_6_trim(string)_%3A_string"
+        title: "trim(string) : string"
+      - id: "2_7_interpolate(stringOrObject%2C_keys)_%3A_string"
+        title: "interpolate(stringOrObject, keys) : string"
+      - id: "2_8_humanize(string)_%3A_string"
+        title: "humanize(string) : string"
+      - id: 2_9_Batman.EventEmitter
+        title: Batman.EventEmitter
+  - id: 3_Batman.Observable
+    title: Batman.Observable
+    sub: 
+      - id: "3_0_get(keypath)_%3A_value"
+        title: "get(keypath) : value"
+      - id: "3_1_set(keypath%2C_newValue)_%3A_newValue"
+        title: "set(keypath, newValue) : newValue"
+      - id: "3_2_unset(keypath)_%3A_value"
+        title: "unset(keypath) : value"
+      - id: "3_3_observe(key%2C_observerCallback)_%3A_this"
+        title: "observe(key, observerCallback) : this"
+      - id: "3_4_observeAndFire(key%2C_observerCallback)_%3A_this"
+        title: "observeAndFire(key, observerCallback) : this"
+      - id: "3_5_forget(%5Bkey_%5B%2C_observerCallback%5D%5D)_%3A_this"
+        title: "forget([key [, observerCallback]]) : this"
+      - id: "3_6_getOrSet(keypath%2C_valueFunction)_%3A_value"
+        title: "getOrSet(keypath, valueFunction) : value"
+  - id: 4_Batman.Object
+    title: Batman.Object
+    sub: 
+      - id: "4_0_%40accessor(%5Bkeys...%5D%2C_objectOrFunction)"
+        title: "@accessor([keys...], objectOrFunction)"
+      - id: "4_1_%40classAccessor(%5Bkeys...%5D%2C_objectOrFunction)"
+        title: "@classAccessor([keys...], objectOrFunction)"
+      - id: "4_2_%40mixin(objects...)_%3A_prototype"
+        title: "@mixin(objects...) : prototype"
+      - id: "4_3_%40classMixin(objects...)_%3A_this"
+        title: "@classMixin(objects...) : this"
+      - id: "4_4_%40observeAll(key%2C_callback_%3A_function)_%3A_prototype"
+        title: "@observeAll(key, callback : function) : prototype"
+      - id: 4_5_constructor(objects...)
+        title: constructor(objects...)
+      - id: "4_6_toJSON()_%3A_object"
+        title: "toJSON() : object"
+      - id: "4_7_hashKey()_%3A_string"
+        title: "hashKey() : string"
+      - id: "4_8_accessor(%5Bkeys...%5D%2C_objectOrFunction)"
+        title: "accessor([keys...], objectOrFunction)"
+      - id: "4_9_mixin(objects...)_%3A_this"
+        title: "mixin(objects...) : this"
+  - id: 5_Batman.SimpleSet
+    title: Batman.SimpleSet
+    sub: 
+      - id: 5_0_constructor(items...)
+        title: constructor(items...)
+      - id: "5_1_length_%3A_number"
+        title: "length : number"
+      - id: "5_2_has(item)_%3A_Boolean"
+        title: "has(item) : Boolean"
+      - id: "5_3_add(items...)_%3A_Array"
+        title: "add(items...) : Array"
+      - id: "5_4_remove(items...)_%3A_Array"
+        title: "remove(items...) : Array"
+      - id: "5_5_addAndRemove(itemsToAdd%2C_itemsToRemove)_%3A_Object"
+        title: "addAndRemove(itemsToAdd, itemsToRemove) : Object"
+      - id: "5_6_find(testFunction_%3A_function)_%3A_%5BObject%5D"
+        title: "find(testFunction : function) : [Object]"
+      - id: "5_7_forEach(iteratorFunction_%3A_function%5B%2C_context%3A_Object%5D)"
+        title: "forEach(iteratorFunction : function[, context: Object])"
+      - id: "5_8_isEmpty()_%3A_boolean"
+        title: "isEmpty() : boolean"
+      - id: "5_9_clear()_%3A_Array"
+        title: "clear() : Array"
+      - id: "5_10_replace(collection_%3A_Enumerable)_%3A_Array"
+        title: "replace(collection : Enumerable) : Array"
+      - id: "5_11_toArray()_%3A_Array"
+        title: "toArray() : Array"
+      - id: "5_12_merge(collections..._%3A_Enumerable)_%3A_SimpleSet"
+        title: "merge(collections... : Enumerable) : SimpleSet"
+      - id: "5_13_indexedBy(key_%3A_String)_%3A_SetIndex"
+        title: "indexedBy(key : String) : SetIndex"
+      - id: "5_14_indexedByUnique(key_%3A_String)_%3A_UniqueSetIndex"
+        title: "indexedByUnique(key : String) : UniqueSetIndex"
+      - id: "5_15_sortedBy(key%3A_String_%5B%2C_order%3A_String%5D)_%3A_SetSort"
+        title: "sortedBy(key: String [, order: String]) : SetSort"
+      - id: 5_16_Batman.Set
+        title: Batman.Set
+  - id: 6_Batman.App
+    title: Batman.App
+    sub: 
+      - id: 6_0_Batman.currentApp
+        title: Batman.currentApp
+      - id: "6_1_%40run()_%3A_App"
+        title: "@run() : App"
+      - id: "6_2_%40stop()_%3A_App"
+        title: "@stop() : App"
+      - id: "6_3_%40routes"
+        title: "@routes"
+      - id: "6_4_%40controllers"
+        title: "@controllers"
+      - id: "6_5_%40layout"
+        title: "@layout"
+      - id: "6_6_%40currentParams"
+        title: "@currentParams"
+      - id: "6_7_%40paramsManager"
+        title: "@paramsManager"
+      - id: "6_8_%40paramsPusher"
+        title: "@paramsPusher"
+      - id: "6_9_'run'_class_event"
+        title: "'run' class event"
+      - id: "6_10_'ready'_class_event"
+        title: "'ready' class event"
+  - id: 7_Batman.App_Routing
+    title: Batman.App Routing
+    sub: 
+      - id: "7_0_%40resources(resourceName_%3A_String%5B%2C_otherResourceNames..._%3A_String%5D%5B%2C_options_%3A_Object%5D%5B%2C_scopedCallback_%3A_Function%5D)"
+        title: "@resources(resourceName : String[, otherResourceNames... : String][, options : Object][, scopedCallback : Function])"
+      - id: "7_1_%40member"
+        title: "@member"
+      - id: "7_2_%40collection"
+        title: "@collection"
+      - id: "7_3_%40route"
+        title: "@route"
+      - id: "7_4_%40root"
+        title: "@root"
+  - id: 8_Batman.Controller
+    title: Batman.Controller
+    sub: 
+      - id: 8_0_Controller_Directory
+        title: Controller Directory
+      - id: 8_1_Actions
+        title: Actions
+      - id: "8_2_%60routingKey%60_and_Minification"
+        title: "`routingKey` and Minification"
+      - id: "8_3_%40beforeFilter(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
+        title: "@beforeFilter([options : [String|Object]], filter : [String|Function])"
+      - id: "8_4_%40afterFilter(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
+        title: "@afterFilter([options : [String|Object]], filter : [String|Function])"
+      - id: "8_5_autoScrollToHash%5B%3D_true%5D_%3A_boolean"
+        title: "autoScrollToHash[= true] : boolean"
+      - id: "8_6_defaultRenderYield%5B%3D_'main'%5D_%3A_String"
+        title: "defaultRenderYield[= 'main'] : String"
+      - id: 8_7_Controller_Actions
+        title: Controller Actions
+      - id: 8_8_executeAction
+        title: executeAction
+      - id: 8_9_render
+        title: render
+      - id: 8_10_redirect
+        title: redirect
+      - id: 8_11_scrollToHash
+        title: scrollToHash
+  - id: 9_Batman.Model
+    title: Batman.Model
+    sub: 
+      - id: 9_0_The_Asynchronous_Nature_of_the_World
+        title: The Asynchronous Nature of the World
+      - id: 9_1_The_Identity_Map
+        title: The Identity Map
+      - id: 9_2_Subclassing
+        title: Subclassing
+      - id: 9_3_Storage_Adapters
+        title: Storage Adapters
+      - id: "9_4_%40primaryKey_%3A_string"
+        title: "@primaryKey : string"
+      - id: "9_5_%40storageKey_%3A_string"
+        title: "@storageKey : string"
+      - id: "9_6_%40persist(mechanism_%3A_StorageAdapter)_%3A_StorageAdapter"
+        title: "@persist(mechanism : StorageAdapter) : StorageAdapter"
+      - id: "9_7_%40encode(keys...%5B%2C_encoderObject_%3A_%5BObject%7CFunction%5D%5D)"
+        title: "@encode(keys...[, encoderObject : [Object|Function]])"
+      - id: "9_8_%40validate(keys...%5B%2C_options_%3A_%5BObject%7CFunction%5D%5D)"
+        title: "@validate(keys...[, options : [Object|Function]])"
+      - id: "9_9_%40loaded_%3A_Set"
+        title: "@loaded : Set"
+      - id: "9_10_%40all_%3A_Set"
+        title: "@all : Set"
+      - id: "9_11_%40clear()_%3A_Set"
+        title: "@clear() : Set"
+      - id: "9_12_%40find(id%2C_callback_%3A_Function)_%3A_Model"
+        title: "@find(id, callback : Function) : Model"
+      - id: "9_13_%40load(options_%3D_%7B%7D%2C_callback_%3A_Function)"
+        title: "@load(options = {}, callback : Function)"
+      - id: "9_14_%40create(attributes_%3D_%7B%7D%2C_callback)_%3A_Model"
+        title: "@create(attributes = {}, callback) : Model"
+      - id: "9_15_%40findOrCreate(attributes_%3D_%7B%7D%2C_callback)_%3A_Model"
+        title: "@findOrCreate(attributes = {}, callback) : Model"
+      - id: "9_16_id_%3A_value"
+        title: "id : value"
+      - id: "9_17_dirtyKeys_%3A_Set"
+        title: "dirtyKeys : Set"
+      - id: "9_18_errors_%3A_ErrorsSet"
+        title: "errors : ErrorsSet"
+      - id: "9_19_constructor(idOrAttributes_%3D_%7B%7D)_%3A_Model"
+        title: "constructor(idOrAttributes = {}) : Model"
+      - id: "9_20_isNew()_%3A_boolean"
+        title: "isNew() : boolean"
+      - id: "9_21_updateAttributes(attributes)_%3A_Model"
+        title: "updateAttributes(attributes) : Model"
+      - id: "9_22_toString()_%3A_string"
+        title: "toString() : string"
+      - id: "9_23_toJSON()_%3A_Object"
+        title: "toJSON() : Object"
+      - id: "9_24_fromJSON()_%3A_Model"
+        title: "fromJSON() : Model"
+      - id: "9_25_toParam()_%3A_value"
+        title: "toParam() : value"
+      - id: "9_26_state()_%3A_string"
+        title: "state() : string"
+      - id: "9_27_hasStorage()_%3A_boolean"
+        title: "hasStorage() : boolean"
+      - id: "9_28_load(options_%3D_%7B%7D%2C_callback)"
+        title: "load(options = {}, callback)"
+      - id: "9_29_save(options_%3D_%7B%7D%2C_callback)"
+        title: "save(options = {}, callback)"
+      - id: "9_30_destroy(options_%3D_%7B%7D%2C_callback)"
+        title: "destroy(options = {}, callback)"
+      - id: 9_31_validate(callback)
+        title: validate(callback)
+  - id: 10_Batman.ValidationError
+    title: Batman.ValidationError
+    sub: []
+  - id: 11_Batman.ErrorsSet
+    title: Batman.ErrorsSet
+    sub: []
+  - id: 12_Batman.View
+    title: Batman.View
+    sub: []
+  - id: 13_Batman_View_Bindings
+    title: Batman View Bindings
+    sub: 
+      - id: 13_0_How_to_use_bindings
+        title: How to use bindings
+      - id: "13_1_data-bind"
+        title: "data-bind"
+      - id: "13_2_data-source"
+        title: "data-source"
+      - id: "13_3_data-target"
+        title: "data-target"
+      - id: "13_4_data-showif_%2F_data-hideif"
+        title: "data-showif / data-hideif"
+      - id: "13_5_data-addclass_%2F_data-removeclass"
+        title: "data-addclass / data-removeclass"
+      - id: "13_6_data-foreach"
+        title: "data-foreach"
+      - id: "13_7_data-formfor"
+        title: "data-formfor"
+      - id: "13_8_data-context"
+        title: "data-context"
+      - id: "13_9_data-event"
+        title: "data-event"
+      - id: "13_10_data-route"
+        title: "data-route"
+      - id: "13_11_data-view"
+        title: "data-view"
+      - id: "13_12_data-partial"
+        title: "data-partial"
+      - id: "13_13_data-mixin"
+        title: "data-mixin"
+      - id: "13_14_data-defineview"
+        title: "data-defineview"
+      - id: "13_15_data-renderif"
+        title: "data-renderif"
+      - id: "13_16_data-yield"
+        title: "data-yield"
+      - id: "13_17_data-contentfor"
+        title: "data-contentfor"
+      - id: "13_18_data-replace"
+        title: "data-replace"
+  - id: 14_Batman_View_Filters
+    title: Batman View Filters
+    sub: 
+      - id: "14_0_raw(value)_%3A_string"
+        title: "raw(value) : string"
+      - id: "14_1_get(value%2C_key)_%3A_value"
+        title: "get(value, key) : value"
+      - id: "14_2_value%5Bkey%5D_%3A_value"
+        title: "value[key] : value"
+      - id: "14_3_equals(left%2C_right)_%3A_boolean"
+        title: "equals(left, right) : boolean"
+      - id: "14_4_not(value)_%3A_boolean"
+        title: "not(value) : boolean"
+      - id: "14_5_matches(value%2C_string)_%3A_boolean"
+        title: "matches(value, string) : boolean"
+      - id: "14_6_truncate(value%2C_length%2C_end_%3D_'...')_%3A_string"
+        title: "truncate(value, length, end = '...') : string"
+      - id: "14_7_default(value%2C_defaultValue)_%3A_value"
+        title: "default(value, defaultValue) : value"
+      - id: "14_8_prepend(value%2C_string)_%3A_string"
+        title: "prepend(value, string) : string"
+      - id: "14_9_append(value%2C_string)_%3A_string"
+        title: "append(value, string) : string"
+      - id: "14_10_replace(value%2C_searchString%2C_replaceString%5B%2C_flags%5D)_%3A_string"
+        title: "replace(value, searchString, replaceString[, flags]) : string"
+      - id: "14_11_downcase(value)_%3A_string"
+        title: "downcase(value) : string"
+      - id: "14_12_upcase(value)_%3A_string"
+        title: "upcase(value) : string"
+      - id: "14_13_pluralize(value%2C_count)_%3A_string"
+        title: "pluralize(value, count) : string"
+      - id: "14_14_humanize(string)_%3A_string"
+        title: "humanize(string) : string"
+      - id: "14_15_join(value%2C_separator_%3D_'')_%3A_string"
+        title: "join(value, separator = '') : string"
+      - id: "14_16_sort(value)_%3A_value"
+        title: "sort(value) : value"
+      - id: "14_17_map(iterable)_%3A_value"
+        title: "map(iterable) : value"
+      - id: "14_18_has(iterable%2C_item)_%3A_boolean"
+        title: "has(iterable, item) : boolean"
+      - id: "14_19_first(iterable)_%3A_value"
+        title: "first(iterable) : value"
+      - id: "14_20_meta(value%2C_keypath)_%3A_value"
+        title: "meta(value, keypath) : value"
+      - id: "14_21_interpolate(string%2C_valuesObject)_%3A_string"
+        title: "interpolate(string, valuesObject) : string"
+      - id: "14_22_withArguments(function%2C_curriedArguments...)_%3A_function"
+        title: "withArguments(function, curriedArguments...) : function"
+      - id: "14_23_routeToAction(model%2C_action)_%3A_string"
+        title: "routeToAction(model, action) : string"
+      - id: "14_24_escape(value)_%3A_string"
+        title: "escape(value) : string"
+

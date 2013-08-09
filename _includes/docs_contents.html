@@ -15,16 +15,7 @@
   </div>
   {% endfor %}
 
-  <div class="box">
-    <h4>API Docs</h4>
-    <ul>
-      {% for item in site.docs %}
-      <li class="{% if page.title == item.title %}current{% endif %}">
-        <a href="{{ site.url }}/docs/{{ item.link }}.html">{{ item.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  {% include api_docs_index.html %}
 
   <div class="box-connected clearfix ssb">
   </div>

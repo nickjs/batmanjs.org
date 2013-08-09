@@ -1,0 +1,38 @@
+safe: true
+lsi: false
+pygments: true
+download:
+    version: 0.15.0
+    date: "June 10th, 2013"
+
+doc_boxes:
+  - box: Getting Started
+    items:
+      - title: Welcome
+        link: index
+      - title: Installation
+        link: installation
+      - title: Architecture
+        link: architecture
+      - title: Directory Structure
+        link: structure
+      - title: Configuration
+        link: configuration
+  - box: Guides
+    items:
+      - title: Controllers
+        link: controllers
+      - title: Models
+        link: models
+      - title: Bindings
+        link: bindings
+      - title: Views
+        link: views
+      - title: Testing
+        link: testing
+
+docs:
+  - title: Batman.Object
+    link: object
+
+#= api_index

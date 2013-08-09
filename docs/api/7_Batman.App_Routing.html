@@ -1,0 +1,35 @@
+---
+layout: api_docs
+title: Batman.App Routing
+sub: 
+  - title: "@resources(resourceName : String[, otherResourceNames... : String][, options : Object][, scopedCallback : Function])"
+    tokens: []
+    id: "7_0_%40resources(resourceName_%3A_String%5B%2C_otherResourceNames..._%3A_String%5D%5B%2C_options_%3A_Object%5D%5B%2C_scopedCallback_%3A_Function%5D)"
+    html: ""
+  - title: "@member"
+    tokens: []
+    id: "7_1_%40member"
+    html: ""
+  - title: "@collection"
+    tokens: []
+    id: "7_2_%40collection"
+    html: ""
+  - title: "@route"
+    tokens: []
+    id: "7_3_%40route"
+    html: ""
+  - title: "@root"
+    tokens: []
+    id: "7_4_%40root"
+    html: ""
+tokens: []
+id: 7_Batman.App_Routing
+html: "<p>The <code>Batman</code> routing DSL is similar to Rails 3&#39;s routing DSL. It is oriented around the notion of a resource:</p>\n"
+
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  {{ s.html }}
+{% endfor %}

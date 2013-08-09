@@ -1,0 +1,10 @@
+---
+layout: api_docs
+#= api_doc
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  {{ s.html }}
+{% endfor %}

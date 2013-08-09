@@ -1,0 +1,115 @@
+---
+layout: api_docs
+title: Batman View Filters
+sub: 
+  - title: "raw(value) : string"
+    tokens: []
+    id: "14_0_raw(value)_%3A_string"
+    html: "<p>The <code>raw</code> filter renders the unescaped value.</p>\n<p><code>html\n&lt;span data-bind=&quot;someHTMLyString | raw&quot;&gt;&lt;/span&gt;</code></p>\n"
+  - title: "get(value, key) : value"
+    tokens: []
+    id: "14_1_get(value%2C_key)_%3A_value"
+    html: ""
+  - title: "value[key] : value"
+    tokens: []
+    id: "14_2_value%5Bkey%5D_%3A_value"
+    html: "<p>Shorthand for the <code>get</code> filter.</p>\n"
+  - title: "equals(left, right) : boolean"
+    tokens: []
+    id: "14_3_equals(left%2C_right)_%3A_boolean"
+    html: ""
+  - title: "not(value) : boolean"
+    tokens: []
+    id: "14_4_not(value)_%3A_boolean"
+    html: ""
+  - title: "matches(value, string) : boolean"
+    tokens: []
+    id: "14_5_matches(value%2C_string)_%3A_boolean"
+    html: ""
+  - title: "truncate(value, length, end = '...') : string"
+    tokens: []
+    id: "14_6_truncate(value%2C_length%2C_end_%3D_'...')_%3A_string"
+    html: ""
+  - title: "default(value, defaultValue) : value"
+    tokens: []
+    id: "14_7_default(value%2C_defaultValue)_%3A_value"
+    html: ""
+  - title: "prepend(value, string) : string"
+    tokens: []
+    id: "14_8_prepend(value%2C_string)_%3A_string"
+    html: ""
+  - title: "append(value, string) : string"
+    tokens: []
+    id: "14_9_append(value%2C_string)_%3A_string"
+    html: ""
+  - title: "replace(value, searchString, replaceString[, flags]) : string"
+    tokens: []
+    id: "14_10_replace(value%2C_searchString%2C_replaceString%5B%2C_flags%5D)_%3A_string"
+    html: ""
+  - title: "downcase(value) : string"
+    tokens: []
+    id: "14_11_downcase(value)_%3A_string"
+    html: ""
+  - title: "upcase(value) : string"
+    tokens: []
+    id: "14_12_upcase(value)_%3A_string"
+    html: ""
+  - title: "pluralize(value, count) : string"
+    tokens: []
+    id: "14_13_pluralize(value%2C_count)_%3A_string"
+    html: ""
+  - title: "humanize(string) : string"
+    tokens: []
+    id: "14_14_humanize(string)_%3A_string"
+    html: ""
+  - title: "join(value, separator = '') : string"
+    tokens: []
+    id: "14_15_join(value%2C_separator_%3D_'')_%3A_string"
+    html: ""
+  - title: "sort(value) : value"
+    tokens: []
+    id: "14_16_sort(value)_%3A_value"
+    html: ""
+  - title: "map(iterable) : value"
+    tokens: []
+    id: "14_17_map(iterable)_%3A_value"
+    html: ""
+  - title: "has(iterable, item) : boolean"
+    tokens: []
+    id: "14_18_has(iterable%2C_item)_%3A_boolean"
+    html: ""
+  - title: "first(iterable) : value"
+    tokens: []
+    id: "14_19_first(iterable)_%3A_value"
+    html: ""
+  - title: "meta(value, keypath) : value"
+    tokens: []
+    id: "14_20_meta(value%2C_keypath)_%3A_value"
+    html: ""
+  - title: "interpolate(string, valuesObject) : string"
+    tokens: []
+    id: "14_21_interpolate(string%2C_valuesObject)_%3A_string"
+    html: ""
+  - title: "withArguments(function, curriedArguments...) : function"
+    tokens: []
+    id: "14_22_withArguments(function%2C_curriedArguments...)_%3A_function"
+    html: ""
+  - title: "routeToAction(model, action) : string"
+    tokens: []
+    id: "14_23_routeToAction(model%2C_action)_%3A_string"
+    html: ""
+  - title: "escape(value) : string"
+    tokens: []
+    id: "14_24_escape(value)_%3A_string"
+    html: ""
+tokens: []
+id: 14_Batman_View_Filters
+html: ""
+
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  {{ s.html }}
+{% endfor %}
