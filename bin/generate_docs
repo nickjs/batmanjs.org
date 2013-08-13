@@ -28,6 +28,10 @@ writeTemplate = (template, destination, replacements) ->
 
   fs.writeFileSync("#{__dirname}/../#{destination}", content)
 
+files = glob.sync("#{__dirname}/../docs/api/*.html")
+for file in files
+  fs.unlinkSync(file)
+
 sections = []
 files    = glob.sync("#{argv.dir}/**/*.litcoffee")
 options  = highlight: (code, lang) -> hljs.highlightAuto(code).value

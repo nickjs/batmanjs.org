@@ -137,43 +137,43 @@ api_index:
         title: "accessor([keys...], objectOrFunction)"
       - id: "4_9_mixin(objects...)_%3A_this"
         title: "mixin(objects...) : this"
-  - id: 5_Batman.SimpleSet
-    title: Batman.SimpleSet
+  - id: 5_Batman.Set
+    title: Batman.Set
     sub: 
       - id: 5_0_constructor(items...)
         title: constructor(items...)
       - id: "5_1_length_%3A_number"
         title: "length : number"
-      - id: "5_2_has(item)_%3A_Boolean"
+      - id: "5_2_isEmpty_%3A_boolean"
+        title: "isEmpty : boolean"
+      - id: "5_3_toArray_%3A_Array"
+        title: "toArray : Array"
+      - id: "5_4_has(item)_%3A_Boolean"
         title: "has(item) : Boolean"
-      - id: "5_3_add(items...)_%3A_Array"
-        title: "add(items...) : Array"
-      - id: "5_4_remove(items...)_%3A_Array"
-        title: "remove(items...) : Array"
-      - id: "5_5_addAndRemove(itemsToAdd%2C_itemsToRemove)_%3A_Object"
-        title: "addAndRemove(itemsToAdd, itemsToRemove) : Object"
-      - id: "5_6_find(testFunction_%3A_function)_%3A_%5BObject%5D"
+      - id: 5_5_add(items...)
+        title: add(items...)
+      - id: 5_6_remove(items...)
+        title: remove(items...)
+      - id: "5_7_find(testFunction_%3A_function)_%3A_%5BObject%5D"
         title: "find(testFunction : function) : [Object]"
-      - id: "5_7_forEach(iteratorFunction_%3A_function%5B%2C_context%3A_Object%5D)"
+      - id: "5_8_forEach(iteratorFunction_%3A_function%5B%2C_context%3A_Object%5D)"
         title: "forEach(iteratorFunction : function[, context: Object])"
-      - id: "5_8_isEmpty()_%3A_boolean"
+      - id: "5_9_isEmpty()_%3A_boolean"
         title: "isEmpty() : boolean"
-      - id: "5_9_clear()_%3A_Array"
+      - id: "5_10_clear()_%3A_Array"
         title: "clear() : Array"
-      - id: "5_10_replace(collection_%3A_Enumerable)_%3A_Array"
+      - id: "5_11_replace(collection_%3A_Enumerable)_%3A_Array"
         title: "replace(collection : Enumerable) : Array"
-      - id: "5_11_toArray()_%3A_Array"
+      - id: "5_12_toArray()_%3A_Array"
         title: "toArray() : Array"
-      - id: "5_12_merge(collections..._%3A_Enumerable)_%3A_SimpleSet"
-        title: "merge(collections... : Enumerable) : SimpleSet"
-      - id: "5_13_indexedBy(key_%3A_String)_%3A_SetIndex"
+      - id: "5_13_merge(collections..._%3A_Enumerable)_%3A_Set"
+        title: "merge(collections... : Enumerable) : Set"
+      - id: "5_14_indexedBy(key_%3A_String)_%3A_SetIndex"
         title: "indexedBy(key : String) : SetIndex"
-      - id: "5_14_indexedByUnique(key_%3A_String)_%3A_UniqueSetIndex"
+      - id: "5_15_indexedByUnique(key_%3A_String)_%3A_UniqueSetIndex"
         title: "indexedByUnique(key : String) : UniqueSetIndex"
-      - id: "5_15_sortedBy(key%3A_String_%5B%2C_order%3A_String%5D)_%3A_SetSort"
+      - id: "5_16_sortedBy(key%3A_String_%5B%2C_order%3A_String%5D)_%3A_SetSort"
         title: "sortedBy(key: String [, order: String]) : SetSort"
-      - id: 5_16_Batman.Set
-        title: Batman.Set
   - id: 6_Batman.App
     title: Batman.App
     sub: 
@@ -221,10 +221,10 @@ api_index:
         title: Actions
       - id: "8_2_%60routingKey%60_and_Minification"
         title: "`routingKey` and Minification"
-      - id: "8_3_%40beforeFilter(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
-        title: "@beforeFilter([options : [String|Object]], filter : [String|Function])"
-      - id: "8_4_%40afterFilter(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
-        title: "@afterFilter([options : [String|Object]], filter : [String|Function])"
+      - id: "8_3_%40beforeAction(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
+        title: "@beforeAction([options : [String|Object]], filter : [String|Function])"
+      - id: "8_4_%40afterAction(%5Boptions_%3A_%5BString%7CObject%5D%5D%2C_filter_%3A_%5BString%7CFunction%5D)"
+        title: "@afterAction([options : [String|Object]], filter : [String|Function])"
       - id: "8_5_autoScrollToHash%5B%3D_true%5D_%3A_boolean"
         title: "autoScrollToHash[= true] : boolean"
       - id: "8_6_defaultRenderYield%5B%3D_'main'%5D_%3A_String"
