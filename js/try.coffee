@@ -46,24 +46,19 @@ class Try.File extends Batman.Model
 	isExpanded: false
 
 	show: ->
-		new Batman.Request
-			url: "/app_files/1.json?path=#{@get('id')}"
-			success: (data) =>
-				@fromJSON(data)
+		if !@cm
+			mode = if @get('name').indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
+			keys = {'Cmd-S': => @save() }
 
-				if !@cm
-					mode = if @get('name').indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
-					keys = {'Cmd-S': => @save() }
+			@node = $('<div style="height:100%"></div>')
+			@cm = CodeMirror(@node[0], theme: 'solarized', mode: mode, lineNumbers: true, extraKeys: keys)
+			@cm.getWrapperElement().style.height = "100%"
+			setTimeout =>
+				@cm.refresh()
+			, 0
 
-					@node = $('<div style="height:100%"></div>')
-					@cm = CodeMirror(@node[0], theme: 'solarized', mode: mode, lineNumbers: true, extraKeys: keys)
-					@cm.getWrapperElement().style.height = "100%"
-					setTimeout =>
-						@cm.refresh()
-					, 0
-
-				@cm.setValue(@get('content') || '')
-				$('#code-editor').html('').append(@node)
+		@cm.setValue(@get('content') || '')
+		$('#code-editor').html('').append(@node)
 
 	save: ->
 		@set('value', @cm.getValue())
