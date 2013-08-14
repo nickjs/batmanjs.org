@@ -37,8 +37,8 @@ files    = glob.sync("#{argv.dir}/**/*.litcoffee")
 options  = highlight: (code, lang) -> hljs.highlightAuto(code).value
 
 files.forEach (f) ->
-  content  = fs.readFileSync(f)
-  tokens   = marked.lexer(content.toString(), {})
+  content = fs.readFileSync(f)
+  tokens  = marked.lexer(content.toString(), {})
 
   tokens.forEach (token) ->
     if token.type == 'heading' && token.depth == 1

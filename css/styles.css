@@ -204,8 +204,10 @@ div[class*="span"] {
 .box {
   background: #f9f9f9;
   padding: 20px;
-  font-size: 1.1em;
   line-height: 1.5em;
+}
+.box.featured {
+  font-size: 1.1em;
 }
 .box p { color: #5c5c6e; }
 .box a { text-decoration: none; }
