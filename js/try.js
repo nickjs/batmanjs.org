@@ -2,7 +2,8 @@
 (function() {
   var steps, _ref, _ref1, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   $('<script src="lib/dist/batman.jquery.js"></script>').appendTo('head');
 
@@ -40,6 +41,7 @@
     __extends(LayoutView, _super);
 
     function LayoutView(options) {
+      this.sendPreviewData = __bind(this.sendPreviewData, this);
       options.node = $('.intro')[0];
       LayoutView.__super__.constructor.apply(this, arguments);
     }
@@ -54,7 +56,24 @@
     };
 
     LayoutView.prototype.previewApp = function() {
-      return window.open('/preview', "app_preview", "width=400,height=600");
+      if (this.previewWindow) {
+        return this.previewWindow.focus();
+      } else {
+        this.previewWindow = window.open('http://localhost:3000/preview', "app_preview", "width=400,height=600");
+        return window.addEventListener('message', this.sendPreviewData);
+      }
+    };
+
+    LayoutView.prototype.sendPreviewData = function() {
+      var files;
+      files = Try.File.get('loaded.indexedBy.id');
+      return this.sendPreviewFile(files.get('/app/assets/batman/rdio.js.coffee').get('first'));
+    };
+
+    LayoutView.prototype.sendPreviewFile = function(file) {
+      return this.previewWindow.postMessage({
+        file: file.toJSON()
+      }, '*');
     };
 
     return LayoutView;
@@ -87,7 +106,7 @@
         set = new Batman.Set;
         for (_i = 0, _len = kids.length; _i < _len; _i++) {
           kid = kids[_i];
-          set.add((new Try.File).fromJSON(kid));
+          set.add(Try.File.createFromJSON(kid));
         }
         return set;
       }

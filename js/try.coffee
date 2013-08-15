@@ -24,7 +24,18 @@ class Try.LayoutView extends Batman.View
 			file.show()
 
 	previewApp: ->
-		window.open('/preview', "app_preview", "width=400,height=600")
+		if @previewWindow
+			@previewWindow.focus()
+		else
+			@previewWindow = window.open('http://localhost:3000/preview', "app_preview", "width=400,height=600")
+			window.addEventListener 'message', @sendPreviewData
+
+	sendPreviewData: =>
+		files = Try.File.get('loaded.indexedBy.id')
+		@sendPreviewFile(files.get('/app/assets/batman/rdio.js.coffee').get('first'))
+
+	sendPreviewFile: (file) ->
+		@previewWindow.postMessage({file: file.toJSON()}, '*')
 
 class Try.File extends Batman.Model
 	@storageKey: 'app_files'
@@ -40,7 +51,7 @@ class Try.File extends Batman.Model
 		decode: (kids) ->
 			set = new Batman.Set
 			for kid in kids
-				set.add (new Try.File).fromJSON(kid)
+				set.add(Try.File.createFromJSON(kid))
 			set
 
 	isExpanded: false
