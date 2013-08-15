@@ -27,14 +27,30 @@ class Try.LayoutView extends Batman.View
 		if @previewWindow
 			@previewWindow.focus()
 		else
-			@previewWindow = window.open('http://localhost:3000/preview', "app_preview", "width=400,height=600")
-			window.addEventListener 'message', @sendPreviewData
+			@previewWindow = window.open('http://localhost:3000/?preview=true', "app_preview", "width=400,height=600")
+			window.addEventListener 'message', (event) =>
+				return unless event.data == 'previewReady'
+				@sendPreviewData()
 
-	sendPreviewData: =>
-		files = Try.File.get('loaded.indexedBy.id')
-		@sendPreviewFile(files.get('/app/assets/batman/rdio.js.coffee').get('first'))
+				console.log 'running'
+				@previewWindow.postMessage('run', '*')
+			, false
 
-	sendPreviewFile: (file) ->
+	sendPreviewData: ->
+		@sendPreviewFile('rdio.js.coffee')
+		@sendPreviewDirectory('lib')
+		@sendPreviewDirectory('controllers')
+		@sendPreviewDirectory('models')
+		@sendPreviewDirectory('views')
+		@sendPreviewDirectory('html')
+
+	sendPreviewDirectory: (dirname) ->
+		dir = Try.File.findByPath("/app/assets/batman/#{dirname}")
+		dir.get('childFiles').forEach (file) =>
+			@previewWindow.postMessage({file: file.toJSON()}, '*')
+
+	sendPreviewFile: (filename) ->
+		file = Try.File.findByPath("/app/assets/batman/#{filename}")
 		@previewWindow.postMessage({file: file.toJSON()}, '*')
 
 class Try.File extends Batman.Model
@@ -46,7 +62,21 @@ class Try.File extends Batman.Model
 	@findByName: (name) ->
 		@get('loaded.indexedBy.name').get(name).get('first')
 
-	@encode 'name', 'content', 'isDirectory'
+	@findByPath: (name) ->
+		@get('loaded.indexedBy.id').get(name).get('first')
+
+	@accessor 'childFiles', ->
+		files = new Batman.Set
+		@get('children').forEach (child) ->
+			if child.get('isDirectory')
+				files.add(child.get('childFiles')._storage...)
+			else
+				files.add(child)
+
+		files
+
+
+	@encode 'name', 'content', 'isDirectory', 'id'
 	@encode 'children',
 		decode: (kids) ->
 			set = new Batman.Set
