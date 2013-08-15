@@ -124,6 +124,12 @@
       return this.get('loaded.indexedBy.id').get(name).get('first');
     };
 
+    File.classAccessor('topLevel', function() {
+      return Try.File.get('all').filter(function(file) {
+        return !file.get('parent');
+      });
+    });
+
     File.accessor('childFiles', function() {
       var files;
       files = new Batman.Set;
@@ -141,11 +147,13 @@
 
     File.encode('children', {
       decode: function(kids) {
-        var kid, set, _i, _len;
+        var file, kid, set, _i, _len;
         set = new Batman.Set;
         for (_i = 0, _len = kids.length; _i < _len; _i++) {
           kid = kids[_i];
-          set.add(Try.File.createFromJSON(kid));
+          file = Try.File.createFromJSON(kid);
+          file.set('parent', this);
+          set.add(file);
         }
         return set;
       }

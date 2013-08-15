@@ -65,6 +65,10 @@ class Try.File extends Batman.Model
 	@findByPath: (name) ->
 		@get('loaded.indexedBy.id').get(name).get('first')
 
+	@classAccessor 'topLevel', ->
+		Try.File.get('all').filter (file) ->
+			!file.get('parent')
+
 	@accessor 'childFiles', ->
 		files = new Batman.Set
 		@get('children').forEach (child) ->
@@ -81,7 +85,9 @@ class Try.File extends Batman.Model
 		decode: (kids) ->
 			set = new Batman.Set
 			for kid in kids
-				set.add(Try.File.createFromJSON(kid))
+				file = Try.File.createFromJSON(kid)
+				file.set('parent', this)
+				set.add(file)
 			set
 
 	isExpanded: false
