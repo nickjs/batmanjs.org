@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/syntax.css">
 </head>
-<body id="{% if page.key == 'overview' and page.title == null %}home{% else %}sub{% endif %}">
+<body class="{% if page.flex %}flex{% endif %}" id="{% if page.key == 'overview' and page.title == null %}home{% else %}sub{% endif %}">
 
   <div class="header">
-    <div class="wrapper">
+    <div class="wrapper clearfix">
       <h1 class="header-site-title"><a href="/">
         <div class="logo"></div>batman.js
       </a></h1>
