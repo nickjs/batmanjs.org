@@ -108,7 +108,6 @@
     LayoutView.prototype.nextStep = function() {
       var index, step;
       Try.currentStep.complete();
-      return;
       index = Try.steps.indexOf(Try.currentStep);
       step = Try.steps[index + 1];
       return step != null ? step.activate() : void 0;
@@ -225,7 +224,8 @@
       var keys, node,
         _this = this;
       keys = {
-        'Cmd-S': this.save
+        'Cmd-S': this.save,
+        'Ctrl-S': this.save
       };
       node = this.get('node');
       this.cm = CodeMirror(node, {

@@ -58,7 +58,7 @@ class Try.LayoutView extends Batman.View
 
   nextStep: ->
     Try.currentStep.complete()
-    return
+
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -126,7 +126,7 @@ class Try.CodeView extends Batman.View
     return doc
 
   ready: ->
-    keys = {'Cmd-S': @save}
+    keys = {'Cmd-S': @save, 'Ctrl-S': @save}
 
     node = @get('node')
     @cm = CodeMirror(node, theme: 'solarized', lineNumbers: true, extraKeys: keys)
