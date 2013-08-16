@@ -6,6 +6,11 @@ $('<script src="js/modes/ruby.js"></script>').appendTo('head')
 $('<link rel="stylesheet" href="css/codemirror.css" />').appendTo('head')
 $('<link rel="stylesheet" href="css/solarized.css" />').appendTo('head')
 
+if window.location.host.indexOf('localhost') != -1
+  APP_URL = 'http://localhost:3000'
+else
+  APP_URL = 'http://batmanrdio.herokuapp.com'
+
 class window.Try extends Batman.App
   @dispatcher: false
   @navigator: false
@@ -15,7 +20,7 @@ class window.Try extends Batman.App
     if @previewWindow
       @previewWindow.focus()
     else
-      @previewWindow = window.open('http://localhost:3000/?preview=true', "app_preview", "width=400,height=600")
+      @previewWindow = window.open("#{APP_URL}/?preview=true", "app_preview", "width=400,height=600")
       window.addEventListener 'message', (event) =>
         return unless event.data == 'previewReady'
         @sendPreviewData()
