@@ -44,7 +44,7 @@ h2 {
   padding-bottom: 8px;
   border-bottom: 1px solid #E4E8F5;
 }
-h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; margin-top: 40px; }
+h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; }
 h4 { font-size: 130%; margin-bottom: .5em; }
 h5 { font-size: 115%; margin-bottom: .5em; }
 a { color: #a2a2ba; }
@@ -682,6 +682,7 @@ td + td > p, th + th {
   background-color: #eaebfb;
   color: #5c5c6e;
   padding: 10px;
+  margin-top: 40px;
 }
 
 @media all and (min-width: 1340px) {
