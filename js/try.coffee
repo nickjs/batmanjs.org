@@ -11,19 +11,7 @@ class window.Try extends Batman.App
 	@navigator: false
 	@layout: 'layout'
 
-class Try.LayoutView extends Batman.View
-	constructor: (options) ->
-		options.node = $('.intro')[0]
-		super
-
-	showFile: (file) ->
-		if file.get('isDirectory')
-			file.set('isExpanded', !file.get('isExpanded'))
-		else
-			@set 'currentFile', file
-			file.show()
-
-	previewApp: ->
+	@previewApp: ->
 		if @previewWindow
 			@previewWindow.focus()
 		else
@@ -36,7 +24,7 @@ class Try.LayoutView extends Batman.View
 				@previewWindow.postMessage('run', '*')
 			, false
 
-	sendPreviewData: ->
+	@sendPreviewData: ->
 		@sendPreviewFile('rdio.js.coffee')
 		@sendPreviewDirectory('lib')
 		@sendPreviewDirectory('controllers')
@@ -44,14 +32,30 @@ class Try.LayoutView extends Batman.View
 		@sendPreviewDirectory('views')
 		@sendPreviewDirectory('html')
 
-	sendPreviewDirectory: (dirname) ->
-		dir = Try.File.findByPath("/app/assets/batman/#{dirname}")
+	@sendPreviewDirectory: (dir) ->
+		dir = Try.File.findByPath("/app/assets/batman/#{dir}") if typeof dir is 'string'
 		dir.get('childFiles').forEach (file) =>
-			@previewWindow.postMessage({file: file.toJSON()}, '*')
+			@sendPreviewFile(file)
 
-	sendPreviewFile: (filename) ->
-		file = Try.File.findByPath("/app/assets/batman/#{filename}")
+	@sendPreviewFile: (file) ->
+		file = Try.File.findByPath("/app/assets/batman/#{file}") if typeof file is 'string'
 		@previewWindow.postMessage({file: file.toJSON()}, '*')
+
+	@reloadPreview: ->
+		return if not @previewWindow
+		@previewWindow.postMessage('reload', '*')
+
+class Try.LayoutView extends Batman.View
+	constructor: (options) ->
+		options.node = $('.intro')[0]
+		super
+
+	showFile: (file) ->
+		if file.get('isDirectory')
+			file.set('isExpanded', !file.get('isExpanded'))
+		else
+			@set 'currentFile', file
+			file.show()
 
 class Try.File extends Batman.Model
 	@storageKey: 'app_files'
@@ -78,7 +82,6 @@ class Try.File extends Batman.Model
 				files.add(child)
 
 		files
-
 
 	@encode 'name', 'content', 'isDirectory', 'id'
 	@encode 'children',
