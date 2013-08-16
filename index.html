@@ -26,8 +26,8 @@ use_intro: true
               <li data-foreach-file="File.topLevel"><div data-view="FileView"></div></li>
             </ul>
           </div>
-          <div class="code-editor-text" id="code-editor">
-            <span class="try-it-live">Click here to try it live!</span>
+          <div class="code-editor-text" id="code-editor" data-view="CodeView">
+            <span class="try-it-live" data-removeif="steps">Click here to try it live!</span>
           </div>
         </div>
         <div class="code-terminal" data-showif="currentStep.isConsole">

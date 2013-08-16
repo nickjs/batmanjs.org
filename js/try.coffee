@@ -96,22 +96,27 @@ class Try.File extends Batman.Model
 	isExpanded: false
 
 	show: ->
-		if !@cm
-			mode = if @get('name').indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
-			keys = {'Cmd-S': => @save() }
+		Try.set('currentFile', this)
 
-			@node = $('<div style="height:100%"></div>')
-			@cm = CodeMirror(@node[0], theme: 'solarized', mode: mode, lineNumbers: true, extraKeys: keys)
-			@cm.getWrapperElement().style.height = "100%"
-			setTimeout =>
-				@cm.refresh()
-			, 0
+class Try.CodeView extends Batman.View
+	ready: ->
+		# mode = if @get('name').indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
+		mode = 'coffeescript'
+		keys = {'Cmd-S': @save}
 
-		@cm.setValue(@get('content') || '')
-		$('#code-editor').html('').append(@node)
+		node = @get('node')
+		@cm = CodeMirror(node, theme: 'solarized', mode: mode, lineNumbers: true, extraKeys: keys)
+		@cm.getWrapperElement().style.height = "100%"
+		setTimeout =>
+			@cm.refresh()
+		, 0
 
-	save: ->
-		@set('value', @cm.getValue())
+		Try.observe 'currentFile', (file) =>
+			@cm.setValue(file.get('content') || '')
+
+	save: =>
+		Try.set('currentFile.content', @cm.getValue())
+		Try.reloadPreview()
 
 class Try.FileView extends Batman.View
 	html: """
