@@ -11,8 +11,8 @@ $('appgen', function() {
   this.title("App Generator");
   this.say("batman-rails includes a number of Rails generators to make batman.js development easy.");
   this.say("Run `rails generate batman:app` to generate an empty batman.js app.");
-  this.expect(/rails\s*[g|generate]\s*batman:app/);
-  return this.after("There's our app! Take a moment to explore the batman directory, it's under `app/assets/batman`.");
+  this.expect(/rails\s+[g|generate]\s+batman:app/, "create  app/controllers/batman_controller.rb\ncreate  app/views/layouts/batman.html.erb\ninsert  config/routes.rb\ncreate  app/assets/batman/rdio.js.coffee\ncreate  app/assets/batman/models\ncreate  app/assets/batman/models/.gitkeep\ncreate  app/assets/batman/views\ncreate  app/assets/batman/views/.gitkeep\ncreate  app/assets/batman/controllers\ncreate  app/assets/batman/controllers/.gitkeep\ncreate  app/assets/batman/html\ncreate  app/assets/batman/html/.gitkeep\ncreate  app/assets/batman/lib\ncreate  app/assets/batman/lib/.gitkeep\ncreate  app/assets/batman/html/main\ncreate  app/assets/batman/controllers/application_controller.js.coffee\ncreate  app/assets/batman/controllers/main_controller.js.coffee\ncreate  app/assets/batman/html/main/index.html\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee");
+  return this.after("There's our app! Take a moment to explore `app/assets/batman`.");
 });
 
 /*

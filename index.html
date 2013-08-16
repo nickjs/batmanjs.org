@@ -41,6 +41,8 @@ use_intro: true
           <div class="code-terminal-text">
             <pre>
 batman.js > <input class="terminal-field" id="terminal-field" />
+<div data-bind="currentStep.result" data-insertif="currentStep.isComplete"></div>
+<div data-insertif="currentStep.isError">Command not found</div>
             </pre>
           </div>
         </div>

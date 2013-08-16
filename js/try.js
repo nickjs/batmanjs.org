@@ -315,11 +315,22 @@
 
     ConsoleStep.prototype.activate = function() {
       ConsoleStep.__super__.activate.apply(this, arguments);
-      return $('#terminal-field').focus();
+      return $('#terminal-field').attr('disabled', false).focus();
     };
 
-    ConsoleStep.prototype.expect = function(regex) {
+    ConsoleStep.prototype.expect = function(regex, result) {
       this.regex = regex;
+      this.result = result;
+    };
+
+    ConsoleStep.prototype.check = function(value) {
+      if (this.regex.test(value)) {
+        this.set('isError', false);
+        this.set('isComplete', true);
+        return $('#terminal-field').attr('disabled', true);
+      } else {
+        return this.set('isError', true);
+      }
     };
 
     return ConsoleStep;

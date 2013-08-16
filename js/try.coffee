@@ -182,9 +182,17 @@ class Try.ConsoleStep extends Try.Step
 
   activate: ->
     super
-    $('#terminal-field').focus()
+    $('#terminal-field').attr('disabled', false).focus()
 
-  expect: (@regex) ->
+  expect: (@regex, @result) ->
+
+  check: (value) ->
+    if @regex.test(value)
+      @set('isError', false)
+      @set('isComplete', true)
+      $('#terminal-field').attr('disabled', true)
+    else
+      @set('isError', true)
 
 class Try.CodeStep extends Try.Step
   isCode: true
