@@ -1,23 +1,25 @@
 # Install batman-rails
-title "Welcome to Batman!"
-say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
-say "First, add `batman-rails` to your Gemfile and run `bundle install`."
+o 'gemfile', ->
+  @title "Welcome to Batman!"
+  @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
+  @say "First, add `batman-rails` to your Gemfile and run `bundle install`."
 
-focus '/Gemfile'
-expect /gem\s*[\"|\']batman\-rails[\"|\']/, in: '/Gemfile'
-expect /bundle\s*install/
+  @focus '/Gemfile'
 
-say "Great! Now we can use batman.js"
+  @command /bundle\s*install/
+
+  @after "Great! Now we can use batman.js"
 
 # Generate batman app
-title "App Generator"
-say "batman-rails includes a number of Rails generators to make batman.js development easy."
-say "Run `rails generate batman:app` to generate an empty batman.js app."
+o 'appgen', ->
+  @title "App Generator"
+  @say "batman-rails includes a number of Rails generators to make batman.js development easy."
+  @say "Run `rails generate batman:app` to generate an empty batman.js app."
 
-expect /rails\s*[g|generate]\s*batman:app/
+  @command /rails\s*[g|generate]\s*batman:app/
 
-say "There's our app! Take a moment to explore the batman directory, it's under `app/assets/batman`."
-
+  @after "There's our app! Take a moment to explore the batman directory, it's under `app/assets/batman`."
+###
 # Generate artist scaffold
 title "Scaffold Generator"
 say "Now let's generate a resource for your batman.js application."
@@ -108,3 +110,4 @@ say "Now let's generate a resource for your batman.js application."
 say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
 
 expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
+###

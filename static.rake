@@ -13,7 +13,22 @@ def files_for_path(path)
     if hash[:isDirectory]
       hash[:children] = files_for_path(filepath)
     else
-      hash[:content] = File.open(filepath).read
+      File.open filepath do |file|
+        content = file.read
+
+        if content.valid_encoding?
+          expectations = []
+          content.gsub! /#\!\{(\S*)(.*)#\!\}/m do
+            name = $1
+            value = $2.strip.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
+            expectations << {name: name, value: value}
+            ''
+          end
+
+          hash[:content] = content
+          hash[:expectations] = expectations if expectations.size > 0
+        end
+      end
     end
 
     hash
