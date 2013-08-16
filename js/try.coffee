@@ -58,6 +58,8 @@ class Try.LayoutView extends Batman.View
       file.show()
 
   nextStep: ->
+    Try.currentStep.complete()
+
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -96,13 +98,15 @@ class Try.File extends Batman.Model
         file = Try.File.createFromJSON(kid)
         file.set('parent', this)
         set.add(file)
-      set
+
+      return set
 
   @encode 'expectations',
     decode: (expectations, key, data) ->
       for expectation in expectations
-        Try.namedSteps[expectation.name].expect(data.id, new RegExp(expectation.value))
-      expectations
+        Try.namedSteps[expectation.stepName].expect(data.id, new RegExp(expectation.regex), expectation.completion)
+
+      return null
 
   isExpanded: false
 
@@ -173,10 +177,6 @@ class Try.ConsoleStep extends Try.Step
 class Try.CodeStep extends Try.Step
   isCode: true
 
-  constructor: ->
-    super
-    @matches = {}
-
   activate: ->
     if filename = @focusFile
       file = Try.File.findByPath(filename)
@@ -184,24 +184,43 @@ class Try.CodeStep extends Try.Step
 
     super
 
-  expect: (filename, regex) ->
-    (@matches[filename] ||= []).push(regex)
+  expect: (filename, regex, completion) ->
+    @matches ||= {}
+    (@matches[filename] ||= []).push({regex, completion})
 
   focus: (filename) ->
     @focusFile = filename
+
+  complete: ->
+    return if @isComplete
+
+    for filename, matches of @matches
+      file = Try.File.findByPath(filename)
+      for match in matches
+        value = file.get('content')
+        if !match.regex.test(value)
+          completion = match.completion
+          newString = value.substr(0, completion.index)
+          newString += completion.value
+          newString += value.substr(completion.index)
+          file.set('content', newString)
+
+    @isComplete = true
+
 
 class Try.Tutorial
   constructor: ->
     Try.steps = []
     Try.namedSteps = {}
     Try.on 'fileSaved', (file) =>
-      if regexes = Try.currentStep.matches[file.get('id')]
+      if matches = Try.currentStep.matches[file.get('id')]
         value = file.get('content')
-        for regex in regexes
-          if !regex.test(value)
+        for match in matches
+          if !match.regex.test(value)
             return
 
       console.log 'matched!'
+      Try.currentStep.isComplete = true
 
   c: (name, block) ->
     step = new Try.CodeStep(name)

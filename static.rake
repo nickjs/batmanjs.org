@@ -18,10 +18,11 @@ def files_for_path(path)
 
         if content.valid_encoding?
           expectations = []
-          content.gsub! /#\!\{(\S*)(.*)#\!\}/m do
+          content.gsub! /#\!\{(\S*)(.*)#\!\}/m do |match|
             name = $1
-            value = $2.strip.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
-            expectations << {name: name, value: value}
+            completed = $2
+            regex = completed.strip.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
+            expectations << {stepName: name, regex: regex, completion: {index: content.index(match), value: completed}}
             ''
           end
 
