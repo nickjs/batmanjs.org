@@ -107,7 +107,6 @@
 
     LayoutView.prototype.nextStep = function() {
       var index, step;
-      Try.currentStep.complete();
       index = Try.steps.indexOf(Try.currentStep);
       step = Try.steps[index + 1];
       return step != null ? step.activate() : void 0;
@@ -380,7 +379,7 @@
           }
         }
       }
-      return this.isComplete = true;
+      return this.set('isComplete', true);
     };
 
     return CodeStep;

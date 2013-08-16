@@ -57,8 +57,6 @@ class Try.LayoutView extends Batman.View
       file.show()
 
   nextStep: ->
-    Try.currentStep.complete()
-
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -219,7 +217,7 @@ class Try.CodeStep extends Try.Step
           newString += value.substr(completion.index)
           file.set('content', newString)
 
-    @isComplete = true
+    @set('isComplete', true)
 
 
 class Try.Tutorial
