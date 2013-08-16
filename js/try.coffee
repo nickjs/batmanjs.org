@@ -54,12 +54,11 @@ class Try.LayoutView extends Batman.View
     if file.get('isDirectory')
       file.set('isExpanded', !file.get('isExpanded'))
     else
-      @set 'currentFile', file
       file.show()
 
   nextStep: ->
     Try.currentStep.complete()
-
+    return
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -114,20 +113,31 @@ class Try.File extends Batman.Model
     Try.set('currentFile', this)
 
 class Try.CodeView extends Batman.View
+  docForFile: (file) ->
+    filename = file.get('id')
+
+    @docs ||= {}
+    if not (doc = @docs[filename])
+      mode = if filename.indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
+      doc = @docs[filename] = CodeMirror.Doc(file.get('content'), mode)
+      file.observe 'content', (value) ->
+        doc.setValue(value)
+
+    return doc
+
   ready: ->
-    # mode = if @get('name').indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
-    mode = 'coffeescript'
     keys = {'Cmd-S': @save}
 
     node = @get('node')
-    @cm = CodeMirror(node, theme: 'solarized', mode: mode, lineNumbers: true, extraKeys: keys)
+    @cm = CodeMirror(node, theme: 'solarized', lineNumbers: true, extraKeys: keys)
     @cm.getWrapperElement().style.height = "100%"
+
+    Try.observeAndFire 'currentFile', (file) =>
+      @cm.swapDoc(@docForFile(file)) if file
+
     setTimeout =>
       @cm.refresh()
     , 0
-
-    Try.observe 'currentFile', (file) =>
-      @cm.setValue(file.get('content') || '')
 
   save: =>
     Try.set('currentFile.content', @cm.getValue())

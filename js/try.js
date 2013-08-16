@@ -101,7 +101,6 @@
       if (file.get('isDirectory')) {
         return file.set('isExpanded', !file.get('isExpanded'));
       } else {
-        this.set('currentFile', file);
         return file.show();
       }
     };
@@ -109,6 +108,7 @@
     LayoutView.prototype.nextStep = function() {
       var index, step;
       Try.currentStep.complete();
+      return;
       index = Try.steps.indexOf(Try.currentStep);
       step = Try.steps[index + 1];
       return step != null ? step.activate() : void 0;
@@ -205,27 +205,41 @@
       return _ref2;
     }
 
+    CodeView.prototype.docForFile = function(file) {
+      var doc, filename, mode;
+      filename = file.get('id');
+      this.docs || (this.docs = {});
+      if (!(doc = this.docs[filename])) {
+        mode = filename.indexOf('.coffee') !== -1 ? 'coffeescript' : 'ruby';
+        doc = this.docs[filename] = CodeMirror.Doc(file.get('content'), mode);
+        file.observe('content', function(value) {
+          return doc.setValue(value);
+        });
+      }
+      return doc;
+    };
+
     CodeView.prototype.ready = function() {
-      var keys, mode, node,
+      var keys, node,
         _this = this;
-      mode = 'coffeescript';
       keys = {
         'Cmd-S': this.save
       };
       node = this.get('node');
       this.cm = CodeMirror(node, {
         theme: 'solarized',
-        mode: mode,
         lineNumbers: true,
         extraKeys: keys
       });
       this.cm.getWrapperElement().style.height = "100%";
-      setTimeout(function() {
+      Try.observeAndFire('currentFile', function(file) {
+        if (file) {
+          return _this.cm.swapDoc(_this.docForFile(file));
+        }
+      });
+      return setTimeout(function() {
         return _this.cm.refresh();
       }, 0);
-      return Try.observe('currentFile', function(file) {
-        return _this.cm.setValue(file.get('content') || '');
-      });
     };
 
     CodeView.prototype.save = function() {
