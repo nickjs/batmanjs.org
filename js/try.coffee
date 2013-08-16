@@ -57,6 +57,11 @@ class Try.LayoutView extends Batman.View
       @set 'currentFile', file
       file.show()
 
+  nextStep: ->
+    index = Try.steps.indexOf(Try.currentStep)
+    step = Try.steps[index + 1]
+    step?.activate()
+
 class Try.File extends Batman.Model
   @storageKey: 'app_files'
   @resourceName: 'app_files'
@@ -96,7 +101,7 @@ class Try.File extends Batman.Model
   @encode 'expectations',
     decode: (expectations, key, data) ->
       for expectation in expectations
-        Try.namedSteps[expectation.name].match(data.id, new RegExp(expectation.value))
+        Try.namedSteps[expectation.name].expect(data.id, new RegExp(expectation.value))
       expectations
 
   isExpanded: false
@@ -141,21 +146,11 @@ class Try.Step extends Batman.Object
   constructor: (@name) ->
     @body = new Batman.Set
 
-    @matches = {}
-    @expectations = []
+    Try.namedSteps[name] = this
+    Try.steps.push(this)
 
   activate: ->
-    if @focus
-      file = Try.File.findByPath(@focus)
-      Try.layout.showFile(file)
-
     Try.set('currentStep', this)
-
-  next: ->
-    array = Try.steps.toArray()
-    index = array.indexOf(this)
-    step = array[index + 1]
-    step.activate?()
 
   title: (string) ->
     @set('heading', string)
@@ -163,50 +158,37 @@ class Try.Step extends Batman.Object
   say: (string) ->
     @get('body').add(string)
 
-  focus: (filename) ->
-    @focus = filename
-
-  match: (filename, regex) ->
-    (@matches[filename] ||= []).push(regex)
-
-  command: ->
-
-
-  expect: (regex) ->
-    @expectations.push(regex)
-
   after: (string) ->
     @after = string
 
 class Try.ConsoleStep extends Try.Step
   isConsole: true
 
-  start: ->
+  activate: ->
+    super
     $('#terminal-field').focus()
 
-  @expect: (regex) ->
-    this::regex = regex
-
-  check: (value) ->
-    if @regex.test(value)
-      @next()
+  expect: (@regex) ->
 
 class Try.CodeStep extends Try.Step
   isCode: true
 
-  start: ->
+  constructor: ->
+    super
+    @matches = {}
+
+  activate: ->
     if filename = @focusFile
-      file = Try.File.findByName(filename)
+      file = Try.File.findByPath(filename)
       Try.layout.showFile(file)
 
-    if filename = @options?.in
-      file = Try.File.findByName(filename)
-      file.observe 'value', (value) =>
-        if @regex.test(value)
-          @next()
+    super
 
-  @focus: (name) ->
-    this::focusFile = name
+  expect: (filename, regex) ->
+    (@matches[filename] ||= []).push(regex)
+
+  focus: (filename) ->
+    @focusFile = filename
 
 class Try.Tutorial
   constructor: ->
@@ -221,12 +203,15 @@ class Try.Tutorial
 
       console.log 'matched!'
 
-  o: (name, block) ->
-    @step = new Try.Step(name)
-    Try.namedSteps[name] = @step
-    Try.steps.push(@step)
+  c: (name, block) ->
+    step = new Try.CodeStep(name)
+    block?.call(step)
+    step
 
-    block.call(@step)
+  $: (name, block) ->
+    step = new Try.ConsoleStep(name)
+    block?.call(step)
+    step
 
 $.ajax url: 'tutorial.js', dataType: 'text', success: (content) ->
   eval("with(new Try.Tutorial){#{content}}")

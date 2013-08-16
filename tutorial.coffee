@@ -1,24 +1,23 @@
 # Install batman-rails
-o 'gemfile', ->
+c 'gemfile', ->
   @title "Welcome to Batman!"
   @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
-  @say "First, add `batman-rails` to your Gemfile and run `bundle install`."
+  @say "First, add `batman-rails` to your Gemfile and press [Cmd/Ctrl] + S."
 
   @focus '/Gemfile'
-
-  @command /bundle\s*install/
 
   @after "Great! Now we can use batman.js"
 
 # Generate batman app
-o 'appgen', ->
+$ 'appgen', ->
   @title "App Generator"
   @say "batman-rails includes a number of Rails generators to make batman.js development easy."
   @say "Run `rails generate batman:app` to generate an empty batman.js app."
 
-  @command /rails\s*[g|generate]\s*batman:app/
+  @expect /rails\s*[g|generate]\s*batman:app/
 
   @after "There's our app! Take a moment to explore the batman directory, it's under `app/assets/batman`."
+
 ###
 # Generate artist scaffold
 title "Scaffold Generator"
