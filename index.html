@@ -9,15 +9,14 @@ use_intro: true
     <div class="row clearfix">
       <div class="span24 intro-message">
         <h2 data-bind="currentStep.heading | raw">Meet your new favorite JavaScript superhero</h2>
-        <h3 data-bind="currentStep.body | raw">If you love Ruby on Rails, batman.js is the best, most familiar way to build rich web apps in CoffeeScript.</p>
-        <h3 data-bind="currentStep.task | raw"></h3>
+        <h3 data-foreach-blurb="currentStep.body" data-bind="blurb | raw">If you love Ruby on Rails, batman.js is the best, most familiar way to build rich web apps in CoffeeScript.</h3>
         <a class="next-step" data-event-click="currentStep.next" data-showif="currentStep.hasNext" style="display:none">Next Step</a>
         <a class="next-step" data-event-click="previewApp" data-showif="currentStep" style="display:none;float:left">Launch App</a>
       </div>
     </div>
     <div class="row clearfix">
       <div class="span24">
-        <div class="code-editor" data-showif="currentStep.isCode">
+        <div class="code-editor">
           <div class="code-header">
             <h3 data-bind="currentFile.name"></h3>
           </div>
@@ -30,7 +29,7 @@ use_intro: true
             <span class="try-it-live" data-removeif="steps">Click here to try it live!</span>
           </div>
         </div>
-        <div class="code-terminal" data-showif="currentStep.isConsole">
+        <div class="code-terminal">
           <div class="code-header"></div>
           <div class="code-terminal-text">
             <pre>

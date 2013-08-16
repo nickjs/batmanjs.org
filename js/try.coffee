@@ -130,7 +130,15 @@ class Try.FileView extends Batman.View
 
 class Try.Step extends Batman.Object
 	hasNext: true
+	constructor: ->
+		@set 'body', new Batman.Set
+		Try.steps.add(this)
+
 	activate: ->
+		if @focus
+			file = Try.File.findByPath(@focus)
+			Try.layout.showFile(file)
+
 		Try.set('currentStep', this)
 		@start()
 
@@ -141,7 +149,6 @@ class Try.Step extends Batman.Object
 		index = array.indexOf(this)
 		step = array[index + 1]
 		step.activate?()
-
 
 class Try.ConsoleStep extends Try.Step
 	isConsole: true
@@ -177,53 +184,27 @@ class Try.CodeStep extends Try.Step
 	@focus: (name) ->
 		this::focusFile = name
 
-class Try.GemfileStep extends Try.CodeStep
-	heading: "Welcome to Batman!"
-	body: "Let's build an app. We've created a brand new Rails app for you."
-	task: "Start off by adding `batman-rails` to your gemfile, and press Cmd+S when you're done."
+class Try.Tutorial
+	title: (string) ->
+		@step = new Try.Step
+		@step.set('heading', string)
 
-	@expect /gem\s*[\"|\']batman\-rails[\"|\']/, in: 'Gemfile'
-	@focus 'Gemfile'
+	say: (string) ->
+		@step.get('body').add(string)
 
-class Try.GenerateAppStep extends Try.ConsoleStep
-	heading: "Great! We've run `bundle install` for you."
-	body: "Now, let's create a new batman application inside your rails app."
-	task: "Run `rails generate batman:app` from the console, and press enter to submit the command."
+	focus: (filename) ->
+		@step.focus = filename
 
-	@expect /rails\s*[g|generate]\s*batman:app/
+	expect: ->
 
-class Try.ExploreStep extends Try.CodeStep
-	heading: "And there's your app!"
-	body: "Take a moment to explore through the directory structure."
-	task: "When you're ready, click Next Step."
-
-	@focus 'app'
-
-class Try.GenerateScaffold extends Try.ConsoleStep
-	heading: "Let's generate our first resource."
-	body: "We'll need to fetch some artists from our Rdio API."
-	task: "Type `rails g batman:scaffold Artist` to make a new scaffold."
-
-	@expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-
-class Try.FinalStep extends Try.Step
-	heading: "That's all for now, more soon!"
-	body: "<a href='/batman-rdio.zip'>Click here</a> to download your app."
-	hasNext: false
-
-steps = new Batman.Set(
-	new Try.GemfileStep
-	new Try.GenerateAppStep
-	new Try.ExploreStep
-	new Try.GenerateScaffold
-	new Try.FinalStep
-)
-
-Try.set('steps', steps)
 Try.File.load ->
-	Try.run()
-	steps.get('first').activate()
+	Try.set('steps', new Batman.Set)
+	$.ajax url: 'tutorial.js', dataType: 'text', success: (content) ->
+		eval("with(new Try.Tutorial){#{content}}")
 
-	$('#terminal-field').on 'keydown', (e) ->
-		if e.keyCode == 13
-			Try.get('currentStep')?.check(@value)
+		Try.run()
+		Try.get('steps.first').activate()
+
+		$('#terminal-field').on 'keydown', (e) ->
+			if e.keyCode == 13
+				Try.get('currentStep')?.check(@value)
