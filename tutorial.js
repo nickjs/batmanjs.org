@@ -15,14 +15,15 @@ $('appgen', function() {
   return this.after("There's our app! Take a moment to explore `app/assets/batman`.");
 });
 
+$('playlist', function() {
+  this.title("Scaffold Generator");
+  this.say("Now let's generate a resource for your batman.js application.");
+  this.say("Run `rails generate batman:scaffold Playlist` to make a new scaffold.");
+  this.expect(/rails\s+[g|generate]\s+batman:scaffold\s+[Pp]laylist/);
+  return this.after("Great, check it out in `app/assets/batman/controllers/playlist`.");
+});
+
 /*
-# Generate artist scaffold
-title "Scaffold Generator"
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
-
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-
 # Storage adapter
 title "Storage Adapters"
 say "First, we need to tell batman.js how artists will communicate with our server."

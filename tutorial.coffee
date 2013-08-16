@@ -15,40 +15,44 @@ $ 'appgen', ->
   @say "Run `rails generate batman:app` to generate an empty batman.js app."
 
   @expect /rails\s+[g|generate]\s+batman:app/, """
-create  app/controllers/batman_controller.rb
-create  app/views/layouts/batman.html.erb
-insert  config/routes.rb
-create  app/assets/batman/rdio.js.coffee
-create  app/assets/batman/models
-create  app/assets/batman/models/.gitkeep
-create  app/assets/batman/views
-create  app/assets/batman/views/.gitkeep
-create  app/assets/batman/controllers
-create  app/assets/batman/controllers/.gitkeep
-create  app/assets/batman/html
-create  app/assets/batman/html/.gitkeep
-create  app/assets/batman/lib
-create  app/assets/batman/lib/.gitkeep
-create  app/assets/batman/html/main
-create  app/assets/batman/controllers/application_controller.js.coffee
-create  app/assets/batman/controllers/main_controller.js.coffee
-create  app/assets/batman/html/main/index.html
-prepend  app/assets/batman/rdio.js.coffee
-prepend  app/assets/batman/rdio.js.coffee
-prepend  app/assets/batman/rdio.js.coffee
-prepend  app/assets/batman/rdio.js.coffee
+  create  app/controllers/batman_controller.rb
+  create  app/views/layouts/batman.html.erb
+  insert  config/routes.rb
+  create  app/assets/batman/rdio.js.coffee
+  create  app/assets/batman/models
+  create  app/assets/batman/models/.gitkeep
+  create  app/assets/batman/views
+  create  app/assets/batman/views/.gitkeep
+  create  app/assets/batman/controllers
+  create  app/assets/batman/controllers/.gitkeep
+  create  app/assets/batman/html
+  create  app/assets/batman/html/.gitkeep
+  create  app/assets/batman/lib
+  create  app/assets/batman/lib/.gitkeep
+  create  app/assets/batman/html/main
+  create  app/assets/batman/controllers/application_controller.js.coffee
+  create  app/assets/batman/controllers/main_controller.js.coffee
+  create  app/assets/batman/html/main/index.html
+  prepend  app/assets/batman/rdio.js.coffee
+  prepend  app/assets/batman/rdio.js.coffee
+  prepend  app/assets/batman/rdio.js.coffee
+  prepend  app/assets/batman/rdio.js.coffee
   """
 
   @after "There's our app! Take a moment to explore `app/assets/batman`."
 
+
+# Generate playlist scaffold
+$ 'playlist', ->
+  @title "Scaffold Generator"
+  @say "Now let's generate a resource for your batman.js application."
+  @say "Run `rails generate batman:scaffold Playlist` to make a new scaffold."
+
+  @expect /rails\s+[g|generate]\s+batman:scaffold\s+[Pp]laylist/
+
+  @after "Great, check it out in `app/assets/batman/controllers/playlist`."
+
 ###
-# Generate artist scaffold
-title "Scaffold Generator"
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
-
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-
 # Storage adapter
 title "Storage Adapters"
 say "First, we need to tell batman.js how artists will communicate with our server."
