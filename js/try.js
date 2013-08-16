@@ -238,7 +238,7 @@
       return _ref3;
     }
 
-    FileView.prototype.html = "<a data-bind=\"file.name\" data-event-click=\"showFile | withArguments file\" class=\"file\" data-addclass-directory=\"file.isDirectory\" data-addclass-active=\"currentFile | equals file\" data-addclass-expanded=\"file.isExpanded\"></a>\n<ul data-showif=\"file.isDirectory | and file.isExpanded\" data-renderif=\"file.isDirectory\">\n	<li data-foreach-file=\"file.children\">\n		<div data-view=\"FileView\"></div>\n	</li>\n</ul>";
+    FileView.prototype.html = "<a data-bind=\"file.name\" data-event-click=\"showFile | withArguments file\" class=\"file\" data-addclass-directory=\"file.isDirectory\" data-addclass-active=\"currentFile | equals file\" data-addclass-expanded=\"file.isExpanded\"></a>\n<ul data-showif=\"file.isDirectory | and file.isExpanded\" data-renderif=\"file.isDirectory\">\n  <li data-foreach-file=\"file.children\">\n    <div data-view=\"FileView\"></div>\n  </li>\n</ul>";
 
     return FileView;
 
