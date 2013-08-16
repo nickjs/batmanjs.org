@@ -112,6 +112,10 @@
       return step != null ? step.activate() : void 0;
     };
 
+    LayoutView.prototype.completeStep = function() {
+      return Try.currentStep.complete();
+    };
+
     return LayoutView;
 
   })(Batman.View);
@@ -315,7 +319,7 @@
 
     ConsoleStep.prototype.activate = function() {
       ConsoleStep.__super__.activate.apply(this, arguments);
-      return $('#terminal-field').attr('disabled', false).focus();
+      return $('#terminal-field').val('').attr('disabled', false).focus();
     };
 
     ConsoleStep.prototype.expect = function(regex, result) {
@@ -331,6 +335,10 @@
       } else {
         return this.set('isError', true);
       }
+    };
+
+    ConsoleStep.prototype.complete = function() {
+      return this.set('isComplete', true);
     };
 
     return ConsoleStep;

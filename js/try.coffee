@@ -61,6 +61,9 @@ class Try.LayoutView extends Batman.View
     step = Try.steps[index + 1]
     step?.activate()
 
+  completeStep: ->
+    Try.currentStep.complete()
+
 class Try.File extends Batman.Model
   @storageKey: 'app_files'
   @resourceName: 'app_files'
@@ -182,7 +185,7 @@ class Try.ConsoleStep extends Try.Step
 
   activate: ->
     super
-    $('#terminal-field').attr('disabled', false).focus()
+    $('#terminal-field').val('').attr('disabled', false).focus()
 
   expect: (@regex, @result) ->
 
@@ -193,6 +196,9 @@ class Try.ConsoleStep extends Try.Step
       $('#terminal-field').attr('disabled', true)
     else
       @set('isError', true)
+
+  complete: ->
+    @set('isComplete', true)
 
 class Try.CodeStep extends Try.Step
   isCode: true
