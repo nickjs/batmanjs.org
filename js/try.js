@@ -271,7 +271,7 @@
   Try.Step = (function(_super) {
     __extends(Step, _super);
 
-    Step.prototype.hasNext = true;
+    Step.prototype.hasNextStep = true;
 
     function Step(name) {
       this.name = name;
@@ -295,6 +295,10 @@
     Step.prototype.after = function(string) {
       return this.after = string;
     };
+
+    Step.accessor('showNextStepButton', function() {
+      return this.get('hasNextStep') && this.get('isComplete');
+    });
 
     return Step;
 
@@ -399,8 +403,7 @@
             }
           }
         }
-        console.log('matched!');
-        return Try.currentStep.isComplete = true;
+        return Try.currentStep.set('isComplete', true);
       });
     }
 

@@ -2,7 +2,7 @@
 c 'gemfile', ->
   @title "Welcome to Batman!"
   @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
-  @say "First, add `batman-rails` to your Gemfile and press [Cmd/Ctrl] + S."
+  @say "First, add `batman-rails` to your Gemfile and press Cmd/Ctrl+S to save."
 
   @focus '/Gemfile'
 

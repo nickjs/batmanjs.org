@@ -156,7 +156,8 @@ class Try.FileView extends Batman.View
   """
 
 class Try.Step extends Batman.Object
-  hasNext: true
+  hasNextStep: true
+
   constructor: (@name) ->
     @body = new Batman.Set
 
@@ -174,6 +175,9 @@ class Try.Step extends Batman.Object
 
   after: (string) ->
     @after = string
+
+  @accessor 'showNextStepButton', ->
+    @get('hasNextStep') and @get('isComplete')
 
 class Try.ConsoleStep extends Try.Step
   isConsole: true
@@ -229,8 +233,7 @@ class Try.Tutorial
           if !match.regex.test(value)
             return
 
-      console.log 'matched!'
-      Try.currentStep.isComplete = true
+      Try.currentStep.set('isComplete', true)
 
   c: (name, block) ->
     step = new Try.CodeStep(name)

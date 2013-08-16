@@ -2,7 +2,7 @@
 c('gemfile', function() {
   this.title("Welcome to Batman!");
   this.say("Let's say you have a Rails app that talks to Rdio that you want to batman-ize.");
-  this.say("First, add `batman-rails` to your Gemfile and press [Cmd/Ctrl] + S.");
+  this.say("First, add `batman-rails` to your Gemfile and press Cmd/Ctrl+S to save.");
   this.focus('/Gemfile');
   return this.after("Great! Now we can use batman.js");
 });
