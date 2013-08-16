@@ -213,7 +213,9 @@
         mode = filename.indexOf('.coffee') !== -1 ? 'coffeescript' : 'ruby';
         doc = this.docs[filename] = CodeMirror.Doc(file.get('content'), mode);
         file.observe('content', function(value) {
-          return doc.setValue(value);
+          if (value !== doc.getValue()) {
+            return doc.setValue(value);
+          }
         });
       }
       return doc;

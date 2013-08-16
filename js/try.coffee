@@ -121,7 +121,7 @@ class Try.CodeView extends Batman.View
       mode = if filename.indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
       doc = @docs[filename] = CodeMirror.Doc(file.get('content'), mode)
       file.observe 'content', (value) ->
-        doc.setValue(value)
+        doc.setValue(value) if value != doc.getValue()
 
     return doc
 
