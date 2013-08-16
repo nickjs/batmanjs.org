@@ -93,6 +93,12 @@ class Try.File extends Batman.Model
 				set.add(file)
 			set
 
+	@encode 'expectations',
+		decode: (expectations, key, data) ->
+			for expectation in expectations
+				Try.namedSteps[expectation.name].match(data.id, new RegExp(expectation.value))
+			expectations
+
 	isExpanded: false
 
 	show: ->
@@ -118,6 +124,8 @@ class Try.CodeView extends Batman.View
 		Try.set('currentFile.content', @cm.getValue())
 		Try.reloadPreview()
 
+		Try.fire('fileSaved', Try.get('currentFile'))
+
 class Try.FileView extends Batman.View
 	html: """
 		<a data-bind="file.name" data-event-click="showFile | withArguments file" class="file" data-addclass-directory="file.isDirectory" data-addclass-active="currentFile | equals file" data-addclass-expanded="file.isExpanded"></a>
@@ -130,9 +138,11 @@ class Try.FileView extends Batman.View
 
 class Try.Step extends Batman.Object
 	hasNext: true
-	constructor: ->
-		@set 'body', new Batman.Set
-		Try.steps.add(this)
+	constructor: (@name) ->
+		@body = new Batman.Set
+
+		@matches = {}
+		@expectations = []
 
 	activate: ->
 		if @focus
@@ -140,15 +150,33 @@ class Try.Step extends Batman.Object
 			Try.layout.showFile(file)
 
 		Try.set('currentStep', this)
-		@start()
-
-	start: ->
 
 	next: ->
-		array = steps.toArray()
+		array = Try.steps.toArray()
 		index = array.indexOf(this)
 		step = array[index + 1]
 		step.activate?()
+
+	title: (string) ->
+		@set('heading', string)
+
+	say: (string) ->
+		@get('body').add(string)
+
+	focus: (filename) ->
+		@focus = filename
+
+	match: (filename, regex) ->
+		(@matches[filename] ||= []).push(regex)
+
+	command: ->
+
+
+	expect: (regex) ->
+		@expectations.push(regex)
+
+	after: (string) ->
+		@after = string
 
 class Try.ConsoleStep extends Try.Step
 	isConsole: true
@@ -177,33 +205,35 @@ class Try.CodeStep extends Try.Step
 				if @regex.test(value)
 					@next()
 
-	@expect: (regex, options) ->
-		this::regex = regex
-		this::options = options
-
 	@focus: (name) ->
 		this::focusFile = name
 
 class Try.Tutorial
-	title: (string) ->
-		@step = new Try.Step
-		@step.set('heading', string)
+	constructor: ->
+		Try.steps = []
+		Try.namedSteps = {}
+		Try.on 'fileSaved', (file) =>
+			if regexes = Try.currentStep.matches[file.get('id')]
+				value = file.get('content')
+				for regex in regexes
+					if !regex.test(value)
+						return
 
-	say: (string) ->
-		@step.get('body').add(string)
+			console.log 'matched!'
 
-	focus: (filename) ->
-		@step.focus = filename
+	o: (name, block) ->
+		@step = new Try.Step(name)
+		Try.namedSteps[name] = @step
+		Try.steps.push(@step)
 
-	expect: ->
+		block.call(@step)
 
-Try.File.load ->
-	Try.set('steps', new Batman.Set)
-	$.ajax url: 'tutorial.js', dataType: 'text', success: (content) ->
-		eval("with(new Try.Tutorial){#{content}}")
+$.ajax url: 'tutorial.js', dataType: 'text', success: (content) ->
+	eval("with(new Try.Tutorial){#{content}}")
 
+	Try.File.load ->
 		Try.run()
-		Try.get('steps.first').activate()
+		Try.steps[0].activate()
 
 		$('#terminal-field').on 'keydown', (e) ->
 			if e.keyCode == 13

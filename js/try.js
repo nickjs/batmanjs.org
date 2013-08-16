@@ -33,28 +33,7 @@
 
     Try.layout = 'layout';
 
-    return Try;
-
-  })(Batman.App);
-
-  Try.LayoutView = (function(_super) {
-    __extends(LayoutView, _super);
-
-    function LayoutView(options) {
-      options.node = $('.intro')[0];
-      LayoutView.__super__.constructor.apply(this, arguments);
-    }
-
-    LayoutView.prototype.showFile = function(file) {
-      if (file.get('isDirectory')) {
-        return file.set('isExpanded', !file.get('isExpanded'));
-      } else {
-        this.set('currentFile', file);
-        return file.show();
-      }
-    };
-
-    LayoutView.prototype.previewApp = function() {
+    Try.previewApp = function() {
       var _this = this;
       if (this.previewWindow) {
         return this.previewWindow.focus();
@@ -188,6 +167,17 @@
       }
     });
 
+    File.encode('expectations', {
+      decode: function(expectations, key, data) {
+        var expectation, _i, _len;
+        for (_i = 0, _len = expectations.length; _i < _len; _i++) {
+          expectation = expectations[_i];
+          Try.namedSteps[expectation.name].match(data.id, new RegExp(expectation.value));
+        }
+        return expectations;
+      }
+    });
+
     File.prototype.isExpanded = false;
 
     File.prototype.show = function() {
@@ -232,7 +222,8 @@
 
     CodeView.prototype.save = function() {
       Try.set('currentFile.content', this.cm.getValue());
-      return Try.reloadPreview();
+      Try.reloadPreview();
+      return Try.fire('fileSaved', Try.get('currentFile'));
     };
 
     return CodeView;
@@ -258,9 +249,11 @@
 
     Step.prototype.hasNext = true;
 
-    function Step() {
-      this.set('body', new Batman.Set);
-      Try.steps.add(this);
+    function Step(name) {
+      this.name = name;
+      this.body = new Batman.Set;
+      this.matches = {};
+      this.expectations = [];
     }
 
     Step.prototype.activate = function() {
@@ -269,18 +262,42 @@
         file = Try.File.findByPath(this.focus);
         Try.layout.showFile(file);
       }
-      Try.set('currentStep', this);
-      return this.start();
+      return Try.set('currentStep', this);
     };
-
-    Step.prototype.start = function() {};
 
     Step.prototype.next = function() {
       var array, index, step;
-      array = steps.toArray();
+      array = Try.steps.toArray();
       index = array.indexOf(this);
       step = array[index + 1];
       return typeof step.activate === "function" ? step.activate() : void 0;
+    };
+
+    Step.prototype.title = function(string) {
+      return this.set('heading', string);
+    };
+
+    Step.prototype.say = function(string) {
+      return this.get('body').add(string);
+    };
+
+    Step.prototype.focus = function(filename) {
+      return this.focus = filename;
+    };
+
+    Step.prototype.match = function(filename, regex) {
+      var _base;
+      return ((_base = this.matches)[filename] || (_base[filename] = [])).push(regex);
+    };
+
+    Step.prototype.command = function() {};
+
+    Step.prototype.expect = function(regex) {
+      return this.expectations.push(regex);
+    };
+
+    Step.prototype.after = function(string) {
+      return this.after = string;
     };
 
     return Step;
@@ -342,11 +359,6 @@
       }
     };
 
-    CodeStep.expect = function(regex, options) {
-      this.prototype.regex = regex;
-      return this.prototype.options = options;
-    };
-
     CodeStep.focus = function(name) {
       return this.prototype.focusFile = name;
     };
@@ -356,44 +368,52 @@
   })(Try.Step);
 
   Try.Tutorial = (function() {
-    function Tutorial() {}
+    function Tutorial() {
+      var _this = this;
+      Try.steps = [];
+      Try.namedSteps = {};
+      Try.on('fileSaved', function(file) {
+        var regex, regexes, value, _i, _len;
+        if (regexes = Try.currentStep.matches[file.get('id')]) {
+          value = file.get('content');
+          for (_i = 0, _len = regexes.length; _i < _len; _i++) {
+            regex = regexes[_i];
+            if (!regex.test(value)) {
+              return;
+            }
+          }
+        }
+        return console.log('matched!');
+      });
+    }
 
-    Tutorial.prototype.title = function(string) {
-      this.step = new Try.Step;
-      return this.step.set('heading', string);
+    Tutorial.prototype.o = function(name, block) {
+      this.step = new Try.Step(name);
+      Try.namedSteps[name] = this.step;
+      Try.steps.push(this.step);
+      return block.call(this.step);
     };
-
-    Tutorial.prototype.say = function(string) {
-      return this.step.get('body').add(string);
-    };
-
-    Tutorial.prototype.focus = function(filename) {
-      return this.step.focus = filename;
-    };
-
-    Tutorial.prototype.expect = function() {};
 
     return Tutorial;
 
   })();
 
-  Try.File.load(function() {
-    Try.set('steps', new Batman.Set);
-    return $.ajax({
-      url: 'tutorial.js',
-      dataType: 'text',
-      success: function(content) {
-        eval("with(new Try.Tutorial){" + content + "}");
+  $.ajax({
+    url: 'tutorial.js',
+    dataType: 'text',
+    success: function(content) {
+      eval("with(new Try.Tutorial){" + content + "}");
+      return Try.File.load(function() {
         Try.run();
-        Try.get('steps.first').activate();
+        Try.steps[0].activate();
         return $('#terminal-field').on('keydown', function(e) {
           var _ref6;
           if (e.keyCode === 13) {
             return (_ref6 = Try.get('currentStep')) != null ? _ref6.check(this.value) : void 0;
           }
         });
-      }
-    });
+      });
+    }
   });
 
 }).call(this);
