@@ -44,12 +44,12 @@ h2 {
   padding-bottom: 8px;
   border-bottom: 1px solid #E4E8F5;
 }
-h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; }
+h3 { font-size: 150%; margin-bottom: .5em; line-height: 1.3em; margin-top: 40px; }
 h4 { font-size: 130%; margin-bottom: .5em; }
 h5 { font-size: 115%; margin-bottom: .5em; }
 a { color: #a2a2ba; }
 a:hover { color: #fff; }
-
+ol { list-style-type: decimal; padding-left: 20px; }
 code {
   font-family: Monaco, Consolas, "Lucida Console", monospace;
   color: #333;
@@ -103,6 +103,13 @@ div[class*="span"] {
   width: 980px;
   margin: 0 auto;
 }
+
+.flex .wrapper {
+  width: 100%;
+  max-width: 1340px;
+  min-width: 800px;
+}
+
 .alt-row { background: #EAEBFA; }
 .plain-row { background: #fff;}
 
@@ -166,7 +173,7 @@ div[class*="span"] {
 .ico-download:before { content: '\e0c4'; } /* '' */
 
 
-.icn { display: inline-block; text-indent: -900em; overflow: hidden; }
+.icn { display: inline-block; direction: ltr; text-indent: -900em; overflow: hidden; }
 
 .icn-ruby { background: url(../images/icn-ruby.png) 0 0 no-repeat; width: 88px; height: 78px; }
 .icn-scale { background: url(../images/icn-scale.png) 0 0 no-repeat; width: 104px; height: 70px; }
@@ -304,6 +311,7 @@ td + td > p, th + th {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 24px;
+  padding-left: 20px;
 }
 .header-site-title a{
   color: #fff;
@@ -320,7 +328,7 @@ td + td > p, th + th {
 
 
 /* header > nav */
-.header-nav { float: right; }
+.header-nav { float: right; padding-right: 20px; }
 .nav-primary a {
   display: block;
   height: 64px;
@@ -334,17 +342,11 @@ td + td > p, th + th {
   font-size: 14px;
   text-decoration: none;
 }
-.nav-primary .nav-top-highlight {  }
 .nav-top-highlight a { color: #1f1f27; line-height: 34px; background: #ffe43f; height: 32px; margin: 16px 0 0 20px; border-radius: 4px; }
 .nav-primary li { float: left; }
-.nav-primary li:first-child a{
-}
 .nav-primary a:hover, .nav-primary li.active{
   background: #2a2a32;
   color: #fff;
-}
-.nav-top-highlight a:hover {
-
 }
 
 .subnav { margin-right: 20px; }
@@ -352,10 +354,6 @@ td + td > p, th + th {
   margin: 0 0 15px 0;
   padding: 0 0 15px 0;
   border-bottom: solid 1px #e8e8fc;
-}
-
-.page-header{
-  margin-bottom: 35px;
 }
 
 .page-header h2 {
@@ -383,6 +381,7 @@ td + td > p, th + th {
   color: #a2a1ba;
   height: 382px;
   overflow: hidden;
+  -moz-transition: height 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000);
   -webkit-transition: height 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000);
 }
 
@@ -573,8 +572,8 @@ td + td > p, th + th {
   bottom: -10px;
   left: 20px;
   content: " ";
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
   border-style: solid;
   border-width: 10px 10px 0 10px;
   border-color: #efefef transparent transparent transparent;
@@ -615,7 +614,6 @@ td + td > p, th + th {
 
 /* footer > mailing list */
 .mailing-list input{
-  padding: 6px;
   border: solid 1px #ddd;
   font-size: 16px;
   -webkit-box-sizing: border-box;
@@ -669,4 +667,28 @@ td + td > p, th + th {
   color: #fff;
   width: 800px;
   text-overflow: hidden;
+}
+
+/* API Docs */
+.api-docs {
+  font-size: 14px;
+}
+
+.api-docs.box {
+  padding-left: 60px;
+}
+
+.api-docs h3 {
+  background-color: #eaebfb;
+  color: #5c5c6e;
+  padding: 10px;
+}
+
+@media all and (min-width: 1340px) {
+  .api-docs.box {
+    padding-left: 20px;
+  }
+  .header-nav, .header-site-title {
+    padding: 0;
+  }
 }
