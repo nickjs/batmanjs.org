@@ -1,0 +1,55 @@
+---
+layout: api_docs
+title: Batman.Enumerable
+sub: 
+  - title: "::.length : number"
+    tokens: []
+    id: "3_0_%3A%3A.length_%3A_number"
+    html: "<p>The number of elements.</p>\n"
+  - title: "::forEach(func)"
+    tokens: []
+    id: "3_1_%3A%3AforEach(func)"
+    html: "<p>Calls <code>func</code> once for each element.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"forEach runs n times\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>)\n  <span class=\"aggregate\">count</span> = <span class=\"number\">0</span>\n  <span class=\"keyword\">set</span>.forEach -&gt; <span class=\"aggregate\">count</span>++\n  equal <span class=\"aggregate\">count</span>, <span class=\"number\">2</span></code></pre>\n"
+  - title: "::map(func[, context = Batman.container]) : Array"
+    tokens: []
+    id: "3_2_%3A%3Amap(func%5B%2C_context_%3D_Batman.container%5D)_%3A_Array"
+    html: "<p>Calls <code>func</code> once for each element, and returns an array composed of the return\nvalue at each iteration.  <code>func</code> receives the arguments <code>(element, value,\nthis)</code></p>\n<pre><code><span class=\"comment\">test</span> <span class=\"comment\">\"forEach</span> <span class=\"comment\">runs</span> <span class=\"comment\">n</span> <span class=\"comment\">times\"</span>, <span class=\"literal\">-</span>&gt;\n  <span class=\"comment\">set</span> <span class=\"comment\">=</span> <span class=\"comment\">new</span> <span class=\"comment\">Batman</span>.<span class=\"comment\">Set(1</span>, <span class=\"comment\">2)</span>\n  <span class=\"comment\">deepEqual</span> <span class=\"title\">[</span><span class=\"comment\">2</span>, <span class=\"comment\">3</span>]<span class=\"string\">,</span> <span class=\"comment\">set</span>.<span class=\"comment\">map</span> <span class=\"comment\">(x)</span> <span class=\"literal\">-</span>&gt; <span class=\"comment\">x</span> <span class=\"literal\">+</span> <span class=\"comment\">1</code></pre>\n"
+  - title: "::mapToProperty(key : string) : Array"
+    tokens: []
+    id: "3_3_%3A%3AmapToProperty(key_%3A_string)_%3A_Array"
+    html: "<p>Returns an array composed of the property specified of each item.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"mapToProperty pulls out the property specified\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>({<span class=\"keyword\">key</span>: <span class=\"string\">'a'</span>}, {<span class=\"keyword\">key</span>: <span class=\"string\">'b'</span>})\n  deepEqual [<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>], <span class=\"keyword\">set</span>.mapToProperty(<span class=\"string\">'key'</span>)</code></pre>\n"
+  - title: "::every(func[, context = Batman.container]) : boolean"
+    tokens: []
+    id: "3_4_%3A%3Aevery(func%5B%2C_context_%3D_Batman.container%5D)_%3A_boolean"
+    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nevery iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"every is false when any element doesn't satisfy the selector function\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"keyword\">true</span>, <span class=\"keyword\">false</span>, <span class=\"keyword\">true</span>)\n  equal <span class=\"keyword\">false</span>, <span class=\"keyword\">set</span>.every (x) -&gt; x</code></pre>\n"
+  - title: "::some(func[, context = Batman.container]) : boolean"
+    tokens: []
+    id: "3_5_%3A%3Asome(func%5B%2C_context_%3D_Batman.container%5D)_%3A_boolean"
+    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nany iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"some is true when any element satisfies the selector function\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"keyword\">true</span>, <span class=\"keyword\">false</span>, <span class=\"keyword\">true</span>)\n  equal <span class=\"keyword\">true</span>, <span class=\"keyword\">set</span>.<span class=\"keyword\">some</span> (x) -&gt; x</code></pre>\n"
+  - title: "::reduce(func[, accumulator]) : Array"
+    tokens: []
+    id: "3_6_%3A%3Areduce(func%5B%2C_accumulator%5D)_%3A_Array"
+    html: "<p>Calls <code>func</code> once for each element, accumulating the result as it goes along.\nIf you pass your own <code>accumulator</code> it will retain its initial value, otherwise\nthe first element will become the initial accumulator value.  <code>func</code> receives\nthe arguments <code>(accumulator, element, value, index, this)</code></p>\n<pre><code>test \"reduce can implement a sum\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">6</span>, <span class=\"keyword\">set</span>.reduce (accumulator, x) -&gt; accumulator + x</code></pre>\n"
+  - title: "::filter(func) : Object"
+    tokens: []
+    id: "3_7_%3A%3Afilter(func)_%3A_Object"
+    html: "<p>Creates a new instance of the current type, and adds every element for which\n<code>func</code> returns true.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"filter strips out the crud\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"attribute\">'wheat</span>', <span class=\"attribute\">'crud</span>', <span class=\"attribute\">'grain</span>')\n  deepEqual [<span class=\"attribute\">'wheat</span>', <span class=\"attribute\">'grain</span>'], (set.filter (x) -&gt; x != <span class=\"attribute\">'crud</span>').toArray()</code></pre>\n"
+  - title: "::count(func) : number"
+    tokens: []
+    id: "3_8_%3A%3Acount(func)_%3A_number"
+    html: "<p>Returns the number of elements for which <code>func</code> returns true, or the total\nnumber of elements if you don&#39;t pass a <code>func</code>.  <code>func</code> receives the arguments\n<code>(element, value, this)</code></p>\n<pre><code>test \"count counts\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">3</span>, <span class=\"keyword\">set</span>.<span class=\"aggregate\">count</span>()\n  equal <span class=\"number\">2</span>, <span class=\"keyword\">set</span>.<span class=\"aggregate\">count</span> (x) -&gt; x &gt; <span class=\"number\">1</span></code></pre>\n"
+  - title: "Implementing your own `Batman.Enumerable`"
+    tokens: []
+    id: "3_9_Implementing_your_own_%60Batman.Enumerable%60"
+    html: "<p>To make these methods available for a new type, all you need to do is define\n<code>forEach()</code> and <code>length</code>. Then, in your type, you can just <code>Batman.extend\n@prototype, Batman.Enumerable</code> to copy the <code>Enumerable</code> methods onto your\nprototype.</p>\n"
+tokens: []
+id: 3_Batman.Enumerable
+html: "<p><code>Batman.Enumerable</code> is a mixin that defines methods available for every\nenumerable type (<code>Batman.Set</code> and <code>Batman.Hash</code> being the main two).</p>\n<p>Note that where the signature of the callback functions is defined, <code>element</code>\nis the value of the current element being iterated over, and <code>value</code> is\n<code>null</code>—except in the case of <code>Batman.Hash</code> where <code>element</code> is the key and\n<code>value</code> is the value.</p>\n"
+
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  {{ s.html }}
+{% endfor %}
