@@ -244,7 +244,7 @@ div[class*="span"] {
 .box-highlight-connected a { text-decoration: none }
 .box-highlight-connected a:hover{ text-decoration: underline }
 .box.mh {
-  min-height: 155px;
+  min-height: 12.5em;
 }
 
 td + td > p, th + th {
@@ -381,8 +381,8 @@ td + td > p, th + th {
   color: #a2a1ba;
   height: 382px;
   overflow: hidden;
-  -moz-transition: height 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000);
-  -webkit-transition: height 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+  -moz-transition: height 0.4s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+  -webkit-transition: height 0.4s cubic-bezier(0.860, 0.000, 0.070, 1.000);
 }
 
 .intro h2 { font-size: 36px; color: #fff; line-height: 1.2em; text-align: center; }
