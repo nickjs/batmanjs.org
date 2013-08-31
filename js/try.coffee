@@ -117,6 +117,8 @@ class Try.CodeView extends Batman.View
     @docs ||= {}
     if not (doc = @docs[filename])
       mode = if filename.indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
+      @set('expectChanges', filename.indexOf('.rb') == -1)
+
       doc = @docs[filename] = CodeMirror.Doc(file.get('content'), mode)
       file.observe 'content', (value) ->
         doc.setValue(value) if value != doc.getValue()
@@ -132,6 +134,7 @@ class Try.CodeView extends Batman.View
 
     Try.observeAndFire 'currentFile', (file) =>
       @cm.swapDoc(@docForFile(file)) if file
+      @cm.setOption('readOnly', !file || file.get('expectChanges'))
 
     setTimeout =>
       @cm.refresh()

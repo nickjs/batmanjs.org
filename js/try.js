@@ -205,6 +205,7 @@
       this.docs || (this.docs = {});
       if (!(doc = this.docs[filename])) {
         mode = filename.indexOf('.coffee') !== -1 ? 'coffeescript' : 'ruby';
+        this.set('expectChanges', filename.indexOf('.rb') === -1);
         doc = this.docs[filename] = CodeMirror.Doc(file.get('content'), mode);
         file.observe('content', function(value) {
           if (value !== doc.getValue()) {
@@ -231,8 +232,9 @@
       this.cm.getWrapperElement().style.height = "100%";
       Try.observeAndFire('currentFile', function(file) {
         if (file) {
-          return _this.cm.swapDoc(_this.docForFile(file));
+          _this.cm.swapDoc(_this.docForFile(file));
         }
+        return _this.cm.setOption('readOnly', !file || file.get('expectChanges'));
       });
       return setTimeout(function() {
         return _this.cm.refresh();
