@@ -14,7 +14,7 @@ $ 'appgen', ->
   @say "batman-rails includes a number of Rails generators to make batman.js development easy."
   @say "Run `rails generate batman:app` to generate an empty batman.js app."
 
-  @expect /rails\s+[g|generate]\s+batman:app/, """
+  @expect /rails\s+(g|generate)\s+batman:app/, """
   create  app/controllers/batman_controller.rb
   create  app/views/layouts/batman.html.erb
   insert  config/routes.rb
@@ -48,7 +48,7 @@ $ 'playlist', ->
   @say "Now let's generate a resource for your batman.js application."
   @say "Run `rails generate batman:scaffold Playlist` to make a new scaffold."
 
-  @expect /rails\s+[g|generate]\s+batman:scaffold\s+[Pp]laylist/
+  @expect /rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/
 
   @after "Great, check it out in `app/assets/batman/controllers/playlist`."
 
