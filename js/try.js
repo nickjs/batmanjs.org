@@ -5,20 +5,6 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  $('<script src="lib/dist/batman.jquery.js"></script>').appendTo('head');
-
-  $('<script src="lib/extras/batman.rails.js"></script>').appendTo('head');
-
-  $('<script src="js/codemirror.js"></script>').appendTo('head');
-
-  $('<script src="js/modes/coffeescript.js"></script>').appendTo('head');
-
-  $('<script src="js/modes/ruby.js"></script>').appendTo('head');
-
-  $('<link rel="stylesheet" href="css/codemirror.css" />').appendTo('head');
-
-  $('<link rel="stylesheet" href="css/solarized.css" />').appendTo('head');
-
   if (window.location.host.indexOf('localhost') !== -1) {
     APP_URL = 'http://localhost:3000';
   } else {
@@ -454,7 +440,7 @@
   })();
 
   $.ajax({
-    url: 'tutorial.js',
+    url: 'js/tutorial.js',
     dataType: 'text',
     success: function(content) {
       eval("with(new Try.Tutorial){" + content + "}");

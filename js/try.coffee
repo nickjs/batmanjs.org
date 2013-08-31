@@ -1,11 +1,3 @@
-$('<script src="lib/dist/batman.jquery.js"></script>').appendTo('head')
-$('<script src="lib/extras/batman.rails.js"></script>').appendTo('head')
-$('<script src="js/codemirror.js"></script>').appendTo('head')
-$('<script src="js/modes/coffeescript.js"></script>').appendTo('head')
-$('<script src="js/modes/ruby.js"></script>').appendTo('head')
-$('<link rel="stylesheet" href="css/codemirror.css" />').appendTo('head')
-$('<link rel="stylesheet" href="css/solarized.css" />').appendTo('head')
-
 if window.location.host.indexOf('localhost') != -1
   APP_URL = 'http://localhost:3000'
 else
@@ -262,7 +254,7 @@ class Try.Tutorial
     block?.call(step)
     step
 
-$.ajax url: 'tutorial.js', dataType: 'text', success: (content) ->
+$.ajax url: 'js/tutorial.js', dataType: 'text', success: (content) ->
   eval("with(new Try.Tutorial){#{content}}")
 
   Try.File.load ->
