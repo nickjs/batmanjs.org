@@ -1,10 +1,10 @@
 require 'json'
 
-EXCLUDED_FILES = %w[Gemfile.lock log public config.ru db bin README.rdoc Rakefile tmp]
+EXCLUDED_FILES = %w[Gemfile.lock log public db bin tmp]
 
 def files_for_path(path)
   Dir.entries(path)
-   .select { |file| file[0] != '.' and !EXCLUDED_FILES.include?(file)}
+   .select { |file| file[0] != '.' and !EXCLUDED_FILES.include?(file) }
    .map do |file|
     filepath = File.join(path, file)
     id = filepath.sub(ROOT, '')
