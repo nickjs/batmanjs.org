@@ -35,26 +35,20 @@
           if (event.data !== 'previewReady') {
             return;
           }
-          _this.sendPreviewData();
+          _this.sendPreviewDirectory('');
           console.log('running');
           return _this.previewWindow.postMessage('run', '*');
         }, false);
       }
     };
 
-    Try.sendPreviewData = function() {
-      this.sendPreviewFile('rdio.js.coffee');
-      this.sendPreviewDirectory('lib');
-      this.sendPreviewDirectory('controllers');
-      this.sendPreviewDirectory('models');
-      this.sendPreviewDirectory('views');
-      return this.sendPreviewDirectory('html');
-    };
-
     Try.sendPreviewDirectory = function(dir) {
       var _this = this;
       if (typeof dir === 'string') {
-        dir = Try.File.findByPath("/app/assets/batman/" + dir);
+        dir = Try.File.findByPath("/app/assets/batman" + dir);
+      }
+      if (dir.get('isHidden')) {
+        return;
       }
       return dir.get('childFiles').forEach(function(file) {
         return _this.sendPreviewFile(file);
@@ -63,7 +57,10 @@
 
     Try.sendPreviewFile = function(file) {
       if (typeof file === 'string') {
-        file = Try.File.findByPath("/app/assets/batman/" + file);
+        file = Try.File.findByPath("/app/assets/batman" + file);
+      }
+      if (file.get('isHidden')) {
+        return;
       }
       return this.previewWindow.postMessage({
         file: file.toJSON()
