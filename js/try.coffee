@@ -168,7 +168,7 @@ class Try.FileView extends Batman.View
   html: """
     <a data-bind="file.name" data-event-click="showFile | withArguments file" class="file" data-addclass-directory="file.isDirectory" data-addclass-active="currentFile | equals file" data-addclass-expanded="file.isExpanded"></a>
     <ul data-showif="file.isDirectory | and file.isExpanded" data-renderif="file.isDirectory">
-      <li data-foreach-file="file.children">
+      <li data-foreach-file="file.children.sortedBy.isDirectory">
         <div data-view="FileView"></div>
       </li>
     </ul>
