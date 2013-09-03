@@ -17,23 +17,34 @@ def files_for_path(path)
         content = file.read
 
         if content.valid_encoding?
-          expectations = []
-          content.gsub! /#\!\{(\S*)(.*)#\!\}/m do |match|
-            name = $1
-            completed = $2
-            regex = completed.strip.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
-            expectations << {stepName: name, regex: regex, completion: {index: content.index(match), value: completed}}
-            ''
-          end
+          if content.include?('#!ignore')
+            hash = nil
+          else
+            expectations = []
 
-          hash[:content] = content
-          hash[:expectations] = expectations if expectations.size > 0
+            content.gsub! /#\!\{(\w*)\s(\w*)(.*)#\!\}/m do |match|
+              name = $1
+              action = $2
+              completed = $3
+
+              if name != 'ignore'
+                regex = completed.strip.gsub(/([\.\+\*\{\}\(\)])/){ '\\' + $1 }.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
+                expectations << {stepName: name, regex: regex, action: action, completion: {index: content.index(match), value: completed}}
+              end
+
+              ''
+            end
+
+            hash[:content] = content
+            hash[:expectations] = expectations if expectations.size > 0
+          end
         end
       end
     end
 
     hash
-  end
+   end
+   .compact
 end
 
 ROOT = ENV["BATMAN_RDIO_PATH"]

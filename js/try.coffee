@@ -101,7 +101,7 @@ class Try.File extends Batman.Model
   @encode 'expectations',
     decode: (expectations, key, data) ->
       for expectation in expectations
-        Try.namedSteps[expectation.stepName].expect(data.id, new RegExp(expectation.regex), expectation.completion)
+        Try.namedSteps[expectation.stepName][expectation.action](data.id, new RegExp(expectation.regex), expectation.completion)
 
       return null
 
@@ -195,6 +195,27 @@ class Try.Step extends Batman.Object
   after: (string) ->
     @after = string
 
+  appear: (filename, regex, completion) ->
+    @appearances ||= {}
+    (@appearances[filename] ||= []).push({regex, completion})
+
+  complete: ->
+    return if @isComplete
+
+    for filename, matches of @appearances
+      file = Try.File.findByPath(filename)
+      for match in matches
+        value = file.get('content')
+        if !match.regex.test(value)
+          completion = match.completion
+          newString = value.substr(0, completion.index)
+          newString += completion.value
+          newString += value.substr(completion.index)
+          file.set('content', newString)
+
+
+    @set('isComplete', true)
+
   @accessor 'showNextStepButton', ->
     @get('hasNextStep') and @get('isComplete')
 
@@ -249,7 +270,7 @@ class Try.CodeStep extends Try.Step
           newString += value.substr(completion.index)
           file.set('content', newString)
 
-    @set('isComplete', true)
+    super
 
 
 class Try.Tutorial
