@@ -22,10 +22,10 @@ def files_for_path(path)
           else
             expectations = []
 
-            content.gsub! /#\!\{(\w*)\s(\w*)(.*?)#\!\}/m do |match|
-              name = $1
-              action = $2
-              completed = $3
+            content.gsub! /(#\!\{|<\!\-\-\#\{)(\w*)\s(\w*)(.*?)(#\!\}|\#\}\-\->)/m do |match|
+              name = $2
+              action = $3
+              completed = $4
 
               if name != 'ignore'
                 regex = completed.strip.gsub(/([\.\+\*\{\}\(\)])/){ '\\' + $1 }.gsub(/\s+/, '\s+').gsub(/["']/, '["\']')
