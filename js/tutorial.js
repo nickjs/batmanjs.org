@@ -31,7 +31,50 @@
     this.say("First, we need to tell the batman.js model which properties to grab from the server.");
     this.say("Take a look in db/schema.rb to see which database columns a Playlist has.");
     this.say("Now add a corresponding `@encode` for each column to our playlist model.");
-    return this.focus('/app/assets/batman/models/playlist.js.coffee');
+    this.focus('/app/assets/batman/models/playlist.js.coffee');
+    return this.after("Next, let's set up some basic CRUD actions for a playlist.");
+  });
+
+  c('playlist_index', function() {
+    this.title("List All Playlists");
+    this.say("First, let's grab all the playlists resources from the API.");
+    this.say("Then we want to set them to an instance variable that we can access in the view.");
+    this.say("Add `@set('playlists', Rdio.Playlist.get('all'))` to the `index` action.");
+    this.focus('/app/assets/batman/controllers/playlists_controller.js.coffee');
+    this.after("All properties in batman.js are accessed with `get` and `set`. It's magic.");
+    this.after("`Playlist.get('all')` will automatically send a GET request to /playlists.json.");
+    return this.after("But how does a user get to the index page in the first place?");
+  });
+
+  c('routing', function() {
+    this.title("Routing");
+    this.say("Every action in your controller needs to be mapped to by at least one URL, called a route.");
+    this.say("batman.js uses a very similar routing syntax to Rails. Declare your routes in rdio.js.coffee.");
+    this.say("The scaffold generator automatically adds an `@resource` route, a macro automatically adds four routes for all the default CRUD actions (index, show, edit, new) and maps them to your `PlaylistsController`.");
+    this.focus('/app/assets/batman/rdio.js.coffee');
+    return this.set('isComplete', true);
+  });
+
+  c('first_binding', function() {
+    this.title("Baby's First Binding");
+    this.say("A big chunk of the power of batman.js lies in its data bindings. You can use them");
+    this.say("to hook up your HTML to your model and app data, without writing glue code.");
+    this.say("Add `data-bind=\"playlists.length\"` to the span in the h1 element.");
+    this.focus('/app/assets/batman/html/playlists/index.html');
+    this.after("The span will automatically observe the length of the playlist array and update when it changes.");
+    this.after("All data bindings start with `data-` and reference model or app data directly.");
+    return this.after("The most basic `data-bind` always updates the content or innerHTML of a node.");
+  });
+
+  c('showif_binding', function() {
+    this.title("Show/Hide Bindings");
+    this.say("Oftentimes, you'll want to show or hide part of your page when data chances.");
+    this.say("Let's add a blank slate for when there are 0 playlists.");
+    this.say("Add `data-showif=\"playlists.empty\"` to the h3 element.");
+    this.focus('/app/assets/batman/html/playlists/index.html');
+    this.after("The h3 will automatically observe the length of the playlist array and hide if there are more than 0 items.");
+    this.after("`data-hideif` works exactly the same way, but with the condition in the opposite.");
+    return this.after("Ok, let's let the user add a new playlist.");
   });
 
   /*

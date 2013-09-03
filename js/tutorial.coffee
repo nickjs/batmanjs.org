@@ -81,6 +81,54 @@ c 'encoders', ->
 
   @focus '/app/assets/batman/models/playlist.js.coffee'
 
+  @after "Next, let's set up some basic CRUD actions for a playlist."
+
+c 'playlist_index', ->
+  @title "List All Playlists"
+  @say "First, let's grab all the playlists resources from the API."
+  @say "Then we want to set them to an instance variable that we can access in the view."
+  @say "Add `@set('playlists', Rdio.Playlist.get('all'))` to the `index` action."
+
+  @focus '/app/assets/batman/controllers/playlists_controller.js.coffee'
+
+  @after "All properties in batman.js are accessed with `get` and `set`. It's magic."
+  @after "`Playlist.get('all')` will automatically send a GET request to /playlists.json."
+  @after "But how does a user get to the index page in the first place?"
+
+c 'routing', ->
+  @title "Routing"
+  @say "Every action in your controller needs to be mapped to by at least one URL, called a route."
+  @say "batman.js uses a very similar routing syntax to Rails. Declare your routes in rdio.js.coffee."
+  @say "The scaffold generator automatically adds an `@resource` route, a macro automatically adds four routes for all the default CRUD actions (index, show, edit, new) and maps them to your `PlaylistsController`."
+
+  @focus '/app/assets/batman/rdio.js.coffee'
+
+  @set('isComplete', true)
+
+c 'first_binding', ->
+  @title "Baby's First Binding"
+  @say "A big chunk of the power of batman.js lies in its data bindings. You can use them"
+  @say "to hook up your HTML to your model and app data, without writing glue code."
+  @say "Add `data-bind=\"playlists.length\"` to the span in the h1 element."
+
+  @focus '/app/assets/batman/html/playlists/index.html'
+
+  @after "The span will automatically observe the length of the playlist array and update when it changes."
+  @after "All data bindings start with `data-` and reference model or app data directly."
+  @after "The most basic `data-bind` always updates the content or innerHTML of a node."
+
+c 'showif_binding', ->
+  @title "Show/Hide Bindings"
+  @say "Oftentimes, you'll want to show or hide part of your page when data chances."
+  @say "Let's add a blank slate for when there are 0 playlists."
+  @say "Add `data-showif=\"playlists.empty\"` to the h3 element."
+
+  @focus '/app/assets/batman/html/playlists/index.html'
+
+  @after "The h3 will automatically observe the length of the playlist array and hide if there are more than 0 items."
+  @after "`data-hideif` works exactly the same way, but with the condition in the opposite."
+  @after "Ok, let's let the user add a new playlist."
+
 ###
 # Storage adapter
 c 'storage adapter', ->
