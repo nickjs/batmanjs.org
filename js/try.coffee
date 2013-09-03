@@ -1,3 +1,10 @@
+###
+# try.coffee
+# Powers the tutorial for batmanjs.org
+# This code is pretty much a clusterfuck of hacks
+# ... Sorry? <3 Nick
+###
+
 if window.location.host.indexOf('localhost') != -1
   APP_URL = 'http://localhost:3000'
 else
