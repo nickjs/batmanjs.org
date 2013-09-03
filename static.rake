@@ -1,6 +1,6 @@
 require 'json'
 
-EXCLUDED_FILES = %w[Gemfile.lock log public db bin tmp]
+EXCLUDED_FILES = %w[Gemfile.lock log public bin tmp development.sqlite3 test.sqlite3]
 
 def files_for_path(path)
   Dir.entries(path)
