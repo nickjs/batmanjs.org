@@ -12,6 +12,7 @@ $(function() {
         $.getScript('lib/codemirror.js', function() {
           $.getScript('lib/modes/coffeescript.js')
           $.getScript('lib/modes/ruby.js')
+          $.getScript('lib/modes/htmlmixed.js')
         })
 
         $('<link rel="stylesheet" href="css/codemirror.css" />').appendTo('head')
