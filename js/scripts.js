@@ -9,9 +9,11 @@ $(function() {
       setTimeout(function(){
         $.getScript('lib/dist/batman.jquery.js')
         $.getScript('lib/extras/batman.rails.js')
-        $.getScript('lib/codemirror.js')
-        $.getScript('lib/modes/coffeescript.js')
-        $.getScript('lib/modes/ruby.js')
+        $.getScript('lib/codemirror.js', function() {
+          $.getScript('lib/modes/coffeescript.js')
+          $.getScript('lib/modes/ruby.js')
+        })
+
         $('<link rel="stylesheet" href="css/codemirror.css" />').appendTo('head')
         $('<link rel="stylesheet" href="css/solarized.css" />').appendTo('head')
 

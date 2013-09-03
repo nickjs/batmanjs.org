@@ -111,15 +111,33 @@ class Try.File extends Batman.Model
     Try.set('currentFile', this)
 
 class Try.CodeView extends Batman.View
+  EXTENSIONS = {
+    '.html.erb': 'htmlmixed'
+    '.html': 'htmlmixed'
+    '.coffee': 'coffeescript'
+    '.js': 'coffeescript'
+    '.js.coffee': 'coffeescript'
+    '.rb': 'ruby'
+    '.ru': 'ruby'
+    'Gemfile': 'ruby'
+  }
+
+  modeForFile: (file) ->
+    filename = file.get('id')
+
+    for ext, mode of EXTENSIONS
+      if filename.indexOf(ext) != -1
+        console.log mode
+        return mode
+
   docForFile: (file) ->
     filename = file.get('id')
 
     @docs ||= {}
     if not (doc = @docs[filename])
-      mode = if filename.indexOf('.coffee') != -1 then 'coffeescript' else 'ruby'
       @set('expectChanges', filename.indexOf('.rb') == -1)
 
-      doc = @docs[filename] = CodeMirror.Doc(file.get('content'), mode)
+      doc = @docs[filename] = CodeMirror.Doc(file.get('content'), @modeForFile(file))
       file.observe 'content', (value) ->
         doc.setValue(value) if value != doc.getValue()
 
