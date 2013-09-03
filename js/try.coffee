@@ -22,21 +22,29 @@ class window.Try extends Batman.App
       @previewWindow = window.open("#{APP_URL}/?preview=true", "app_preview", "width=400,height=600")
       window.addEventListener 'message', (event) =>
         return unless event.data == 'previewReady'
-        @sendPreviewDirectory('')
+        @sendPreviewData()
 
         console.log 'running'
         @previewWindow.postMessage('run', '*')
       , false
 
+  @sendPreviewData: ->
+    @sendPreviewFile('rdio.js.coffee')
+    @sendPreviewDirectory('lib')
+    @sendPreviewDirectory('controllers')
+    @sendPreviewDirectory('models')
+    @sendPreviewDirectory('views')
+    @sendPreviewDirectory('html')
+
   @sendPreviewDirectory: (dir) ->
-    dir = Try.File.findByPath("/app/assets/batman#{dir}") if typeof dir is 'string'
+    dir = Try.File.findByPath("/app/assets/batman/#{dir}") if typeof dir is 'string'
     return if dir.get('isHidden')
 
     dir.get('childFiles').forEach (file) =>
       @sendPreviewFile(file)
 
   @sendPreviewFile: (file) ->
-    file = Try.File.findByPath("/app/assets/batman#{file}") if typeof file is 'string'
+    file = Try.File.findByPath("/app/assets/batman/#{file}") if typeof file is 'string'
     return if file.get('isHidden')
 
     @previewWindow.postMessage({file: file.toJSON()}, '*')
