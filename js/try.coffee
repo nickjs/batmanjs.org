@@ -106,7 +106,7 @@ class Try.File extends Batman.Model
   @encode 'expectations',
     decode: (expectations, key, data) ->
       for expectation in expectations
-        Try.namedSteps[expectation.stepName][expectation.action](data.id, new RegExp(expectation.regex), expectation.completion)
+        Try.namedSteps[expectation.stepName]?[expectation.action]?(data.id, new RegExp(expectation.regex), expectation.completion)
 
       return null
 
@@ -198,10 +198,11 @@ class Try.Step extends Batman.Object
     @set('heading', string)
 
   say: (string) ->
-    string = string.replace(/`(.*)`/g, "<code>$1</code>")
+    string = string.replace(/`(.*?)`/g, "<code>$1</code>")
     @get('body').add(string)
 
   after: (string) ->
+    string = string.replace(/`(.*)`/g, "<code>$1</code>")
     @after = string
 
   appear: (filename, regex, completion) ->

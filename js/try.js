@@ -177,10 +177,14 @@
 
     File.encode('expectations', {
       decode: function(expectations, key, data) {
-        var expectation, _i, _len;
+        var expectation, _i, _len, _name, _ref2;
         for (_i = 0, _len = expectations.length; _i < _len; _i++) {
           expectation = expectations[_i];
-          Try.namedSteps[expectation.stepName][expectation.action](data.id, new RegExp(expectation.regex), expectation.completion);
+          if ((_ref2 = Try.namedSteps[expectation.stepName]) != null) {
+            if (typeof _ref2[_name = expectation.action] === "function") {
+              _ref2[_name](data.id, new RegExp(expectation.regex), expectation.completion);
+            }
+          }
         }
         return null;
       }
@@ -321,11 +325,12 @@
     };
 
     Step.prototype.say = function(string) {
-      string = string.replace(/`(.*)`/g, "<code>$1</code>");
+      string = string.replace(/`(.*?)`/g, "<code>$1</code>");
       return this.get('body').add(string);
     };
 
     Step.prototype.after = function(string) {
+      string = string.replace(/`(.*)`/g, "<code>$1</code>");
       return this.after = string;
     };
 

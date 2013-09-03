@@ -22,7 +22,7 @@ def files_for_path(path)
           else
             expectations = []
 
-            content.gsub! /#\!\{(\w*)\s(\w*)(.*)#\!\}/m do |match|
+            content.gsub! /#\!\{(\w*)\s(\w*)(.*?)#\!\}/m do |match|
               name = $1
               action = $2
               completed = $3
