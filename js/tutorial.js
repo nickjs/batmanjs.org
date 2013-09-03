@@ -3,41 +3,46 @@
   c('gemfile', function() {
     this.title("Welcome to Batman!");
     this.say("Let's say you have a Rails app that talks to Rdio that you want to batman-ize.");
-    this.say("First, add `batman-rails` to your Gemfile and press Cmd/Ctrl+S to save.");
+    this.say("First, add `gem batman-rails` to your Gemfile and press Cmd/Ctrl+S to save.");
+    this.say("Note: this tutorial uses some features specific to batman-rails, but you can use batman.js with any backend.");
     this.focus('/Gemfile');
-    return this.after("Great! Now we can use batman.js");
+    return this.after("Great! Now we can use the batman.js generators.");
   });
 
   $('appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman.html.erb', '/app/assets/batman'], function() {
     this.title("App Generator");
     this.say("batman-rails includes a number of Rails generators to make batman.js development easy.");
     this.say("Run `rails generate batman:app` to generate an empty batman.js app.");
-    this.expect(/rails\s+(g|generate)\s+batman:app/, "create  app/controllers/batman_controller.rb\ncreate  app/views/layouts/batman.html.erb\ninsert  config/routes.rb\ncreate  app/assets/batman/rdio.js.coffee\ncreate  app/assets/batman/models\ncreate  app/assets/batman/models/.gitkeep\ncreate  app/assets/batman/views\ncreate  app/assets/batman/views/.gitkeep\ncreate  app/assets/batman/controllers\ncreate  app/assets/batman/controllers/.gitkeep\ncreate  app/assets/batman/html\ncreate  app/assets/batman/html/.gitkeep\ncreate  app/assets/batman/lib\ncreate  app/assets/batman/lib/.gitkeep\ncreate  app/assets/batman/html/main\ncreate  app/assets/batman/controllers/application_controller.js.coffee\ncreate  app/assets/batman/controllers/main_controller.js.coffee\ncreate  app/assets/batman/html/main/index.html\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee");
-    return this.after("There's our app! Take a moment to explore `app/assets/batman`.");
+    this.expect(/rails\s+(g|generate)\s+batman:app/, " create  app/controllers/batman_controller.rb\n create  app/views/layouts/batman.html.erb\n insert  config/routes.rb\n create  app/assets/batman/rdio.js.coffee\n create  app/assets/batman/models\n create  app/assets/batman/models/.gitkeep\n create  app/assets/batman/views\n create  app/assets/batman/views/.gitkeep\n create  app/assets/batman/controllers\n create  app/assets/batman/controllers/.gitkeep\n create  app/assets/batman/html\n create  app/assets/batman/html/.gitkeep\n create  app/assets/batman/lib\n create  app/assets/batman/lib/.gitkeep\n create  app/assets/batman/html/main\n create  app/assets/batman/controllers/application_controller.js.coffee\n create  app/assets/batman/controllers/main_controller.js.coffee\n create  app/assets/batman/html/main/index.html\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee\nprepend  app/assets/batman/rdio.js.coffee");
+    return this.after("There's our app! The generator puts all of our app files in app/assets/batman.");
   });
 
   $('playlist', function() {
     this.title("Scaffold Generator");
-    this.say("Now let's generate a resource for your batman.js application.");
+    this.say("Our Rails app already has a JSON API for managing a Playlist resource.");
+    this.say("Let's generate a corresponding resource for the batman.js side.");
     this.say("Run `rails generate batman:scaffold Playlist` to make a new scaffold.");
-    this.expect(/rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/);
-    return this.after("Great, check it out in `app/assets/batman/controllers/playlist`.");
+    this.expect(/rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/, "generate  batman:model Playlist\n  create  app/assets/batman/models/playlist.js.coffee\ngenerate  batman:controller playlists index show edit new create update destroy\n  create  app/assets/batman/controllers/playlists_controller.js.coffee\ngenerate  batman:html playlists index show edit new\n  create  app/assets/batman/html/playlists\n  create  app/assets/batman/html/playlists/index.html\n  create  app/assets/batman/html/playlists/show.html\n  create  app/assets/batman/html/playlists/edit.html\n  create  app/assets/batman/html/playlists/new.html\ngenerate  batman:view  playlists index show edit new\n  create  app/assets/batman/views/playlists\n  create  app/assets/batman/views/playlists/playlists_index_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_show_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_edit_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_new_view.js.coffee\n  insert  app/assets/batman/rdio.js.coffee");
+    return this.after("The scaffold generator sets up a controller, model, and empty views for a playlist resource.");
+  });
+
+  c('encoders', function() {
+    this.title("Model Encoders");
+    this.say("First, we need to tell the batman.js model which properties to grab from the server.");
+    this.say("Take a look in db/schema.rb to see which database columns a Playlist has.");
+    this.say("Now add a corresponding `@encode` for each column to our playlist model.");
+    return this.focus('/app/assets/batman/models/playlist.js.coffee');
   });
 
   /*
   # Storage adapter
-  title "Storage Adapters"
-  say "First, we need to tell batman.js how artists will communicate with our server."
-  say "batman.js ships with storage adapters for localStorage, REST servers, and more specifically, Rails."
-  say "Add `@persist Batman.RailsStorage` to `models/article.js.coffee`."
+  c 'storage adapter', ->
+    @title "Storage Adapters"
+    @say "First, we need to tell batman.js how artists will communicate with our server."
+    @say "batman.js ships with storage adapters for localStorage, REST servers, and more specifically, Rails."
+    @say "Add `@persist Batman.RailsStorage` to `models/article.js.coffee`."
   
-  expect /@persist\s*Batman.RailsStorage/, in: 'models/article.js.coffee'
-  
-  # Encoders
-  title "Encoders"
-  say "Now, batman.js needs to know which properties to grab from the server."
-  say "We use `@encode` to specify which properties we care about."
-  say "Add `@encode 'name', "
+    @expect /@persist\s*Batman.RailsStorage/, in: 'models/article.js.coffee'
   
   # Resource routes
   title "Routing"

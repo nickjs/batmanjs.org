@@ -2,11 +2,12 @@
 c 'gemfile', ->
   @title "Welcome to Batman!"
   @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
-  @say "First, add `batman-rails` to your Gemfile and press Cmd/Ctrl+S to save."
+  @say "First, add `gem batman-rails` to your Gemfile and press Cmd/Ctrl+S to save."
+  @say "Note: this tutorial uses some features specific to batman-rails, but you can use batman.js with any backend."
 
   @focus '/Gemfile'
 
-  @after "Great! Now we can use batman.js"
+  @after "Great! Now we can use the batman.js generators."
 
 # Generate batman app
 $ 'appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman.html.erb', '/app/assets/batman'], ->
@@ -33,39 +34,62 @@ $ 'appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman
   create  app/assets/batman/controllers/application_controller.js.coffee
   create  app/assets/batman/controllers/main_controller.js.coffee
   create  app/assets/batman/html/main/index.html
-  prepend  app/assets/batman/rdio.js.coffee
-  prepend  app/assets/batman/rdio.js.coffee
-  prepend  app/assets/batman/rdio.js.coffee
-  prepend  app/assets/batman/rdio.js.coffee
+ prepend  app/assets/batman/rdio.js.coffee
+ prepend  app/assets/batman/rdio.js.coffee
+ prepend  app/assets/batman/rdio.js.coffee
+ prepend  app/assets/batman/rdio.js.coffee
   """
 
-  @after "There's our app! Take a moment to explore `app/assets/batman`."
+  @after "There's our app! The generator puts all of our app files in app/assets/batman."
 
 
 # Generate playlist scaffold
 $ 'playlist', ->
   @title "Scaffold Generator"
-  @say "Now let's generate a resource for your batman.js application."
+  @say "Our Rails app already has a JSON API for managing a Playlist resource."
+  @say "Let's generate a corresponding resource for the batman.js side."
   @say "Run `rails generate batman:scaffold Playlist` to make a new scaffold."
 
-  @expect /rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/
+  @expect /rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/, """
+  generate  batman:model Playlist
+    create  app/assets/batman/models/playlist.js.coffee
+  generate  batman:controller playlists index show edit new create update destroy
+    create  app/assets/batman/controllers/playlists_controller.js.coffee
+  generate  batman:html playlists index show edit new
+    create  app/assets/batman/html/playlists
+    create  app/assets/batman/html/playlists/index.html
+    create  app/assets/batman/html/playlists/show.html
+    create  app/assets/batman/html/playlists/edit.html
+    create  app/assets/batman/html/playlists/new.html
+  generate  batman:view  playlists index show edit new
+    create  app/assets/batman/views/playlists
+    create  app/assets/batman/views/playlists/playlists_index_view.js.coffee
+    create  app/assets/batman/views/playlists/playlists_show_view.js.coffee
+    create  app/assets/batman/views/playlists/playlists_edit_view.js.coffee
+    create  app/assets/batman/views/playlists/playlists_new_view.js.coffee
+    insert  app/assets/batman/rdio.js.coffee
+  """
 
-  @after "Great, check it out in `app/assets/batman/controllers/playlist`."
+  @after "The scaffold generator sets up a controller, model, and empty views for a playlist resource."
+
+# Encoders
+c 'encoders', ->
+  @title "Model Encoders"
+  @say "First, we need to tell the batman.js model which properties to grab from the server."
+  @say "Take a look in db/schema.rb to see which database columns a Playlist has."
+  @say "Now add a corresponding `@encode` for each column to our playlist model."
+
+  @focus '/app/assets/batman/models/playlist.js.coffee'
 
 ###
 # Storage adapter
-title "Storage Adapters"
-say "First, we need to tell batman.js how artists will communicate with our server."
-say "batman.js ships with storage adapters for localStorage, REST servers, and more specifically, Rails."
-say "Add `@persist Batman.RailsStorage` to `models/article.js.coffee`."
+c 'storage adapter', ->
+  @title "Storage Adapters"
+  @say "First, we need to tell batman.js how artists will communicate with our server."
+  @say "batman.js ships with storage adapters for localStorage, REST servers, and more specifically, Rails."
+  @say "Add `@persist Batman.RailsStorage` to `models/article.js.coffee`."
 
-expect /@persist\s*Batman.RailsStorage/, in: 'models/article.js.coffee'
-
-# Encoders
-title "Encoders"
-say "Now, batman.js needs to know which properties to grab from the server."
-say "We use `@encode` to specify which properties we care about."
-say "Add `@encode 'name', "
+  @expect /@persist\s*Batman.RailsStorage/, in: 'models/article.js.coffee'
 
 # Resource routes
 title "Routing"
