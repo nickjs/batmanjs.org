@@ -259,15 +259,15 @@
         extraKeys: keys
       });
       this.cm.getWrapperElement().style.height = "100%";
-      Try.observeAndFire('currentFile', function(file) {
-        if (file) {
-          _this.cm.swapDoc(_this.docForFile(file));
-        }
-        return _this.cm.setOption('readOnly', !file || !_this.get('expectChanges'));
+      return Try.observeAndFire('currentFile', function(file) {
+        return setTimeout(function() {
+          if (file) {
+            _this.cm.swapDoc(_this.docForFile(file));
+          }
+          _this.cm.setOption('readOnly', !file || !_this.get('expectChanges'));
+          return _this.cm.refresh();
+        }, 0);
       });
-      return setTimeout(function() {
-        return _this.cm.refresh();
-      }, 0);
     };
 
     CodeView.prototype.save = function() {

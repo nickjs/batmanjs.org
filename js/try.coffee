@@ -154,12 +154,11 @@ class Try.CodeView extends Batman.View
     @cm.getWrapperElement().style.height = "100%"
 
     Try.observeAndFire 'currentFile', (file) =>
-      @cm.swapDoc(@docForFile(file)) if file
-      @cm.setOption('readOnly', !file || !@get('expectChanges'))
-
-    setTimeout =>
-      @cm.refresh()
-    , 0
+      setTimeout =>
+        @cm.swapDoc(@docForFile(file)) if file
+        @cm.setOption('readOnly', !file || !@get('expectChanges'))
+        @cm.refresh()
+      , 0
 
   save: =>
     Try.set('currentFile.content', @cm.getValue())
