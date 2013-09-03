@@ -123,21 +123,24 @@ class Try.File extends Batman.Model
 
 class Try.CodeView extends Batman.View
   EXTENSIONS = {
-    '.html.erb': 'htmlmixed'
-    '.html': 'htmlmixed'
+    '.html.erb': 'application/x-erb'
+    '.html': 'text/html'
     '.coffee': 'coffeescript'
     '.js': 'coffeescript'
     '.js.coffee': 'coffeescript'
     '.rb': 'ruby'
     '.ru': 'ruby'
+    '.css': 'css'
+    '.css.scss': 'css'
     'Gemfile': 'ruby'
   }
 
   modeForFile: (file) ->
     filename = file.get('id')
 
-    for ext, mode of EXTENSIONS
-      return mode if filename.indexOf(ext) != -1
+    for ext, mode of EXTENSIONS when filename.indexOf(ext) != -1
+      console.log mode
+      return mode
 
   docForFile: (file) ->
     filename = file.get('id')

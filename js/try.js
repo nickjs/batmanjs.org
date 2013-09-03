@@ -220,13 +220,15 @@
     }
 
     EXTENSIONS = {
-      '.html.erb': 'htmlmixed',
-      '.html': 'htmlmixed',
+      '.html.erb': 'application/x-erb',
+      '.html': 'text/html',
       '.coffee': 'coffeescript',
       '.js': 'coffeescript',
       '.js.coffee': 'coffeescript',
       '.rb': 'ruby',
       '.ru': 'ruby',
+      '.css': 'css',
+      '.css.scss': 'css',
       'Gemfile': 'ruby'
     };
 
@@ -235,9 +237,11 @@
       filename = file.get('id');
       for (ext in EXTENSIONS) {
         mode = EXTENSIONS[ext];
-        if (filename.indexOf(ext) !== -1) {
-          return mode;
+        if (!(filename.indexOf(ext) !== -1)) {
+          continue;
         }
+        console.log(mode);
+        return mode;
       }
     };
 

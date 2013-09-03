@@ -39,7 +39,8 @@ $(function() {
 
       dependencies = [
         'lib/dist/batman.jquery.js', 'lib/extras/batman.rails.js',
-        'lib/codemirror.js', 'lib/modes/coffeescript.js', 'lib/modes/ruby.js', 'lib/modes/htmlmixed.js',
+        'lib/codemirror.js', 'lib/modes/coffeescript.js', 'lib/modes/ruby.js', 'lib/modes/javascript.js', 'lib/modes/css.js',
+        'lib/modes/xml.js', 'lib/modes/htmlmixed.js', 'lib/modes/htmlembedded.js',
         'js/try.js', '!js/tutorial.js'
       ]
 
