@@ -12,12 +12,7 @@ use_intro: true
         <a class="next-step" data-event-click="previewApp" data-showif="currentStep" style="display:none;float:left">Launch App</a>
         <a class="next-step" data-event-click="nextStep" data-showif="currentStep.showNextStepButton" style="display:none">Next Step</a>
 
-        <div data-insertif="currentStep.isComplete">
-          <h3 data-bind="currentStep.after | raw"></h3>
-        </div>
-        <div data-removeif="currentStep.isComplete">
-          <h3 data-foreach-blurb="currentStep.body" data-bind="blurb | raw">If you love Ruby on Rails, batman.js is the best, most familiar way to build rich web apps in CoffeeScript.</h3>
-        </div>
+        <h3 data-foreach-blurb="currentStep.body" data-bind="blurb | raw">If you love Ruby on Rails, batman.js is the best, most familiar way to build rich web apps in CoffeeScript.</h3>
       </div>
     </div>
     <div class="row clearfix">

@@ -104,7 +104,6 @@
 
     LayoutView.prototype.nextStep = function() {
       var index, step;
-      Try.currentStep.afterComplete();
       index = Try.steps.indexOf(Try.currentStep);
       step = Try.steps[index + 1];
       return step != null ? step.activate() : void 0;
@@ -310,6 +309,7 @@
         showFiles = null;
       }
       this.body = new Batman.Set;
+      this.afterBody = new Batman.Set;
       this.fileAppearances = showFiles;
       Try.namedSteps[name] = this;
       Try.steps.push(this);
@@ -331,7 +331,7 @@
 
     Step.prototype.after = function(string) {
       string = string.replace(/`(.*?)`/g, "<code>$1</code>");
-      return this.after = string;
+      return this.get('afterBody').add(string);
     };
 
     Step.prototype.appear = function(filename, regex, completion) {
@@ -347,11 +347,15 @@
       if (this.isComplete) {
         return;
       }
-      return this.set('isComplete', true);
+      this.set('isComplete', true);
+      return this.afterComplete();
     };
 
     Step.prototype.afterComplete = function() {
       var completion, file, filename, match, matches, newString, value, _i, _len, _ref4, _ref5, _results;
+      if (this.afterBody.get('length')) {
+        this.set('body', this.afterBody);
+      }
       if (this.fileAppearances) {
         _ref4 = this.fileAppearances;
         for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
@@ -418,6 +422,7 @@
       if (this.regex.test(value)) {
         this.set('isError', false);
         this.set('isComplete', true);
+        this.afterComplete();
         return $('#terminal-field').attr('disabled', true);
       } else {
         return this.set('isError', true);
@@ -497,8 +502,11 @@
       Try.steps = [];
       Try.namedSteps = {};
       Try.on('fileSaved', function(file) {
-        var match, matches, value, _i, _len;
-        if (matches = Try.currentStep.matches[file.get('id')]) {
+        var filename, match, matches, value, _i, _len, _ref6;
+        _ref6 = Try.currentStep.matches;
+        for (filename in _ref6) {
+          matches = _ref6[filename];
+          file = Try.File.findByPath(filename);
           value = file.get('content');
           for (_i = 0, _len = matches.length; _i < _len; _i++) {
             match = matches[_i];
@@ -507,7 +515,8 @@
             }
           }
         }
-        return Try.currentStep.set('isComplete', true);
+        Try.currentStep.set('isComplete', true);
+        return Try.currentStep.afterComplete();
       });
     }
 

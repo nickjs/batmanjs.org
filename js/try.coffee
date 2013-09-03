@@ -57,8 +57,6 @@ class Try.LayoutView extends Batman.View
       file.show()
 
   nextStep: ->
-    Try.currentStep.afterComplete()
-
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -185,6 +183,8 @@ class Try.Step extends Batman.Object
       showFiles = null
 
     @body = new Batman.Set
+    @afterBody = new Batman.Set
+
     @fileAppearances = showFiles
 
     Try.namedSteps[name] = this
@@ -203,7 +203,7 @@ class Try.Step extends Batman.Object
 
   after: (string) ->
     string = string.replace(/`(.*?)`/g, "<code>$1</code>")
-    @after = string
+    @get('afterBody').add(string)
 
   appear: (filename, regex, completion) ->
     @appearances ||= {}
@@ -212,8 +212,11 @@ class Try.Step extends Batman.Object
   complete: ->
     return if @isComplete
     @set('isComplete', true)
+    @afterComplete()
 
   afterComplete: ->
+    @set('body', @afterBody) if @afterBody.get('length')
+
     if @fileAppearances
       for filename in @fileAppearances
         Try.File.findByPath(filename).set('isHidden', false)
@@ -245,6 +248,8 @@ class Try.ConsoleStep extends Try.Step
     if @regex.test(value)
       @set('isError', false)
       @set('isComplete', true)
+      @afterComplete()
+
       $('#terminal-field').attr('disabled', true)
     else
       @set('isError', true)
@@ -298,6 +303,7 @@ class Try.Tutorial
             return
 
       Try.currentStep.set('isComplete', true)
+      Try.currentStep.afterComplete()
 
   c: (name, showFiles, block) ->
     new Try.CodeStep(name, showFiles, block)
