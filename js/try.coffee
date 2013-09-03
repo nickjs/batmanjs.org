@@ -68,7 +68,7 @@ class Try.LayoutView extends Batman.View
 
 class Try.File extends Batman.Model
   @storageKey: 'app_files'
-  @resourceName: 'app_files'
+  @resourceName: 'files'
 
   @persist Batman.RailsStorage
 
@@ -94,11 +94,11 @@ class Try.File extends Batman.Model
 
   @encode 'name', 'content', 'isDirectory', 'id'
   @encode 'children',
-    decode: (kids) ->
+    decode: (kids, key, _, __, parent) ->
       set = new Batman.Set
       for kid in kids
         file = Try.File.createFromJSON(kid)
-        file.set('parent', this)
+        file.set('parent', parent)
         set.add(file)
 
       return set
@@ -256,6 +256,8 @@ class Try.CodeStep extends Try.Step
     if filename = @focusFile
       file = Try.File.findByPath(filename)
       Try.layout.showFile(file)
+
+      file.set('isExpanded', true) while file = file.get('parent')
 
     super
 

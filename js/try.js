@@ -128,7 +128,7 @@
 
     File.storageKey = 'app_files';
 
-    File.resourceName = 'app_files';
+    File.resourceName = 'files';
 
     File.persist(Batman.RailsStorage);
 
@@ -162,13 +162,13 @@
     File.encode('name', 'content', 'isDirectory', 'id');
 
     File.encode('children', {
-      decode: function(kids) {
+      decode: function(kids, key, _, __, parent) {
         var file, kid, set, _i, _len;
         set = new Batman.Set;
         for (_i = 0, _len = kids.length; _i < _len; _i++) {
           kid = kids[_i];
           file = Try.File.createFromJSON(kid);
-          file.set('parent', this);
+          file.set('parent', parent);
           set.add(file);
         }
         return set;
@@ -443,6 +443,9 @@
       if (filename = this.focusFile) {
         file = Try.File.findByPath(filename);
         Try.layout.showFile(file);
+        while (file = file.get('parent')) {
+          file.set('isExpanded', true);
+        }
       }
       return CodeStep.__super__.activate.apply(this, arguments);
     };
