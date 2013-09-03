@@ -234,7 +234,7 @@
         if (file) {
           _this.cm.swapDoc(_this.docForFile(file));
         }
-        return _this.cm.setOption('readOnly', !file || file.get('expectChanges'));
+        return _this.cm.setOption('readOnly', !file || !_this.get('expectChanges'));
       });
       return setTimeout(function() {
         return _this.cm.refresh();

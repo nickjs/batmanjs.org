@@ -134,7 +134,7 @@ class Try.CodeView extends Batman.View
 
     Try.observeAndFire 'currentFile', (file) =>
       @cm.swapDoc(@docForFile(file)) if file
-      @cm.setOption('readOnly', !file || file.get('expectChanges'))
+      @cm.setOption('readOnly', !file || !@get('expectChanges'))
 
     setTimeout =>
       @cm.refresh()
