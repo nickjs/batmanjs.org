@@ -290,7 +290,8 @@ class Try.Tutorial
     Try.steps = []
     Try.namedSteps = {}
     Try.on 'fileSaved', (file) =>
-      if matches = Try.currentStep.matches[file.get('id')]
+      for filename, matches of Try.currentStep.matches
+        file = Try.File.findByPath(filename)
         value = file.get('content')
         for match in matches
           if !match.regex.test(value)
