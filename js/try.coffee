@@ -16,7 +16,7 @@ class window.Try extends Batman.App
   @layout: 'layout'
 
   @previewApp: ->
-    if @previewWindow
+    if @previewWindow and !@previewWindow.closed
       @previewWindow.focus()
     else
       @previewWindow = window.open("#{APP_URL}/?preview=true", "app_preview", "width=400,height=600")

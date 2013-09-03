@@ -35,7 +35,7 @@
 
     Try.previewApp = function() {
       var _this = this;
-      if (this.previewWindow) {
+      if (this.previewWindow && !this.previewWindow.closed) {
         return this.previewWindow.focus();
       } else {
         this.previewWindow = window.open("" + APP_URL + "/?preview=true", "app_preview", "width=400,height=600");
