@@ -456,7 +456,7 @@ td + td > p, th + th {
   height: 430px;
   float: left;
   padding: 20px 0;
-  overflow: hidden;
+  overflow: scroll;
 }
 .code-editor-browser ul {
   margin: 0 0 0 20px;
