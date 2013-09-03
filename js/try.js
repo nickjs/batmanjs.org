@@ -541,34 +541,31 @@
 
   })();
 
-  $.ajax({
-    url: 'js/tutorial.js',
-    dataType: 'text',
-    success: function(content) {
-      eval("with(new Try.Tutorial){" + content + "}");
-      return Try.File.load(function() {
-        var file, step, _i, _j, _len, _len1, _ref6, _ref7;
-        _ref6 = Try.steps;
-        for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
-          step = _ref6[_i];
-          if (step.fileAppearances) {
-            _ref7 = step.fileAppearances;
-            for (_j = 0, _len1 = _ref7.length; _j < _len1; _j++) {
-              file = _ref7[_j];
-              Try.File.findByPath(file).set('isHidden', true);
-            }
+  Try.initializeTutorial = function(tutorialContent, callback) {
+    eval("with(new Try.Tutorial){" + tutorialContent + "}");
+    return Try.File.load(function() {
+      var file, step, _i, _j, _len, _len1, _ref6, _ref7;
+      _ref6 = Try.steps;
+      for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+        step = _ref6[_i];
+        if (step.fileAppearances) {
+          _ref7 = step.fileAppearances;
+          for (_j = 0, _len1 = _ref7.length; _j < _len1; _j++) {
+            file = _ref7[_j];
+            Try.File.findByPath(file).set('isHidden', true);
           }
         }
-        Try.run();
-        Try.steps[0].activate();
-        return $('#terminal-field').on('keydown', function(e) {
-          var _ref8;
-          if (e.keyCode === 13) {
-            return (_ref8 = Try.get('currentStep')) != null ? _ref8.check(this.value) : void 0;
-          }
-        });
+      }
+      Try.run();
+      Try.steps[0].activate();
+      $('#terminal-field').on('keydown', function(e) {
+        var _ref8;
+        if (e.keyCode === 13) {
+          return (_ref8 = Try.get('currentStep')) != null ? _ref8.check(this.value) : void 0;
+        }
       });
-    }
-  });
+      return typeof callback === "function" ? callback() : void 0;
+    });
+  };
 
 }).call(this);

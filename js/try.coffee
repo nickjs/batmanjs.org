@@ -319,8 +319,8 @@ class Try.Tutorial
   $: (name, showFiles, block) ->
     new Try.ConsoleStep(name, showFiles, block)
 
-$.ajax url: 'js/tutorial.js', dataType: 'text', success: (content) ->
-  eval("with(new Try.Tutorial){#{content}}")
+Try.initializeTutorial = (tutorialContent, callback) ->
+  eval("with(new Try.Tutorial){#{tutorialContent}}")
 
   Try.File.load ->
     for step in Try.steps
@@ -334,3 +334,5 @@ $.ajax url: 'js/tutorial.js', dataType: 'text', success: (content) ->
     $('#terminal-field').on 'keydown', (e) ->
       if e.keyCode == 13
         Try.get('currentStep')?.check(@value)
+
+    callback?()
