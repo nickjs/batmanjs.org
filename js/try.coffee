@@ -318,8 +318,9 @@ class Try.Tutorial
 
   $: (name, showFiles, block) ->
     new Try.ConsoleStep(name, showFiles, block)
-
+debugger
 $.ajax url: 'js/tutorial.js', dataType: 'text', success: (content) ->
+  debugger
   eval("with(new Try.Tutorial){#{content}}")
 
   Try.File.load ->

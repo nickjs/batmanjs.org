@@ -541,10 +541,13 @@
 
   })();
 
+  debugger;
+
   $.ajax({
     url: 'js/tutorial.js',
     dataType: 'text',
     success: function(content) {
+      debugger;
       eval("with(new Try.Tutorial){" + content + "}");
       return Try.File.load(function() {
         var file, step, _i, _j, _len, _len1, _ref6, _ref7;
