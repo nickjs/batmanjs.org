@@ -202,7 +202,7 @@ class Try.Step extends Batman.Object
     @get('body').add(string)
 
   after: (string) ->
-    string = string.replace(/`(.*)`/g, "<code>$1</code>")
+    string = string.replace(/`(.*?)`/g, "<code>$1</code>")
     @after = string
 
   appear: (filename, regex, completion) ->

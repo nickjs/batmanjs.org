@@ -330,7 +330,7 @@
     };
 
     Step.prototype.after = function(string) {
-      string = string.replace(/`(.*)`/g, "<code>$1</code>");
+      string = string.replace(/`(.*?)`/g, "<code>$1</code>");
       return this.after = string;
     };
 
