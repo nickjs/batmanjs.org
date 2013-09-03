@@ -54,6 +54,8 @@ class Try.LayoutView extends Batman.View
       file.show()
 
   nextStep: ->
+    Try.currentStep.afterComplete()
+
     index = Try.steps.indexOf(Try.currentStep)
     step = Try.steps[index + 1]
     step?.activate()
@@ -205,6 +207,12 @@ class Try.Step extends Batman.Object
 
   complete: ->
     return if @isComplete
+    @set('isComplete', true)
+
+  afterComplete: ->
+    if @fileAppearances
+      for filename in @fileAppearances
+        Try.File.findByPath(filename).set('isHidden', false)
 
     for filename, matches of @appearances
       file = Try.File.findByPath(filename)
@@ -216,9 +224,6 @@ class Try.Step extends Batman.Object
           newString += completion.value
           newString += value.substr(completion.index)
           file.set('content', newString)
-
-
-    @set('isComplete', true)
 
   @accessor 'showNextStepButton', ->
     @get('hasNextStep') and @get('isComplete')
@@ -239,9 +244,6 @@ class Try.ConsoleStep extends Try.Step
       $('#terminal-field').attr('disabled', true)
     else
       @set('isError', true)
-
-  complete: ->
-    @set('isComplete', true)
 
 class Try.CodeStep extends Try.Step
   isCode: true

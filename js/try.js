@@ -99,6 +99,7 @@
 
     LayoutView.prototype.nextStep = function() {
       var index, step;
+      Try.currentStep.afterComplete();
       index = Try.steps.indexOf(Try.currentStep);
       step = Try.steps[index + 1];
       return step != null ? step.activate() : void 0;
@@ -332,27 +333,46 @@
     };
 
     Step.prototype.complete = function() {
-      var completion, file, filename, match, matches, newString, value, _i, _len, _ref4;
       if (this.isComplete) {
         return;
       }
-      _ref4 = this.appearances;
-      for (filename in _ref4) {
-        matches = _ref4[filename];
-        file = Try.File.findByPath(filename);
-        for (_i = 0, _len = matches.length; _i < _len; _i++) {
-          match = matches[_i];
-          value = file.get('content');
-          if (!match.regex.test(value)) {
-            completion = match.completion;
-            newString = value.substr(0, completion.index);
-            newString += completion.value;
-            newString += value.substr(completion.index);
-            file.set('content', newString);
-          }
+      return this.set('isComplete', true);
+    };
+
+    Step.prototype.afterComplete = function() {
+      var completion, file, filename, match, matches, newString, value, _i, _len, _ref4, _ref5, _results;
+      if (this.fileAppearances) {
+        _ref4 = this.fileAppearances;
+        for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
+          filename = _ref4[_i];
+          Try.File.findByPath(filename).set('isHidden', false);
         }
       }
-      return this.set('isComplete', true);
+      _ref5 = this.appearances;
+      _results = [];
+      for (filename in _ref5) {
+        matches = _ref5[filename];
+        file = Try.File.findByPath(filename);
+        _results.push((function() {
+          var _j, _len1, _results1;
+          _results1 = [];
+          for (_j = 0, _len1 = matches.length; _j < _len1; _j++) {
+            match = matches[_j];
+            value = file.get('content');
+            if (!match.regex.test(value)) {
+              completion = match.completion;
+              newString = value.substr(0, completion.index);
+              newString += completion.value;
+              newString += value.substr(completion.index);
+              _results1.push(file.set('content', newString));
+            } else {
+              _results1.push(void 0);
+            }
+          }
+          return _results1;
+        })());
+      }
+      return _results;
     };
 
     Step.accessor('showNextStepButton', function() {
@@ -391,10 +411,6 @@
       } else {
         return this.set('isError', true);
       }
-    };
-
-    ConsoleStep.prototype.complete = function() {
-      return this.set('isComplete', true);
     };
 
     return ConsoleStep;
