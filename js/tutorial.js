@@ -8,7 +8,7 @@
     return this.after("Great! Now we can use batman.js");
   });
 
-  $('appgen', function() {
+  $('appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman.html.erb', '/app/assets/batman'], function() {
     this.title("App Generator");
     this.say("batman-rails includes a number of Rails generators to make batman.js development easy.");
     this.say("Run `rails generate batman:app` to generate an empty batman.js app.");

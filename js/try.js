@@ -174,7 +174,7 @@
         var expectation, _i, _len;
         for (_i = 0, _len = expectations.length; _i < _len; _i++) {
           expectation = expectations[_i];
-          Try.namedSteps[expectation.stepName].expect(data.id, new RegExp(expectation.regex), expectation.completion);
+          Try.namedSteps[expectation.stepName][expectation.action](data.id, new RegExp(expectation.regex), expectation.completion);
         }
         return null;
       }
@@ -191,6 +191,8 @@
   })(Batman.Model);
 
   Try.CodeView = (function(_super) {
+    var EXTENSIONS;
+
     __extends(CodeView, _super);
 
     function CodeView() {
@@ -199,14 +201,35 @@
       return _ref2;
     }
 
+    EXTENSIONS = {
+      '.html.erb': 'htmlmixed',
+      '.html': 'htmlmixed',
+      '.coffee': 'coffeescript',
+      '.js': 'coffeescript',
+      '.js.coffee': 'coffeescript',
+      '.rb': 'ruby',
+      '.ru': 'ruby',
+      'Gemfile': 'ruby'
+    };
+
+    CodeView.prototype.modeForFile = function(file) {
+      var ext, filename, mode;
+      filename = file.get('id');
+      for (ext in EXTENSIONS) {
+        mode = EXTENSIONS[ext];
+        if (filename.indexOf(ext) !== -1) {
+          return mode;
+        }
+      }
+    };
+
     CodeView.prototype.docForFile = function(file) {
-      var doc, filename, mode;
+      var doc, filename;
       filename = file.get('id');
       this.docs || (this.docs = {});
       if (!(doc = this.docs[filename])) {
-        mode = filename.indexOf('.coffee') !== -1 ? 'coffeescript' : 'ruby';
         this.set('expectChanges', filename.indexOf('.rb') === -1);
-        doc = this.docs[filename] = CodeMirror.Doc(file.get('content'), mode);
+        doc = this.docs[filename] = CodeMirror.Doc(file.get('content'), this.modeForFile(file));
         file.observe('content', function(value) {
           if (value !== doc.getValue()) {
             return doc.setValue(value);
@@ -259,7 +282,7 @@
       return _ref3;
     }
 
-    FileView.prototype.html = "<a data-bind=\"file.name\" data-event-click=\"showFile | withArguments file\" class=\"file\" data-addclass-directory=\"file.isDirectory\" data-addclass-active=\"currentFile | equals file\" data-addclass-expanded=\"file.isExpanded\"></a>\n<ul data-showif=\"file.isDirectory | and file.isExpanded\" data-renderif=\"file.isDirectory\">\n  <li data-foreach-file=\"file.children\">\n    <div data-view=\"FileView\"></div>\n  </li>\n</ul>";
+    FileView.prototype.html = "<a data-bind=\"file.name\" data-hideif=\"file.isHidden\" data-event-click=\"showFile | withArguments file\" class=\"file\" data-addclass-directory=\"file.isDirectory\" data-addclass-active=\"currentFile | equals file\" data-addclass-expanded=\"file.isExpanded\"></a>\n<ul data-showif=\"file.isDirectory | and file.isExpanded\" data-renderif=\"file.isDirectory\">\n  <li data-foreach-file=\"file.children.sortedBy.isDirectory\">\n    <div data-view=\"FileView\"></div>\n  </li>\n</ul>";
 
     return FileView;
 
@@ -270,11 +293,17 @@
 
     Step.prototype.hasNextStep = true;
 
-    function Step(name) {
+    function Step(name, showFiles, block) {
       this.name = name;
+      if (!block) {
+        block = showFiles;
+        showFiles = null;
+      }
       this.body = new Batman.Set;
+      this.fileAppearances = showFiles;
       Try.namedSteps[name] = this;
       Try.steps.push(this);
+      block.call(this);
     }
 
     Step.prototype.activate = function() {
@@ -291,6 +320,39 @@
 
     Step.prototype.after = function(string) {
       return this.after = string;
+    };
+
+    Step.prototype.appear = function(filename, regex, completion) {
+      var _base;
+      this.appearances || (this.appearances = {});
+      return ((_base = this.appearances)[filename] || (_base[filename] = [])).push({
+        regex: regex,
+        completion: completion
+      });
+    };
+
+    Step.prototype.complete = function() {
+      var completion, file, filename, match, matches, newString, value, _i, _len, _ref4;
+      if (this.isComplete) {
+        return;
+      }
+      _ref4 = this.appearances;
+      for (filename in _ref4) {
+        matches = _ref4[filename];
+        file = Try.File.findByPath(filename);
+        for (_i = 0, _len = matches.length; _i < _len; _i++) {
+          match = matches[_i];
+          value = file.get('content');
+          if (!match.regex.test(value)) {
+            completion = match.completion;
+            newString = value.substr(0, completion.index);
+            newString += completion.value;
+            newString += value.substr(completion.index);
+            file.set('content', newString);
+          }
+        }
+      }
+      return this.set('isComplete', true);
     };
 
     Step.accessor('showNextStepButton', function() {
@@ -392,7 +454,7 @@
           }
         }
       }
-      return this.set('isComplete', true);
+      return CodeStep.__super__.complete.apply(this, arguments);
     };
 
     return CodeStep;
@@ -419,22 +481,12 @@
       });
     }
 
-    Tutorial.prototype.c = function(name, block) {
-      var step;
-      step = new Try.CodeStep(name);
-      if (block != null) {
-        block.call(step);
-      }
-      return step;
+    Tutorial.prototype.c = function(name, showFiles, block) {
+      return new Try.CodeStep(name, showFiles, block);
     };
 
-    Tutorial.prototype.$ = function(name, block) {
-      var step;
-      step = new Try.ConsoleStep(name);
-      if (block != null) {
-        block.call(step);
-      }
-      return step;
+    Tutorial.prototype.$ = function(name, showFiles, block) {
+      return new Try.ConsoleStep(name, showFiles, block);
     };
 
     return Tutorial;
@@ -447,12 +499,24 @@
     success: function(content) {
       eval("with(new Try.Tutorial){" + content + "}");
       return Try.File.load(function() {
+        var file, step, _i, _j, _len, _len1, _ref6, _ref7;
+        _ref6 = Try.steps;
+        for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+          step = _ref6[_i];
+          if (step.fileAppearances) {
+            _ref7 = step.fileAppearances;
+            for (_j = 0, _len1 = _ref7.length; _j < _len1; _j++) {
+              file = _ref7[_j];
+              Try.File.findByPath(file).set('isHidden', true);
+            }
+          }
+        }
         Try.run();
         Try.steps[0].activate();
         return $('#terminal-field').on('keydown', function(e) {
-          var _ref6;
+          var _ref8;
           if (e.keyCode === 13) {
-            return (_ref6 = Try.get('currentStep')) != null ? _ref6.check(this.value) : void 0;
+            return (_ref8 = Try.get('currentStep')) != null ? _ref8.check(this.value) : void 0;
           }
         });
       });

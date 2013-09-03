@@ -9,7 +9,7 @@ c 'gemfile', ->
   @after "Great! Now we can use batman.js"
 
 # Generate batman app
-$ 'appgen', ->
+$ 'appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman.html.erb', '/app/assets/batman'], ->
   @title "App Generator"
   @say "batman-rails includes a number of Rails generators to make batman.js development easy."
   @say "Run `rails generate batman:app` to generate an empty batman.js app."

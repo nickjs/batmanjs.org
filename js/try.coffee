@@ -126,9 +126,7 @@ class Try.CodeView extends Batman.View
     filename = file.get('id')
 
     for ext, mode of EXTENSIONS
-      if filename.indexOf(ext) != -1
-        console.log mode
-        return mode
+      return mode if filename.indexOf(ext) != -1
 
   docForFile: (file) ->
     filename = file.get('id')
@@ -166,7 +164,7 @@ class Try.CodeView extends Batman.View
 
 class Try.FileView extends Batman.View
   html: """
-    <a data-bind="file.name" data-event-click="showFile | withArguments file" class="file" data-addclass-directory="file.isDirectory" data-addclass-active="currentFile | equals file" data-addclass-expanded="file.isExpanded"></a>
+    <a data-bind="file.name" data-hideif="file.isHidden" data-event-click="showFile | withArguments file" class="file" data-addclass-directory="file.isDirectory" data-addclass-active="currentFile | equals file" data-addclass-expanded="file.isExpanded"></a>
     <ul data-showif="file.isDirectory | and file.isExpanded" data-renderif="file.isDirectory">
       <li data-foreach-file="file.children.sortedBy.isDirectory">
         <div data-view="FileView"></div>
@@ -177,11 +175,17 @@ class Try.FileView extends Batman.View
 class Try.Step extends Batman.Object
   hasNextStep: true
 
-  constructor: (@name) ->
+  constructor: (@name, showFiles, block) ->
+    if !block
+      block = showFiles
+      showFiles = null
+
     @body = new Batman.Set
+    @fileAppearances = showFiles
 
     Try.namedSteps[name] = this
     Try.steps.push(this)
+    block.call(this)
 
   activate: ->
     Try.set('currentStep', this)
@@ -286,20 +290,21 @@ class Try.Tutorial
 
       Try.currentStep.set('isComplete', true)
 
-  c: (name, block) ->
-    step = new Try.CodeStep(name)
-    block?.call(step)
-    step
+  c: (name, showFiles, block) ->
+    new Try.CodeStep(name, showFiles, block)
 
-  $: (name, block) ->
-    step = new Try.ConsoleStep(name)
-    block?.call(step)
-    step
+  $: (name, showFiles, block) ->
+    new Try.ConsoleStep(name, showFiles, block)
 
 $.ajax url: 'js/tutorial.js', dataType: 'text', success: (content) ->
   eval("with(new Try.Tutorial){#{content}}")
 
   Try.File.load ->
+    for step in Try.steps
+      if step.fileAppearances
+        for file in step.fileAppearances
+          Try.File.findByPath(file).set('isHidden', true)
+
     Try.run()
     Try.steps[0].activate()
 
