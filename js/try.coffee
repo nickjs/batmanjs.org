@@ -192,6 +192,7 @@ class Try.Step extends Batman.Object
     @set('heading', string)
 
   say: (string) ->
+    string = string.replace(/`(.*)`/g, "<code>$1</code>")
     @get('body').add(string)
 
   after: (string) ->

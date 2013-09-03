@@ -313,6 +313,7 @@
     };
 
     Step.prototype.say = function(string) {
+      string = string.replace(/`(.*)`/g, "<code>$1</code>");
       return this.get('body').add(string);
     };
 
