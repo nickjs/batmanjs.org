@@ -1,5 +1,5 @@
 c 'gemfile', ->
-  @title "Welcome to Batman!"
+  @title "Welcome to batman.js!"
   @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
   @say "First, add `gem 'batman-rails'` to your Gemfile and press Cmd/Ctrl+S to save."
   @say "Note: this tutorial uses some features specific to batman-rails, but you can use batman.js with any backend."
@@ -233,4 +233,4 @@ c 'fin', ->
   @title "Looking Back"
   @say "Well shit amigo, that's a pretty slick looking Rdio playlist manager."
   @say "You should have a bit of a better idea of what it's like to develop with"
-  @say "batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/rdio\">Rdio app</a> on GitHub a bit more."
+  @say "batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/batman-rdio\">Rdio app</a> on GitHub a bit more."
