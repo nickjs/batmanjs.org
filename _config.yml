@@ -3,7 +3,7 @@ lsi: false
 pygments: true
 download:
     version: 0.15.0
-    date: "June 10th, 2013"
+    date: "September 4th, 2013"
 
 doc_boxes:
   - box: Getting Started
@@ -35,10 +35,10 @@ docs:
   - title: Batman.Object
     link: object
 
-api_index: 
+api_index:
   - id: 0_Batman
     title: Batman
-    sub: 
+    sub:
       - id: 0_0_container
         title: container
       - id: "0_1_%40typeOf(object)_%3A_string"
@@ -69,7 +69,7 @@ api_index:
         title: "@escapeHTML(input) : string"
   - id: 1_Batman.helpers
     title: Batman.helpers
-    sub: 
+    sub:
       - id: "1_0_%40ordinalize(value_%3A_%5Bnumber%7Cstring%5D)_%3A_string"
         title: "@ordinalize(value : [number|string]) : string"
       - id: "1_1_%40singularize(pluralString_%3A_string)_%3A_string"
@@ -90,7 +90,7 @@ api_index:
         title: "@humanize(string) : string"
   - id: 2_Batman.Object
     title: Batman.Object
-    sub: 
+    sub:
       - id: "2_0_%40accessor(%5Bkeys...%5D%2C_objectOrFunction)"
         title: "@accessor([keys...], objectOrFunction)"
       - id: "2_1_%40classAccessor(%5Bkeys...%5D%2C_objectOrFunction)"
@@ -159,7 +159,7 @@ api_index:
         title: "::.isEventEmitter"
   - id: 3_Batman.Enumerable
     title: Batman.Enumerable
-    sub: 
+    sub:
       - id: "3_0_%3A%3A.length_%3A_number"
         title: "::.length : number"
       - id: "3_1_%3A%3AforEach(func)"
@@ -182,7 +182,7 @@ api_index:
         title: "Implementing your own `Batman.Enumerable`"
   - id: 4_Batman.Set
     title: Batman.Set
-    sub: 
+    sub:
       - id: 4_0_constructor(items...)
         title: constructor(items...)
       - id: "4_1_length_%3A_number"
@@ -219,7 +219,7 @@ api_index:
         title: "sortedBy(key: String [, order: String]) : SetSort"
   - id: 5_Batman_Request
     title: Batman Request
-    sub: 
+    sub:
       - id: 5_0_.status
         title: .status
       - id: 5_1_.response
@@ -232,7 +232,7 @@ api_index:
         title: "::send([data])"
   - id: 6_Batman.App
     title: Batman.App
-    sub: 
+    sub:
       - id: 6_0_Batman.currentApp
         title: Batman.currentApp
       - id: "6_1_%40run()_%3A_App"
@@ -257,7 +257,7 @@ api_index:
         title: "'ready' class event"
   - id: 7_Batman.App_Routing
     title: Batman.App Routing
-    sub: 
+    sub:
       - id: "7_0_%40resources(resourceName_%3A_String%5B%2C_otherResourceNames..._%3A_String%5D%5B%2C_options_%3A_Object%5D%5B%2C_scopedCallback_%3A_Function%5D)"
         title: "@resources(resourceName : String[, otherResourceNames... : String][, options : Object][, scopedCallback : Function])"
       - id: "7_1_%40member"
@@ -270,7 +270,7 @@ api_index:
         title: "@root"
   - id: 8_Batman.Controller
     title: Batman.Controller
-    sub: 
+    sub:
       - id: 8_0_Controller_Directory
         title: Controller Directory
       - id: 8_1_Actions
@@ -295,7 +295,7 @@ api_index:
         title: "::.defaultRenderYield[= 'main'] : string"
   - id: 9_Batman.Model
     title: Batman.Model
-    sub: 
+    sub:
       - id: 9_0_The_Asynchronous_Nature_of_the_World
         title: The Asynchronous Nature of the World
       - id: 9_1_The_Identity_Map
@@ -368,7 +368,7 @@ api_index:
     sub: []
   - id: 12_Batman.Model_Associations
     title: Batman.Model Associations
-    sub: 
+    sub:
       - id: 12_0_Batman.AssocationProxy
         title: Batman.AssocationProxy
       - id: 12_1_Shared_Options
@@ -381,7 +381,7 @@ api_index:
         title: "@belongsTo(label[, options])"
   - id: 13_Batman.View
     title: Batman.View
-    sub: 
+    sub:
       - id: "13_0_%3A%3Aconstructor(options_%3D_%7B%7D)"
         title: "::constructor(options = {})"
       - id: "13_1_%3A%3AlookupKeypath(keypath)_%3A_Object"
@@ -414,7 +414,7 @@ api_index:
         title: "@viewForNode(node, climbTree = true) : Batman.View"
   - id: 14_Batman_View_Bindings
     title: Batman View Bindings
-    sub: 
+    sub:
       - id: 14_0_How_to_use_bindings
         title: How to use bindings
       - id: "14_1_data-bind"
@@ -455,7 +455,7 @@ api_index:
         title: "data-replace"
   - id: 15_Batman_View_Filters
     title: Batman View Filters
-    sub: 
+    sub:
       - id: "15_0_raw(value)_%3A_string"
         title: "raw(value) : string"
       - id: "15_1_get(value%2C_key)_%3A_value"
@@ -508,7 +508,7 @@ api_index:
         title: "escape(value) : string"
   - id: 16_Batman.DOM
     title: Batman.DOM
-    sub: 
+    sub:
       - id: "16_0_%40scrollIntoView(elementID_%3A_string)"
         title: "@scrollIntoView(elementID : string)"
       - id: "16_1_%40setStyleProperty(node_%3A_Node%2Cproperty_%3A_string%2Cvalue_%3A_string%2C_importance_%3A_string)"
