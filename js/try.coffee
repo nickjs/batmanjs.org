@@ -211,6 +211,23 @@ class Try.Step extends Batman.Object
     Try.set('currentStep', this)
     Try.set('showLaunchAppButton', true) if @enablesLaunchAppButton
 
+    if @fileAppearances
+      for filename in @fileAppearances
+        Try.File.findByPath(filename).set('isHidden', false)
+
+    for filename, matches of @appearances
+      file = Try.File.findByPath(filename)
+      for match in matches
+        value = file.get('content')
+        if !match.regex.test(value)
+          completion = match.completion
+          newString = value.substr(0, completion.index)
+          newString += completion.value
+          newString += value.substr(completion.index)
+          file.set('content', newString)
+
+    return
+
   title: (string) ->
     @set('heading', string)
 
@@ -233,23 +250,6 @@ class Try.Step extends Batman.Object
 
   afterComplete: ->
     @set('body', @afterBody) if @afterBody.get('length')
-
-    if @fileAppearances
-      for filename in @fileAppearances
-        Try.File.findByPath(filename).set('isHidden', false)
-
-    for filename, matches of @appearances
-      file = Try.File.findByPath(filename)
-      for match in matches
-        value = file.get('content')
-        if !match.regex.test(value)
-          completion = match.completion
-          newString = value.substr(0, completion.index)
-          newString += completion.value
-          newString += value.substr(completion.index)
-          file.set('content', newString)
-
-    return
 
   @accessor 'showNextStepButton', ->
     @get('hasNextStep') and @get('isComplete')

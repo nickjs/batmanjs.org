@@ -335,9 +335,33 @@
     }
 
     Step.prototype.activate = function() {
+      var completion, file, filename, match, matches, newString, value, _i, _j, _len, _len1, _ref4, _ref5;
       Try.set('currentStep', this);
       if (this.enablesLaunchAppButton) {
-        return Try.set('showLaunchAppButton', true);
+        Try.set('showLaunchAppButton', true);
+      }
+      if (this.fileAppearances) {
+        _ref4 = this.fileAppearances;
+        for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
+          filename = _ref4[_i];
+          Try.File.findByPath(filename).set('isHidden', false);
+        }
+      }
+      _ref5 = this.appearances;
+      for (filename in _ref5) {
+        matches = _ref5[filename];
+        file = Try.File.findByPath(filename);
+        for (_j = 0, _len1 = matches.length; _j < _len1; _j++) {
+          match = matches[_j];
+          value = file.get('content');
+          if (!match.regex.test(value)) {
+            completion = match.completion;
+            newString = value.substr(0, completion.index);
+            newString += completion.value;
+            newString += value.substr(completion.index);
+            file.set('content', newString);
+          }
+        }
       }
     };
 
@@ -373,32 +397,8 @@
     };
 
     Step.prototype.afterComplete = function() {
-      var completion, file, filename, match, matches, newString, value, _i, _j, _len, _len1, _ref4, _ref5;
       if (this.afterBody.get('length')) {
-        this.set('body', this.afterBody);
-      }
-      if (this.fileAppearances) {
-        _ref4 = this.fileAppearances;
-        for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
-          filename = _ref4[_i];
-          Try.File.findByPath(filename).set('isHidden', false);
-        }
-      }
-      _ref5 = this.appearances;
-      for (filename in _ref5) {
-        matches = _ref5[filename];
-        file = Try.File.findByPath(filename);
-        for (_j = 0, _len1 = matches.length; _j < _len1; _j++) {
-          match = matches[_j];
-          value = file.get('content');
-          if (!match.regex.test(value)) {
-            completion = match.completion;
-            newString = value.substr(0, completion.index);
-            newString += completion.value;
-            newString += value.substr(completion.index);
-            file.set('content', newString);
-          }
-        }
+        return this.set('body', this.afterBody);
       }
     };
 
