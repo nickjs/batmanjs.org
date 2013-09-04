@@ -1,15 +1,13 @@
-# Install batman-rails
 c 'gemfile', ->
   @title "Welcome to Batman!"
   @say "Let's say you have a Rails app that talks to Rdio that you want to batman-ize."
-  @say "First, add `gem batman-rails` to your Gemfile and press Cmd/Ctrl+S to save."
+  @say "First, add `gem 'batman-rails'` to your Gemfile and press Cmd/Ctrl+S to save."
   @say "Note: this tutorial uses some features specific to batman-rails, but you can use batman.js with any backend."
 
   @focus '/Gemfile'
 
   @after "Great! Now we can use the batman.js generators."
 
-# Generate batman app
 $ 'appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman.html.erb', '/app/assets/batman'], ->
   @title "App Generator"
   @say "batman-rails includes a number of Rails generators to make batman.js development easy."
@@ -40,11 +38,23 @@ $ 'appgen', ['/app/controllers/batman_controller.rb', '/app/views/layouts/batman
  prepend  app/assets/batman/rdio.js.coffee
   """
 
-  @after "There's our app! The generator puts all of our app files in app/assets/batman."
+  @after "There's our app! The generator puts all of our app files in `app/assets/batman`."
 
+c 'look_around_app', ->
+  @title "App Generator"
+  @enableLaunchAppButton()
 
-# Generate playlist scaffold
-$ 'playlist', ->
+  @say "Take a look around the generated app in `app/assets/batman`."
+  @say "Press the Launch App button to preview your app as you write code."
+  @say "It's pretty empty now, just some text fields that automatically update"
+  @say "data and other UI within the app. The preview will automatically reload"
+  @say "whenever you save changes to a file with Ctrl/Cmd+S."
+
+  @focus '/app/assets/batman/html/main/index.html'
+
+  @complete()
+
+$ 'playlist', ['/app/assets/batman/controllers/playlists_controller.js.coffee', '/app/assets/batman/models/playlist.js.coffee', '/app/assets/batman/views/playlists', '/app/assets/batman/html/playlists'], ->
   @title "Scaffold Generator"
   @say "Our Rails app already has a JSON API for managing a Playlist resource."
   @say "Let's generate a corresponding resource for the batman.js side."
@@ -71,146 +81,156 @@ $ 'playlist', ->
   """
 
   @after "The scaffold generator sets up a controller, model, and empty views for a playlist resource."
-  @after "Press the Launch App button to preview your app as you write code."
-  @after "It's pretty empty now, but it will reload whenever you save a file."
 
-  @enableLaunchAppButton()
+c 'look_around_playlist', ->
+  @title "Scaffold Generator"
+  @say "Look around the generated Playlist scaffold. You'll find files in"
+  @say "`controllers`, `models`, and `html`. It won't do much yet, but we've added"
+  @say "some basic HTML. Try clicking the `Playlists` link in the preview window."
 
-# Encoders
-c 'encoders', ->
-  @title "Model Encoders"
-  @say "First, we need to tell the batman.js model which properties to grab from the server."
-  @say "Take a look in db/schema.rb to see which database columns a Playlist has."
-  @say "Now add a corresponding `@encode` for each column to our playlist model."
+  @focus '/app/assets/batman/html/playlists/index.html'
 
-  @focus '/app/assets/batman/models/playlist.js.coffee'
+  @complete()
 
-  @after "Next, let's set up some basic CRUD actions for a playlist."
+c 'routing', ->
+  @title "Routing"
+  @say "Notice that clicking on that link took you to a new URL and a new controller within your app."
+  @say "Every action in your controller needs to be mapped to by at least one URL, called a route."
+  @say "batman.js uses a very similar routing syntax to Rails. Declare your routes in `rdio.js.coffee`."
+  @say "For a simple first task, try changing the `root` route (what will be matched by `/`) to point to"
+  @say "`playlists#index` instead of `main#index`. This represents the index action of playlists controller."
 
+  @focus '/app/assets/batman/rdio.js.coffee'
+
+  @after "Note that the scaffold generator automatically adds an `@resource` route, which is a"
+  @after "macro that automatically adds four routes for all of the default CRUD actions (index,"
+  @after "show, edit, new) and maps them to a corresponding action in your `PlaylistsController`."
 
 c 'playlist_index', ->
   @title "List All Playlists"
-  @say "First, let's grab all the playlists resources from the API."
-  @say "Then we want to set them to an instance variable that we can access in the view."
+  @say "First, let's grab all the playlists resources from the API and store them in"
+  @say "an instance variable on our controller that we can access from the view."
   @say "Add `@set('playlists', Rdio.Playlist.get('all'))` to the `index` action."
 
   @focus '/app/assets/batman/controllers/playlists_controller.js.coffee'
 
   @after "All properties in batman.js are accessed with `get` and `set`. It's magic."
   @after "`Playlist.get('all')` will automatically send a GET request to /playlists.json."
-  @after "But how does a user get to the index page in the first place?"
-
-c 'routing', ->
-  @title "Routing"
-  @say "Every action in your controller needs to be mapped to by at least one URL, called a route."
-  @say "batman.js uses a very similar routing syntax to Rails. Declare your routes in rdio.js.coffee."
-  @say "The scaffold generator automatically adds an `@resource` route, a macro automatically adds four routes for all the default CRUD actions (index, show, edit, new) and maps them to your `PlaylistsController`."
-
-  @focus '/app/assets/batman/rdio.js.coffee'
-
-  @set('isComplete', true)
+  @after "Now let's show the user how many playlists are stored on the server."
 
 c 'first_binding', ->
   @title "Baby's First Binding"
   @say "A big chunk of the power of batman.js lies in its data bindings. You can use them"
   @say "to hook up your HTML to your model and app data, without writing glue code."
-  @say "Add `data-bind=\"playlists.length\"` to the span in the h1 element."
+  @say "Add `data-bind=\"playlists.length\"` to the `span` insude the `h1` element."
 
   @focus '/app/assets/batman/html/playlists/index.html'
 
   @after "The span will automatically observe the length of the playlist array and update when it changes."
-  @after "All data bindings start with `data-` and reference model or app data directly."
-  @after "The most basic `data-bind` always updates the content or innerHTML of a node."
+  @after "All data bindings start with `data-*` and reference model or app data directly."
+  @after "The most basic `data-bind` always updates the value or innerHTML of a node."
 
 c 'showif_binding', ->
   @title "Show/Hide Bindings"
   @say "Oftentimes, you'll want to show or hide part of your page when data chances."
   @say "Let's add a blank slate for when there are 0 playlists."
-  @say "Add `data-showif=\"playlists.empty\"` to the h3 element."
+  @say "Add `data-showif=\"playlists.isEmpty\"` to the `h3` element."
 
   @focus '/app/assets/batman/html/playlists/index.html'
 
-  @after "The h3 will automatically observe the length of the playlist array and hide if there are more than 0 items."
-  @after "`data-hideif` works exactly the same way, but with the condition in the opposite."
-  @after "Ok, let's let the user add a new playlist."
+  @after "The `h3` will automatically observe the length of the playlist array and hide if"
+  @after "there are more than 0 items. `data-hideif` works exactly the same way, but hides"
+  @after "the node instead of shows it. Ok, now let's actually show all the playlists."
 
-###
-# Storage adapter
-c 'storage adapter', ->
-  @title "Storage Adapters"
-  @say "First, we need to tell batman.js how artists will communicate with our server."
-  @say "batman.js ships with storage adapters for localStorage, REST servers, and more specifically, Rails."
-  @say "Add `@persist Batman.RailsStorage` to `models/article.js.coffee`."
+c 'foreach_binding', ->
+  @title "For Each Bindings"
+  @say "Another common task is iterating over a set of data that may change. Try adding"
+  @say "`data-foreach-list=\"playlists\"` to the `li` node and `data-bind=\"list.name\"` to its"
+  @say "inner `span`. This says for each `list` in `playlists`, copy this `li` and assign `list` to it."
 
-  @expect /@persist\s*Batman.RailsStorage/, in: 'models/article.js.coffee'
+  @focus '/app/assets/batman/html/playlists/index.html'
 
-# Resource routes
-title "Routing"
-say "batman.js has a very similar syntax to Rails for defining your routes."
-say "Because artists are a RESTful resource, we can use the `@resources` macro to automatically add all of the CRUD routes."
-say "Add `@resources 'artists'` to `rdio.js.coffee`."
+  @after "This node will be cloned for every iteration of the set of playlists."
+  @after "Every cloned node has access to the iteration property, which in this"
+  @after "case, is what we called `list`. But hmm, still nothing shows up..."
 
-expect /@resources\s*'artists'/, in: 'rdio.js.coffee'
+c 'encoders', ->
+  @title "Model Encoders"
+  @say "We need to tell the batman.js model which properties to grab from the server."
+  @say "Take a look in `db/schema.rb` to see which database columns a Playlist has."
+  @say "Now add a corresponding `@encode` for each column to our playlist model."
+  @say "Hint: You can use a single `@encode` for multiple properties on the same line."
 
-# Controller actions
-title "Controller Actions"
-say "Every URL in your routes file needs a corresponding action in a controller."
-say "Just like with Rails, URL's are mapped to specific controller actions."
-say "Actions are just functions on a controller object that take `params` as an argument."
-say "Add `index`, `new`, and `show` to `controllers/artists_controller.js.coffee`."
+  @focus '/app/assets/batman/models/playlist.js.coffee'
 
-expect /index:\s*\(params\)\s*->/, in: 'controllers/artists_controller.js.coffee'
-expect /show:\s*\(params\)\s*->/, in: 'controllers/artists_controller.js.coffee'
-expect /new:\s*\(params\)\s*->/, in: 'controllers/artists_controller.js.coffee'
+  @after "Awesome, the list works! Now, let's show the icon for the playlist."
 
-# Index view
-title "Data Bindings"
-say "Take a moment to explore the batman directory, it's under `app/assets/batman`."
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
+c 'attribute_binding', ->
+  @title "Attribute Bindings"
+  @say "Another type of binding, similar to the original `data-bind` content binding is"
+  @say "the attribute binding. Instead of just the node's content, you can bind any of"
+  @say "the node's attributes. Add `data-bind-src=\"list.icon\"` to the `img` tag."
 
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
+  @focus '/app/assets/batman/html/playlists/index.html'
 
-# Generate batman app
-title "Great! Now let's generate our batman.js app."
-say "batman-rails includes a number of Rails generators to make batman.js development easy."
-say "Run `rails generate batman:app` to generate an empty batman.js app."
+  @after "Any valid HTML attribute can be bound and autoupdated simply by doing"
+  @after "`data-bind-[attribute]`. Set `id`s, `class` names, `src`s, `disabled`s, etc."
+  @after "Finally, let's set up some links to other routes in our app."
 
-expect /rails\s*[g|generate]\s*batman:app/
+c 'route_bindings', ->
+  @title "Route Bindings"
+  @say "Let's look at one more type of binding to navigate around our app. `data-route`"
+  @say "takes three types of arguments. A manual URL as a string, a named route, or a resource."
+  @say "Add `data-route=\"routes.playlists.new\"` (named route) to the `a` tag for New Playlist."
+  @say "Add `data-route=\"playlist\"` (resource route) to the `a` tag in the playlist `li`."
 
-# Generate artist scaffold
-title "There's our app."
-say "Take a moment to explore the batman directory, it's under `app/assets/batman`."
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
+  @focus '/app/assets/batman/html/playlists/index.html'
 
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-# Generate batman app
-title "Great! Now let's generate our batman.js app."
-say "batman-rails includes a number of Rails generators to make batman.js development easy."
-say "Run `rails generate batman:app` to generate an empty batman.js app."
+  @after "`data-route` automatically handles all the interaction for links and buttons."
+  @after "It will handle pushState if the user's browser supports it and manages URL's in"
+  @after "exactly the way you'd expect. That means we don't break back or forward buttons,"
+  @after "bookmarkable URL's, or anything else people like to complain about."
 
-expect /rails\s*[g|generate]\s*batman:app/
+c 'fast_forward', ['/app/assets/batman/models/track.js.coffee', '/app/assets/batman/models/album.js.coffee'], ->
+  @title "Intermission"
+  @say "We've filled in some more of the app for you so we can look at more"
+  @say "interesting things. Feel free to take a minute to click through the code."
 
-# Generate artist scaffold
-title "There's our app."
-say "Take a moment to explore the batman directory, it's under `app/assets/batman`."
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
+  @focus '/app/assets/batman/controllers/playlists_controller.js.coffee'
 
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-# Generate batman app
-title "Great! Now let's generate our batman.js app."
-say "batman-rails includes a number of Rails generators to make batman.js development easy."
-say "Run `rails generate batman:app` to generate an empty batman.js app."
+  @complete()
 
-expect /rails\s*[g|generate]\s*batman:app/
+$ 'generate_player_view', ['/app/assets/batman/html/player', '/app/assets/batman/views/player_view.js.coffee'], ->
+  @title "Custom Views"
+  @say "Let's generate a custom view for the Rdio player."
+  @say "Run `rails generate batman:view player`."
 
-# Generate artist scaffold
-title "There's our app."
-say "Take a moment to explore the batman directory, it's under `app/assets/batman`."
-say "Now let's generate a resource for your batman.js application."
-say "Run `rails generate batman:scaffold Artist` to make a new scaffold."
+  @expect /rails\s+(g|generate)\s+batman:view\s+player/, """
+  create  app/assets/batman/views/player_view.js.coffee
+  """
 
-expect /rails\s*[g|generate]\s*batman:scaffold\s*Artist/
-###
+  @after "Great, we have a simple view file."
+
+c 'view_source', ->
+  @title "Custom View Sources"
+  @say "First we have to tell our custom view where to find its HTML."
+  @say "Specify the view's `source` property as `player/main`."
+
+  @focus '/app/assets/batman/views/player_view.js.coffee'
+
+  @after "Check it out, that's a nice looking player!"
+
+c 'viewDidAppear', ->
+  @title "Custom View Events"
+  @say "You can define special events on a view class that will be called"
+  @say "at various points in the view's lifecycle. Here, `viewDidAppear`"
+  @say "will be called whenever the view appears in the DOM for the first time."
+  @say "We use it to implement custom logic, jQuery, and event handlers."
+
+  @complete()
+
+c 'fin', ->
+  @title "Looking Back"
+  @say "Well shit amigo, that's a pretty slick looking Rdio playlist manager."
+  @say "You should have a bit of a better idea of what it's like to develop with"
+  @say "batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/rdio\">Rdio app</a> on GitHub a bit more."
