@@ -89,6 +89,7 @@ c 'look_around_playlist', ->
   @say "some basic HTML. Try clicking the `Playlists` link in the preview window."
 
   @focus '/app/assets/batman/html/playlists/index.html'
+  @reloadPreview()
 
   @complete()
 

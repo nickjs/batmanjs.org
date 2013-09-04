@@ -340,6 +340,9 @@
       if (this.enablesLaunchAppButton) {
         Try.set('showLaunchAppButton', true);
       }
+      if (this.reloadsPreview) {
+        Try.reloadPreview();
+      }
       if (this.fileAppearances) {
         _ref4 = this.fileAppearances;
         for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
@@ -408,6 +411,10 @@
 
     Step.prototype.enableLaunchAppButton = function() {
       return this.enablesLaunchAppButton = true;
+    };
+
+    Step.prototype.reloadPreview = function() {
+      return this.reloadsPreview = true;
     };
 
     return Step;

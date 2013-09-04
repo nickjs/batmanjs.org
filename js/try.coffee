@@ -210,6 +210,7 @@ class Try.Step extends Batman.Object
   activate: ->
     Try.set('currentStep', this)
     Try.set('showLaunchAppButton', true) if @enablesLaunchAppButton
+    Try.reloadPreview() if @reloadsPreview
 
     if @fileAppearances
       for filename in @fileAppearances
@@ -256,6 +257,9 @@ class Try.Step extends Batman.Object
 
   enableLaunchAppButton: ->
     @enablesLaunchAppButton = true
+
+  reloadPreview: ->
+    @reloadsPreview = true
 
 class Try.ConsoleStep extends Try.Step
   isConsole: true

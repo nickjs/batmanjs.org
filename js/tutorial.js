@@ -44,6 +44,7 @@
     this.say("`controllers`, `models`, and `html`. It won't do much yet, but we've added");
     this.say("some basic HTML. Try clicking the `Playlists` link in the preview window.");
     this.focus('/app/assets/batman/html/playlists/index.html');
+    this.reloadPreview();
     return this.complete();
   });
 
