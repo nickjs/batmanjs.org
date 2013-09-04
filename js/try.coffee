@@ -345,6 +345,9 @@ Try.initializeTutorial = (tutorialContent, callback) ->
     Try.run()
     Try.steps[0].activate()
 
+    window.onbeforeunload = ->
+      "Are you sure you want to navigate away? Your app will be lost in the abyss, as we're not cool enough to save your changes in localStorage yet."
+
     $('#terminal-field').on 'keydown', (e) ->
       if e.keyCode == 13
         Try.get('currentStep')?.check(@value)

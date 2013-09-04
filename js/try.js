@@ -565,6 +565,9 @@
       }
       Try.run();
       Try.steps[0].activate();
+      window.onbeforeunload = function() {
+        return "Are you sure you want to navigate away? Your app will be lost in the abyss, as we're not cool enough to save your changes in localStorage yet.";
+      };
       $('#terminal-field').on('keydown', function(e) {
         var _ref8;
         if (e.keyCode === 13) {
