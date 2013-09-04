@@ -37,12 +37,12 @@ use_intro: true
             <pre>
 batman.js > <input class="terminal-field" id="terminal-field" />
 <div data-bind="currentStep.result" data-insertif="currentStep.isComplete"></div>
-<div data-insertif="currentStep.isError">Command not found</div>
+<div data-insertif="currentStep.isError">Invalid command</div>
             </pre>
           </div>
         </div>
 
-        <div class="skip-this-step"><a data-event-click="completeStep">Skip this Step</a></div>
+        <div class="skip-this-step" data-hideif="currentStep.isComplete"><a data-event-click="completeStep">Skip this Step</a></div>
       </div>
     </div>
   </div>
