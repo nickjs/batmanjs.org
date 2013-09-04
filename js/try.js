@@ -273,7 +273,7 @@
         extraKeys: keys
       });
       this.cm.getWrapperElement().style.height = "100%";
-      return Try.observeAndFire('currentFile', function(file) {
+      Try.observeAndFire('currentFile', function(file) {
         return setTimeout(function() {
           if (file) {
             _this.cm.swapDoc(_this.docForFile(file));
@@ -281,6 +281,13 @@
           _this.cm.setOption('readOnly', !file || !_this.get('expectChanges'));
           return _this.cm.refresh();
         }, 0);
+      });
+      return Try.observe('currentStep', function(step) {
+        if (step instanceof Try.CodeStep) {
+          return setTimeout(function() {
+            return _this.cm.refresh();
+          }, 0);
+        }
       });
     };
 

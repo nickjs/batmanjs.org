@@ -168,6 +168,12 @@ class Try.CodeView extends Batman.View
         @cm.refresh()
       , 0
 
+    Try.observe 'currentStep', (step) =>
+      if step instanceof Try.CodeStep
+        setTimeout =>
+          @cm.refresh()
+        , 0
+
   save: =>
     Try.set('currentFile.content', @cm.getValue())
     Try.reloadPreview()
