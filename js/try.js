@@ -335,7 +335,10 @@
     }
 
     Step.prototype.activate = function() {
-      return Try.set('currentStep', this);
+      Try.set('currentStep', this);
+      if (this.enablesLaunchAppButton) {
+        return Try.set('showLaunchAppButton', true);
+      }
     };
 
     Step.prototype.title = function(string) {
@@ -370,12 +373,9 @@
     };
 
     Step.prototype.afterComplete = function() {
-      var completion, file, filename, match, matches, newString, value, _i, _len, _ref4, _ref5, _results;
+      var completion, file, filename, match, matches, newString, value, _i, _j, _len, _len1, _ref4, _ref5;
       if (this.afterBody.get('length')) {
         this.set('body', this.afterBody);
-      }
-      if (this.enablesLaunchAppButton) {
-        Try.set('showLaunchAppButton', true);
       }
       if (this.fileAppearances) {
         _ref4 = this.fileAppearances;
@@ -385,30 +385,21 @@
         }
       }
       _ref5 = this.appearances;
-      _results = [];
       for (filename in _ref5) {
         matches = _ref5[filename];
         file = Try.File.findByPath(filename);
-        _results.push((function() {
-          var _j, _len1, _results1;
-          _results1 = [];
-          for (_j = 0, _len1 = matches.length; _j < _len1; _j++) {
-            match = matches[_j];
-            value = file.get('content');
-            if (!match.regex.test(value)) {
-              completion = match.completion;
-              newString = value.substr(0, completion.index);
-              newString += completion.value;
-              newString += value.substr(completion.index);
-              _results1.push(file.set('content', newString));
-            } else {
-              _results1.push(void 0);
-            }
+        for (_j = 0, _len1 = matches.length; _j < _len1; _j++) {
+          match = matches[_j];
+          value = file.get('content');
+          if (!match.regex.test(value)) {
+            completion = match.completion;
+            newString = value.substr(0, completion.index);
+            newString += completion.value;
+            newString += value.substr(completion.index);
+            file.set('content', newString);
           }
-          return _results1;
-        })());
+        }
       }
-      return _results;
     };
 
     Step.accessor('showNextStepButton', function() {

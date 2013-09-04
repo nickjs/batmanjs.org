@@ -209,6 +209,7 @@ class Try.Step extends Batman.Object
 
   activate: ->
     Try.set('currentStep', this)
+    Try.set('showLaunchAppButton', true) if @enablesLaunchAppButton
 
   title: (string) ->
     @set('heading', string)
@@ -232,7 +233,6 @@ class Try.Step extends Batman.Object
 
   afterComplete: ->
     @set('body', @afterBody) if @afterBody.get('length')
-    Try.set('showLaunchAppButton', true) if @enablesLaunchAppButton
 
     if @fileAppearances
       for filename in @fileAppearances
@@ -248,6 +248,8 @@ class Try.Step extends Batman.Object
           newString += completion.value
           newString += value.substr(completion.index)
           file.set('content', newString)
+
+    return
 
   @accessor 'showNextStepButton', ->
     @get('hasNextStep') and @get('isComplete')
