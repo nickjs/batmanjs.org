@@ -2,7 +2,7 @@
 layout: docs
 title: Views
 prev_section: bindings
-next_section:
+next_section: testing
 ---
 
 `Batman.View`s are the bridge between application state and user interaction.
