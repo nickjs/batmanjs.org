@@ -9,7 +9,7 @@ use_intro: true
     <div class="row clearfix">
       <div class="span24 intro-message">
         <h2 data-bind="currentStep.heading | raw">Meet your new favorite JavaScript superhero</h2>
-        <a class="next-step" data-event-click="previewApp" data-showif="currentStep" style="display:none;float:left">Launch App</a>
+        <a class="next-step" data-event-click="previewApp" data-showif="showLaunchAppButton" style="display:none;float:left">Launch App</a>
         <a class="next-step" data-event-click="nextStep" data-showif="currentStep.showNextStepButton" style="display:none">Next Step</a>
 
         <h3 data-foreach-blurb="currentStep.body" data-bind="blurb | raw">If you love Ruby on Rails, batman.js is the best, most familiar way to build rich web apps in CoffeeScript.</h3>

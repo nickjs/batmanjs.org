@@ -237,11 +237,9 @@
       filename = file.get('id');
       for (ext in EXTENSIONS) {
         mode = EXTENSIONS[ext];
-        if (!(filename.indexOf(ext) !== -1)) {
-          continue;
+        if (filename.indexOf(ext) !== -1) {
+          return mode;
         }
-        console.log(mode);
-        return mode;
       }
     };
 
@@ -369,6 +367,9 @@
       if (this.afterBody.get('length')) {
         this.set('body', this.afterBody);
       }
+      if (this.enablesLaunchAppButton) {
+        Try.set('showLaunchAppButton', true);
+      }
       if (this.fileAppearances) {
         _ref4 = this.fileAppearances;
         for (_i = 0, _len = _ref4.length; _i < _len; _i++) {
@@ -406,6 +407,10 @@
     Step.accessor('showNextStepButton', function() {
       return this.get('hasNextStep') && this.get('isComplete');
     });
+
+    Step.prototype.enableLaunchAppButton = function() {
+      return this.enablesLaunchAppButton = true;
+    };
 
     return Step;
 

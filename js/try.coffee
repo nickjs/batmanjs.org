@@ -139,7 +139,6 @@ class Try.CodeView extends Batman.View
     filename = file.get('id')
 
     for ext, mode of EXTENSIONS when filename.indexOf(ext) != -1
-      console.log mode
       return mode
 
   docForFile: (file) ->
@@ -227,6 +226,7 @@ class Try.Step extends Batman.Object
 
   afterComplete: ->
     @set('body', @afterBody) if @afterBody.get('length')
+    Try.set('showLaunchAppButton', true) if @enablesLaunchAppButton
 
     if @fileAppearances
       for filename in @fileAppearances
@@ -245,6 +245,9 @@ class Try.Step extends Batman.Object
 
   @accessor 'showNextStepButton', ->
     @get('hasNextStep') and @get('isComplete')
+
+  enableLaunchAppButton: ->
+    @enablesLaunchAppButton = true
 
 class Try.ConsoleStep extends Try.Step
   isConsole: true

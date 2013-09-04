@@ -23,7 +23,10 @@
     this.say("Let's generate a corresponding resource for the batman.js side.");
     this.say("Run `rails generate batman:scaffold Playlist` to make a new scaffold.");
     this.expect(/rails\s+(g|generate)\s+batman:scaffold\s+[Pp]laylist/, "generate  batman:model Playlist\n  create  app/assets/batman/models/playlist.js.coffee\ngenerate  batman:controller playlists index show edit new create update destroy\n  create  app/assets/batman/controllers/playlists_controller.js.coffee\ngenerate  batman:html playlists index show edit new\n  create  app/assets/batman/html/playlists\n  create  app/assets/batman/html/playlists/index.html\n  create  app/assets/batman/html/playlists/show.html\n  create  app/assets/batman/html/playlists/edit.html\n  create  app/assets/batman/html/playlists/new.html\ngenerate  batman:view  playlists index show edit new\n  create  app/assets/batman/views/playlists\n  create  app/assets/batman/views/playlists/playlists_index_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_show_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_edit_view.js.coffee\n  create  app/assets/batman/views/playlists/playlists_new_view.js.coffee\n  insert  app/assets/batman/rdio.js.coffee");
-    return this.after("The scaffold generator sets up a controller, model, and empty views for a playlist resource.");
+    this.after("The scaffold generator sets up a controller, model, and empty views for a playlist resource.");
+    this.after("Press the Launch App button to preview your app as you write code.");
+    this.after("It's pretty empty now, but it will reload whenever you save a file.");
+    return this.enableLaunchAppButton();
   });
 
   c('encoders', function() {

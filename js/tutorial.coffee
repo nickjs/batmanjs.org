@@ -71,6 +71,10 @@ $ 'playlist', ->
   """
 
   @after "The scaffold generator sets up a controller, model, and empty views for a playlist resource."
+  @after "Press the Launch App button to preview your app as you write code."
+  @after "It's pretty empty now, but it will reload whenever you save a file."
+
+  @enableLaunchAppButton()
 
 # Encoders
 c 'encoders', ->
@@ -82,6 +86,7 @@ c 'encoders', ->
   @focus '/app/assets/batman/models/playlist.js.coffee'
 
   @after "Next, let's set up some basic CRUD actions for a playlist."
+
 
 c 'playlist_index', ->
   @title "List All Playlists"
