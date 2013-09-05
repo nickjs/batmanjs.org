@@ -176,7 +176,8 @@
     this.title("Looking Back");
     this.say("Well shit amigo, that's a pretty slick looking Rdio playlist manager.");
     this.say("You should have a bit of a better idea of what it's like to develop with");
-    return this.say("batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/batman-rdio\">Rdio app</a> on GitHub a bit more.");
+    this.say("batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/batman-rdio\">Rdio app</a> on GitHub a bit more.");
+    return this.completeAllSteps();
   });
 
 }).call(this);

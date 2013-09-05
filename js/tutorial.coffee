@@ -235,3 +235,4 @@ c 'fin', ->
   @say "Well shit amigo, that's a pretty slick looking Rdio playlist manager."
   @say "You should have a bit of a better idea of what it's like to develop with"
   @say "batman.js now, but feel free to poke around the <a href=\"http://github.com/batmanjs/batman-rdio\">Rdio app</a> on GitHub a bit more."
+  @completeAllSteps()

@@ -399,6 +399,11 @@
       return this.afterComplete();
     };
 
+    Step.prototype.completeAllSteps = function() {
+      this.complete();
+      return this.set('hasNextStep', false);
+    };
+
     Step.prototype.afterComplete = function() {
       if (this.afterBody.get('length')) {
         return this.set('body', this.afterBody);

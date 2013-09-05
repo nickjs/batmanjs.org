@@ -249,6 +249,10 @@ class Try.Step extends Batman.Object
     @set('isComplete', true)
     @afterComplete()
 
+  completeAllSteps: ->
+    @complete()
+    @set('hasNextStep', false)
+
   afterComplete: ->
     @set('body', @afterBody) if @afterBody.get('length')
 
