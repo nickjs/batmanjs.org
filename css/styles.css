@@ -217,7 +217,6 @@ div[class*="span"] {
   font-size: 1.1em;
 }
 .box p { color: #5c5c6e; }
-.box a { text-decoration: none; }
 .box-connected{
   border-top: solid 1px #e6e6e6;
   padding: 10px;
