@@ -5,7 +5,7 @@ prev_section: bindings
 next_section: testing
 ---
 
-`Batman.View`s are the bridge between application state and user interaction.
+`Batman.View` is the bridge between application state and user interaction.
 They're responsible for rendering templates, handling bindings, and general
 manipulation of the DOM. Most of the time, they'll be automatically created by
 bindings within templates, but they can be manually manipulated as well.
@@ -22,12 +22,14 @@ is responsible for the document's `<html>` node. There is one layout view per
 
 ### Views as data contexts
 
-The view tree is also used to organize data in a hierarchical way, similar to
-variable scoping works in a language like JavaScript. Properties of a view are
-accessible to its entire subtree, making it an ideal way to store data relevant to part of the DOM.
+The view tree is also used to organize data in a hierarchical way, reminiscent
+of variable scoping in JavaScript. Properties of a view are accessible to its
+entire subtree, making it an ideal way to store data relevant to part of the
+DOM.
 
-Whenever you create a binding with `data-bind` or similar, the tree is traversed to locate the specified
-keypath (via `[View::lookupKeypath]`). The lookup follows this chain:
+Whenever you create a binding with `data-bind` or similar, the tree is
+traversed to locate the specified keypath (via `[View::lookupKeypath]`). The
+lookup follows this chain:
 
 current view → chain of superviews → layout view → active controller → app →
 window
@@ -35,17 +37,26 @@ window
 [View::lookupKeypath]: /docs/api/12_Batman.View.html#something
 
 
-## Custom Views
+### Adding views to the DOM
 
-Views are useful for creating reusable, configurable components which can be
-instantiated from within templates.
+Views are added to the DOM by adding them to a superview that is already part
+of the DOM. The layout view represents the root `<html>` node, so it is always
+in the DOM.
 
-`<examples go here>`
+When adding a subview, you need to specify where exactly in the superview's DOM
+tree the subview should be appended. To do this, set the `parentNode` property
+on the subview. This can either be a node contained in the superview's DOM tree
+already or a string selector to find one.
 
-## Lifecycle
+Alternatively, you may set the `contentFor` property on a subview. This uses
+batman.js' traditional `yield` system and will replace the yield node's content
+with the subview's `node`. You should set `contentFor` to a string matching the
+name of the `yield` in the subview.
 
-As a view is manipulated by the application, it progresses through states. As
-it does this, it fires events that you can hook into:
+## View Lifecycle
+
+As a view is manipulated by the application, it progresses through various
+states. As it does this, it fires events that you can hook into:
 
 - `viewWillAppear`: Fired when the view is about to be attached to the DOM. It
   will always have a superview.
@@ -65,6 +76,13 @@ not.
 - `viewDidLoad`: After `loadView` has been successfully called, the div has
   been created and populated with HTML from the `HTMLStore`.
 - `ready`: All bindings have been initialized (one shot).
+
+## Custom Views
+
+Views are useful for creating reusable, configurable components which can be
+instantiated from within templates.
+
+`<examples go here>`
 
 
 ## Backing Views
