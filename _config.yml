@@ -417,41 +417,49 @@ api_index:
     sub:
       - id: 14_0_How_to_use_bindings
         title: How to use bindings
-      - id: "14_1_data-bind"
+      - id: 14_1_Binding_Keypaths
+        title: Binding Keypaths
+      - id: 14_2_Binding_Contexts
+        title: Binding Contexts
+      - id: 14_3_Keypath_Filters
+        title: Keypath Filters
+      - id: 14_4_Keypath_Literals
+        title: Keypath Literals
+      - id: "14_5_data-bind"
         title: "data-bind"
-      - id: "14_2_data-source"
+      - id: "14_6_data-source"
         title: "data-source"
-      - id: "14_3_data-target"
+      - id: "14_7_data-target"
         title: "data-target"
-      - id: "14_4_data-showif_%2F_data-hideif"
+      - id: "14_8_data-showif_%2F_data-hideif"
         title: "data-showif / data-hideif"
-      - id: "14_5_data-addclass_%2F_data-removeclass"
+      - id: "14_9_data-addclass_%2F_data-removeclass"
         title: "data-addclass / data-removeclass"
-      - id: "14_6_data-foreach"
+      - id: "14_10_data-foreach"
         title: "data-foreach"
-      - id: "14_7_data-formfor"
+      - id: "14_11_data-formfor"
         title: "data-formfor"
-      - id: "14_8_data-context"
+      - id: "14_12_data-context"
         title: "data-context"
-      - id: "14_9_data-event"
+      - id: "14_13_data-event"
         title: "data-event"
-      - id: "14_10_data-route"
+      - id: "14_14_data-route"
         title: "data-route"
-      - id: "14_11_data-view"
+      - id: "14_15_data-view"
         title: "data-view"
-      - id: "14_12_data-partial"
+      - id: "14_16_data-partial"
         title: "data-partial"
-      - id: "14_13_data-mixin"
+      - id: "14_17_data-mixin"
         title: "data-mixin"
-      - id: "14_14_data-defineview"
+      - id: "14_18_data-defineview"
         title: "data-defineview"
-      - id: "14_15_data-renderif"
+      - id: "14_19_data-renderif"
         title: "data-renderif"
-      - id: "14_16_data-yield"
+      - id: "14_20_data-yield"
         title: "data-yield"
-      - id: "14_17_data-contentfor"
+      - id: "14_21_data-contentfor"
         title: "data-contentfor"
-      - id: "14_18_data-replace"
+      - id: "14_22_data-replace"
         title: "data-replace"
   - id: 15_Batman_View_Filters
     title: Batman View Filters
