@@ -21,7 +21,7 @@ Here's how the key components work specifically in batman.js:
 
 #### 1.1 Models
 
-Models are still responsible for getting all your data, but since we're a client side app, they'll load it via JSON from your API. It's worth nothing that batman.js is more or less backend-agnostic. It doesn't really care what type of server you're using, as long as it responds to common REST API's with JSON (but you should still use Rails for maximum easiness).
+Models are still responsible for getting all your data, but since we're a client side app, they'll load it via JSON from your API. It's worth noting that batman.js is more or less backend-agnostic. It doesn't really care what type of server you're using, as long as it responds to common REST API's with JSON (but you should still use Rails for maximum easiness).
 
 [More About Models](/docs/models.html)
 
