@@ -277,7 +277,7 @@ html: "<p><code>Batman.Object</code> is the superclass for virtually all objects
     <a href="#{{ s.id }}" class="anchor-link">
     <span class="{% if s.meta %}monospace-heading{% endif %}">
       {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
-    {% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}
+      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
     </span>
     </a>
   </h3>

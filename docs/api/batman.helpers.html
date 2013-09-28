@@ -96,7 +96,7 @@ html: "<p><code>Batman.helpers</code> is a namespace for Batman&#39;s helpful st
     <a href="#{{ s.id }}" class="anchor-link">
     <span class="{% if s.meta %}monospace-heading{% endif %}">
       {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
-    {% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}
+      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
     </span>
     </a>
   </h3>

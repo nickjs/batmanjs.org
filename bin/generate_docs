@@ -35,10 +35,10 @@ parseHeading = (title) ->
 
   res = title.match(/(.+?)([[( :].*)/)
   if res
-    [__, title, meta] = res
-    [__, params, returnType] = meta.match(/(?:\((.*)\))?\s*:?\s*(.*)/)
+    [match, title, meta] = res
+    [match, params, returnType] = meta.match(/(?:\((.*)\))?\s*:?\s*(.*)/)
     unless params?
-      [__, params, returnType] = meta.match(/(\[.*\])?\s*:?\s*(.*)/)
+      [match, params, returnType] = meta.match(/(\[.*\])?\s*:?\s*(.*)/)
 
     returnType = undefined unless returnType
 
