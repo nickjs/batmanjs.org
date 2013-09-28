@@ -4,56 +4,104 @@ title: Batman.App
 sub: 
   - title: Batman.currentApp
     tokens: []
-    id: 6_0_Batman.currentApp
+    id: batman.currentapp
     html: "<p>A Batman-wide reference to the currently running <code>Batman.App</code>.</p>\n"
-  - title: "@run() : App"
+  - title: run
     tokens: []
-    id: "6_1_%40run()_%3A_App"
+    meta: 
+      type: function
+      level: class
+      params: ""
+      returnType: App
+    id: class_function_run
     html: "<p><code>App.run</code> is the central entry point for a Batman application. <code>@run</code> takes these steps to initialize a Batman application:</p>\n<ol>\n<li>Instantiate a <code>Dispatcher</code>, an internal object for mananging action dispatch to controllers.</li>\n<li>Instantiate a <code>Navigator</code>, an internal object for managing the URL via pushState or hashbangs.</li>\n<li>Instantiate the <code>layout</code> view according to the <code>layout</code> property on the <code>App</code>.</li>\n<li>Wait for the layout view to fire it&#39;s <code>ready</code> event.</li>\n<li>Start the first action dispatch by telling the <code>Navigator</code> to begin monitoring the URL.</li>\n</ol>\n<p><em>Note</em>: <code>@run</code> emits the <code>run</code> class event on the <code>App</code>, but not necessarily as soon as <code>@run</code> is called. Because the <code>layout</code> View renders asynchronously and may need to fetch other components, the <code>run</code> event can and often does fire long after <code>@run</code> is called. If you need to execute code as soon as the <code>App</code> has started running, add a listener to the <code>run</code> event on the <code>App</code> class. If you need to execute code as soon as the layout has rendered, you can use the <code>ready</code> event on the <code>App</code> class.</p>\n<p><code>@run</code> can be called before or on the <code>load</code> DOMEvent of the window. <code>@run</code> will return the App if the commencement was successful and complete, or <code>false</code> if the App must wait for the <code>layout</code> to render or if the <code>App</code> has already run.</p>\n<h4>starting an application with DOMEvents</h4>\n<pre><code class=\"lang-coffeescript\">window.addEventListener '<span class=\"operator\"><span class=\"keyword\">load</span><span class=\"string\">', -&gt;\n  MyApp.run()</code></pre>\n<h4>starting an application with jQuery</h4>\n<pre><code class=\"lang-coffeescript\"><span class=\"comment\">$</span> <span class=\"literal\">-</span>&gt;\n  <span class=\"comment\">MyApp</span>.<span class=\"comment\">run()</code></pre>\n"
-  - title: "@stop() : App"
+  - title: stop
     tokens: []
-    id: "6_2_%40stop()_%3A_App"
+    meta: 
+      type: function
+      level: class
+      params: ""
+      returnType: App
+    id: class_function_stop
     html: "<p><code>@stop</code> stops the <code>App</code> it&#39;s called upon. The URL will stop being monitored and no more actions will be dispatched. In usual Batman development you shouldn&#39;t have to call this.</p>\n"
-  - title: "@routes"
+  - title: routes
     tokens: []
-    id: "6_3_%40routes"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_routes
     html: "<p><code>@routes</code> is a class level property referencing the root level <code>NamedRouteQuery</code> which allows for binding to routes on objects. See <code>data-route</code> bindings for more information.</p>\n"
-  - title: "@controllers"
+  - title: controllers
     tokens: []
-    id: "6_4_%40controllers"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_controllers
     html: "<p><code>@controllers</code> is a class level property containing the singleton <code>Batman.Controller</code> instances for each subclass in the application. This <code>controllers</code> directory puts these instances at the lowercase name of the controller. For example, the <code>TodosController</code> would be found at <code>controllers.todos</code>. <code>@controllers</code> ideally should never be bound to, but it is very useful for debugging in the console and other such workarounds.</p>\n<pre><code>test <span class=\"string\">\"App.controllers references a directory of controller instances\"</span>, -&gt;\n  <span class=\"class\"><span class=\"keyword\">class</span> <span class=\"title\">Alfred</span> <span class=\"keyword\">extends</span> <span class=\"title\">Batman</span>.<span class=\"title\">App</span>\n  <span class=\"title\">class</span> <span class=\"title\">Alfred</span>.<span class=\"title\">TodosController</span> <span class=\"keyword\">extends</span> <span class=\"title\">Batman</span>.<span class=\"title\">Controller</span>\n  <span class=\"title\">controller</span> = <span class=\"title\">Alfred</span>.<span class=\"title\">get</span>('<span class=\"title\">controllers</span>.<span class=\"title\">todos</span>')\n  <span class=\"title\">equal</span> <span class=\"title\">Batman</span>.<span class=\"title\">_functionName</span>(<span class=\"title\">controller</span>.<span class=\"title\">constructor</span>), \"<span class=\"title\">TodosController</span>\"</code></pre>\n"
-  - title: "@layout"
+  - title: layout
     tokens: []
-    id: "6_5_%40layout"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_layout
     html: ""
-  - title: "@currentParams"
+  - title: currentParams
     tokens: []
-    id: "6_6_%40currentParams"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_currentparams
     html: ""
-  - title: "@paramsManager"
+  - title: paramsManager
     tokens: []
-    id: "6_7_%40paramsManager"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_paramsmanager
     html: ""
-  - title: "@paramsPusher"
+  - title: paramsPusher
     tokens: []
-    id: "6_8_%40paramsPusher"
+    meta: 
+      type: function
+      level: class
+      params: !<tag:yaml.org,2002:js/undefined> ""
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_paramspusher
     html: ""
   - title: "'run' class event"
     tokens: []
-    id: "6_9_'run'_class_event"
+    id: "'run'_class_event"
     html: "<p>The <code>run</code> class event is fired once the app has run. This indeterminately but often happens before the app&#39;s layout has finished rendering.</p>\n"
   - title: "'ready' class event"
     tokens: []
-    id: "6_10_'ready'_class_event"
+    id: "'ready'_class_event"
     html: "<p>The <code>ready</code> class event is fired once the app&#39;s layout is rendered.</p>\n"
 tokens: []
-id: 6_Batman.App
+id: batman.app
 html: "<p><code>Batman.App</code> is the central object in any Batman application. It manages the routing table and the current URL parameters, as well as the initial start of the application. It should also be used as a namespace for models and views so that other objects can find them. Batman assumes that there will only ever be one <code>Batman.App</code> in use at once.</p>\n"
 
 ---
 
 {{ page.html }}
 {% for s in page.sub %}
-  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  <h3>
+    <a id="{{ s.id }}" class="anchor-target"></a>
+    <a href="#{{ s.id }}" class="anchor-link">
+    <span class="{% if s.meta %}monospace-heading{% endif %}">
+      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
+    {% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}
+    </span>
+    </a>
+  </h3>
   {{ s.html }}
 {% endfor %}

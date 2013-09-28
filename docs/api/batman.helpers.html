@@ -2,50 +2,103 @@
 layout: api_docs
 title: Batman.helpers
 sub: 
-  - title: "@ordinalize(value : [number|string]) : string"
+  - title: ordinalize
     tokens: []
-    id: "1_0_%40ordinalize(value_%3A_%5Bnumber%7Cstring%5D)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: "value : [number|string]"
+      returnType: string
+    id: class_function_ordinalize
     html: "<p><code>ordinalize</code> converts a given integer into an ordinal string for describing position in a list, like 1st, 2nd, or 20th.</p>\n<pre><code>test 'ordinalize converts numbers <span class=\"keyword\">to</span> their ordinal form', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(<span class=\"number\">1</span>), <span class=\"string\">\"1st\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(<span class=\"string\">\"2\"</span>), <span class=\"string\">\"2nd\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(<span class=\"number\">1002</span>), <span class=\"string\">\"1002nd\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(<span class=\"string\">\"1003\"</span>), <span class=\"string\">\"1003rd\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(-<span class=\"number\">11</span>), <span class=\"string\">\"-11th\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.ordinalize(-<span class=\"number\">1021</span>), <span class=\"string\">\"-1021st\"</span></code></pre>\n"
-  - title: "@singularize(pluralString : string) : string"
+  - title: singularize
     tokens: []
-    id: "1_1_%40singularize(pluralString_%3A_string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: "pluralString : string"
+      returnType: string
+    id: class_function_singularize
     html: "<p><code>singularize</code> converts the plural form of a word to a singular form.</p>\n<pre><code>test 'singularize converts plural <span class=\"property\">words</span> <span class=\"keyword\">to</span> singular <span class=\"property\">words</span>', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.singularize(<span class=\"string\">\"posts\"</span>), <span class=\"string\">\"post\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.singularize(<span class=\"string\">\"octopi\"</span>), <span class=\"string\">\"octopus\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.singularize(<span class=\"string\">\"sheep\"</span>), <span class=\"string\">\"sheep\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.singularize(<span class=\"string\">\"word\"</span>), <span class=\"string\">\"word\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.singularize(<span class=\"string\">\"CamelOctopi\"</span>), <span class=\"string\">\"CamelOctopus\"</span></code></pre>\n"
-  - title: "@pluralize(singularString : string) : string"
+  - title: pluralize
     tokens: []
-    id: "1_2_%40pluralize(singularString_%3A_string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: "singularString : string"
+      returnType: string
+    id: class_function_pluralize
     html: "<p><code>pluralize</code> converts the singular form of a word to the plural form.</p>\n<pre><code>test 'pluralize converts plural <span class=\"property\">words</span> <span class=\"keyword\">to</span> singular <span class=\"property\">words</span>', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.pluralize(<span class=\"string\">\"post\"</span>), <span class=\"string\">\"posts\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.pluralize(<span class=\"string\">\"octopus\"</span>), <span class=\"string\">\"octopi\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.pluralize(<span class=\"string\">\"sheep\"</span>), <span class=\"string\">\"sheep\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.pluralize(<span class=\"string\">\"words\"</span>), <span class=\"string\">\"words\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.pluralize(<span class=\"string\">\"CamelOctopus\"</span>), <span class=\"string\">\"CamelOctopi\"</span></code></pre>\n"
-  - title: "@camelize(name [, lowercaseFirstLetter = false]) : string"
+  - title: camelize
     tokens: []
-    id: "1_3_%40camelize(name_%5B%2C_lowercaseFirstLetter_%3D_false%5D)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: "name [, lowercaseFirstLetter = false]"
+      returnType: string
+    id: class_function_camelize
     html: "<p><code>camelize</code> converts the passed <code>name</code> to UpperCamelCase. If the second argument is passed as <code>true</code>, then lowerCamelCase is returned.</p>\n<pre><code>test 'camelize returns <span class=\"keyword\">the</span> CamelCase <span class=\"property\">version</span> <span class=\"keyword\">of</span> an under_scored <span class=\"property\">word</span>', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.camelize(<span class=\"string\">\"batman_object\"</span>), <span class=\"string\">\"BatmanObject\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.camelize(<span class=\"string\">\"batman_object\"</span>, <span class=\"constant\">true</span>), <span class=\"string\">\"batmanObject\"</span></code></pre>\n"
-  - title: "@underscore(string) : string"
+  - title: underscore
     tokens: []
-    id: "1_4_%40underscore(string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: string
+      returnType: string
+    id: class_function_underscore
     html: "<p><code>underscore</code> returns the underscored version of a CamelCase word.</p>\n<pre><code>test <span class=\"attribute\">'underscore</span> converts CamelCase <span class=\"keyword\">to</span> under_scores', -&gt;\n  equal Batman.helpers.underscore(<span class=\"string\">\"BatmanObject\"</span>), <span class=\"string\">\"batman_object\"</span></code></pre>\n"
-  - title: "@capitalize(string) : string"
+  - title: capitalize
     tokens: []
-    id: "1_5_%40capitalize(string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: string
+      returnType: string
+    id: class_function_capitalize
     html: "<p><code>capitalize</code> does a word-wise capitalization of a phrase or word.</p>\n<pre><code>test 'capitalize makes <span class=\"keyword\">the</span> <span class=\"keyword\">first</span> letter <span class=\"keyword\">of</span> each <span class=\"property\">word</span> <span class=\"keyword\">in</span> <span class=\"keyword\">the</span> <span class=\"type\">string</span> uppercase', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.capitalize(<span class=\"string\">\"batmanObject\"</span>), <span class=\"string\">\"BatmanObject\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.capitalize(<span class=\"string\">\"batman object\"</span>), <span class=\"string\">\"Batman Object\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.capitalize(<span class=\"string\">\"AlreadyCapitalized\"</span>), <span class=\"string\">\"AlreadyCapitalized\"</span></code></pre>\n"
-  - title: "@trim(string) : string"
+  - title: trim
     tokens: []
-    id: "1_6_%40trim(string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: string
+      returnType: string
+    id: class_function_trim
     html: "<p><code>trim</code> trims a string getting rid of extra white space around the string or returning an empty string if it is null.</p>\n<pre><code>test 'trim gets rid <span class=\"keyword\">of</span> <span class=\"constant\">space</span> <span class=\"keyword\">around</span> a <span class=\"type\">string</span>', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(<span class=\"string\">\"TrimRight \"</span>), <span class=\"string\">\"TrimRight\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(<span class=\"string\">\" TrimLeft\"</span>), <span class=\"string\">\"TrimLeft\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(<span class=\"string\">\" TrimBothSides \"</span>), <span class=\"string\">\"TrimBothSides\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(<span class=\"string\">\"AlreadyTrimmed\"</span>), <span class=\"string\">\"AlreadyTrimmed\"</span>\n\ntest 'trim turns a null <span class=\"keyword\">or</span> undefined <span class=\"type\">string</span> <span class=\"keyword\">into</span> an empty <span class=\"type\">string</span>', -&gt;\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(null), <span class=\"string\">\"\"</span>\n  <span class=\"keyword\">equal</span> Batman.helpers.trim(undefined), <span class=\"string\">\"\"</span></code></pre>\n"
-  - title: "@interpolate(stringOrObject, keys) : string"
+  - title: interpolate
     tokens: []
-    id: "1_7_%40interpolate(stringOrObject%2C_keys)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: "stringOrObject, keys"
+      returnType: string
+    id: class_function_interpolate
     html: "<p><code>interpolate</code> interpolates a string, filling it in with values matching interpolation keys, similar to printf variants.</p>\n<pre><code>test 'interpolate fills <span class=\"flow\">in</span> key values globally <span class=\"flow\">in</span> a string', -&gt;\n  equal Batman.helpers.interpolate(\"%{field} must be at least %{count} characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> %{field} to be valid\", count: \"<span class=\"number\">3</span>\", field: \"name\"), \"name must be at least <span class=\"number\">3</span> characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> name to be valid\"\n\ntest 'interpolate fills <span class=\"flow\">in</span> key values globally <span class=\"flow\">in</span> an object-embedded string', -&gt;\n  equal Batman.helpers.interpolate({'other': \"%{field} must be at least %{count} characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> %{field} to be valid\"}, count: \"<span class=\"number\">3</span>\", field: \"name\"), \"name must be at least <span class=\"number\">3</span> characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> name to be valid\"\n\ntest 'interpolate fills <span class=\"flow\">in</span> key values globally <span class=\"flow\">in</span> an object-embedded string, embedded by key count', -&gt;\n  equal Batman.helpers.interpolate({<span class=\"number\">3</span>: \"%{field} must be at least %{count} characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> %{field} to be valid\"}, count: \"<span class=\"number\">3</span>\", field: \"name\"), \"name must be at least <span class=\"number\">3</span> characters <span class=\"flow\">in</span> order <span class=\"flow\">for</span> name to be valid\"</code></pre>\n"
-  - title: "@humanize(string) : string"
+  - title: humanize
     tokens: []
-    id: "1_8_%40humanize(string)_%3A_string"
+    meta: 
+      type: function
+      level: class
+      params: string
+      returnType: string
+    id: class_function_humanize
     html: "<p><code>humanize</code> reformats a string that has a programmatic meaning (camelcased, underscored, &quot;_id&quot; suffixed) to make human-readable by separating concatenated words and/or getting rid of the &quot;_id&quot; suffix.</p>\n<pre><code>test <span class=\"attribute\">'humanize</span> replaces underscores <span class=\"keyword\">and</span> dashes <span class=\"keyword\">with</span> empty space', -&gt;\n  equal Batman.helpers.humanize(<span class=\"attribute\">'underscored_string</span>'), <span class=\"attribute\">'Underscored</span> <span class=\"typename\">string</span>'\n  equal Batman.helpers.humanize(<span class=\"attribute\">'dash</span>-separated-<span class=\"typename\">string</span>'), <span class=\"attribute\">'Dash</span> separated <span class=\"typename\">string</span>'\n\ntest <span class=\"attribute\">'humanize</span> splits camel cased words by empty space', -&gt;\n  equal Batman.helpers.humanize(<span class=\"attribute\">'CamelCasedString</span>'), <span class=\"attribute\">'Camel</span> cased <span class=\"typename\">string</span>'\n\ntest <span class=\"attribute\">'humanize</span> title-cases the first word', -&gt;\n  equal Batman.helpers.humanize(<span class=\"attribute\">'lower</span> <span class=\"keyword\">case</span> sentence'), <span class=\"attribute\">'Lower</span> <span class=\"keyword\">case</span> sentence'\n\ntest <span class=\"attribute\">'humanize</span> lower-cases <span class=\"keyword\">all</span> words <span class=\"keyword\">after</span> the first one', -&gt;\n  equal Batman.helpers.humanize(<span class=\"attribute\">'Mixed</span> <span class=\"keyword\">Case</span> SENTENCE'), <span class=\"attribute\">'Mixed</span> <span class=\"keyword\">case</span> sentence'\n\ntest <span class=\"attribute\">'humanize</span> gets rid <span class=\"keyword\">of</span> _id suffix', -&gt;\n  equal Batman.helpers.humanize(<span class=\"attribute\">'identifying_string_id</span>'), <span class=\"attribute\">'Identifying</span> <span class=\"typename\">string</span>'</code></pre>\n"
 tokens: []
-id: 1_Batman.helpers
+id: batman.helpers
 html: "<p><code>Batman.helpers</code> is a namespace for Batman&#39;s helpful string manipulation helpers.</p>\n<p><em>Note</em>: Batman&#39;s pluralization functions mirror those of Rails&#39; exactly.</p>\n"
 
 ---
 
 {{ page.html }}
 {% for s in page.sub %}
-  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  <h3>
+    <a id="{{ s.id }}" class="anchor-target"></a>
+    <a href="#{{ s.id }}" class="anchor-link">
+    <span class="{% if s.meta %}monospace-heading{% endif %}">
+      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
+    {% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}
+    </span>
+    </a>
+  </h3>
   {{ s.html }}
 {% endfor %}

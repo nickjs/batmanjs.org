@@ -687,6 +687,35 @@ td + td > p, th + th {
   margin-top: 40px;
 }
 
+.api-docs h3 .anchor-link {
+  color: #5c5c6e;
+  text-decoration: none;
+}
+
+.api-docs h3 .anchor-link:hover {
+  text-decoration: underline;
+}
+
+.api-docs h3 .anchor-target {
+  display: block;
+  position: relative;
+  top: -100px;
+  visibility: hidden;
+}
+
+.api-docs .monospace-heading {
+  font-family: "Courier New",Courier,monospace;
+  font-size: 0.8em;
+}
+
+.api-docs .params {
+  color: #b09100;
+}
+
+.api-docs .return-type {
+  color: #dbb500;
+}
+
 @media all and (min-width: 1340px) {
   .api-docs.box {
     padding-left: 20px;
