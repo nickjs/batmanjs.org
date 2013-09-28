@@ -62,6 +62,9 @@ code {
   font-size: 90%
 }
 
+em { font-style: oblique; }
+strong { font-weight: bold; }
+
 
 /* layout */
 .row {
