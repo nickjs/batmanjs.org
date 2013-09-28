@@ -6,7 +6,7 @@ next_section: testing
 ---
 
 `Batman.View` is the bridge between application state and user interaction.
-They're responsible for rendering templates, handling bindings, and general
+Views are responsible for rendering templates, handling bindings, and general
 manipulation of the DOM. Most of the time, they'll be automatically created by
 bindings within templates, but they can be manually manipulated as well.
 

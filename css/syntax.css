@@ -84,7 +84,7 @@ div.highlight pre{
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
 
 
-.api-docs pre {
+.highlight-children pre {
   background: #FFFFFF;
   border: 1px solid #E0E0E0;
   font-family:"Courier New",Courier,monospace;
@@ -98,12 +98,12 @@ div.highlight pre{
   border: 1px solid #C4B7D8;
 }
 
-.api-docs pre > code { background: transparent; color: #333333 }
-.api-docs code .string { color: #dd1144; }
-.api-docs code .literal { color: #333333; font-weight: 800; }
-.api-docs code .variable { color: #008080; }
-.api-docs code .keyword { color: #333333; }
-.api-docs code .title { color: #333333; }
-.api-docs code .constant { color: #008080; }
-.api-docs code .number { color: #008080; }
-.api-docs code .property { color: #0086bc; }
+.highlight-children pre > code { background: transparent; color: #333333 }
+.highlight-children code .string { color: #dd1144; }
+.highlight-children code .literal { color: #333333; font-weight: 800; }
+.highlight-children code .variable { color: #008080; }
+.highlight-children code .keyword { color: #333333; }
+.highlight-children code .title { color: #333333; }
+.highlight-children code .constant { color: #008080; }
+.highlight-children code .number { color: #008080; }
+.highlight-children code .property { color: #0086bc; }
