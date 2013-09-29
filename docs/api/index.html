@@ -1,0 +1,23 @@
+---
+layout: api_docs
+title: Using This Reference
+sub: []
+tokens: []
+id: index
+html: "<p>The API Reference contains specific documentation for individual components of\nthe framework. In most sections you&#39;ll also find tests included, which serve as\nan example for correct usage as well as an assertion that the API has not\nchanged.</p>\n<p>Within the reference, types are documented by suffixing with a colon followed\nby the type (e.g. <code>toString() : string</code>). This applies to function arguments,\nreturn types, property types and accessor types. If there is no type specified,\nit&#39;s either self-evident or the type is undefined (e.g. in the case of a\nfunction with no return value).  All function/property/accessor headings are\nprefixed with an <code>@</code> if they exist at the class level, otherwise they exist at\nthe prototype/instance level.</p>\n"
+
+---
+
+{{ page.html }}
+{% for s in page.sub %}
+  <h3>
+    <a id="{{ s.id }}" class="anchor-target"></a>
+    <a href="#{{ s.id }}" class="anchor-link">
+    <span class="{% if s.meta %}monospace-heading{% endif %}">
+      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
+      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
+    </span>
+    </a>
+  </h3>
+  {{ s.html }}
+{% endfor %}

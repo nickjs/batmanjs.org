@@ -81,7 +81,11 @@ files.forEach (f) ->
         section.tokens.push(token)
 
 sections.forEach (section, index) ->
-  section.id = generateId(section.title)
+  # manually handle the index page
+  section.id = if index == 0
+    "index"
+  else
+    generateId(section.title)
   section.html = parseTokens(section.tokens, options)
 
   usedIds = {}

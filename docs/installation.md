@@ -1,8 +1,8 @@
 ---
 layout: docs
 title: Installation
-prev_section: index
-next_section: architecture
+prev_section: structure
+next_section: configuration
 ---
 
 We've tried to make batman.js's installation process as simple as possible. There's two main ways to go about it: using the `batman-rails` gem or downloading the Starter Package.

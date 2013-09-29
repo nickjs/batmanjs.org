@@ -19,12 +19,14 @@ Models are defined by creating subclasses of `Batman.Model`. Things like
 encoders, validations, and storage adapters will be inherited by deep
 subclasses, so you can subclass your own models to extend their functionality.
 
-    class MyApp.Product extends Batman.Model
-      @encode 'title', 'description', 'price'
+{% highlight coffeescript %}
+class MyApp.Product extends Batman.Model
+  @encode 'title', 'description', 'price'
 
-    class MyApp.Subscription extends MyApp.Product
-      # Subscription inherits the encoders from Product.
-      @encode 'period'
+class MyApp.Subscription extends MyApp.Product
+  # Subscription inherits the encoders from Product.
+  @encode 'period'
+{% endhighlight %}
 
 
 ### Defining Data

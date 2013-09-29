@@ -6,20 +6,18 @@ download:
     date: "June 10th, 2013"
 
 doc_boxes:
-  - box: Getting Started
+  - box: Developer Guide
     items:
-      - title: Welcome
+      - title: Getting Started
         link: index
-      - title: Installation
-        link: installation
       - title: Architecture
         link: architecture
-      - title: Directory Structure
+      - title: App Structure
         link: structure
+      - title: Installation
+        link: installation
       - title: Configuration
         link: configuration
-  - box: Guides
-    items:
       - title: Controllers
         link: controllers
       - title: Models
@@ -30,9 +28,5 @@ doc_boxes:
         link: views
       - title: Testing
         link: testing
-
-docs:
-  - title: Batman.Object
-    link: object
 
 #= api_index

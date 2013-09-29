@@ -527,7 +527,7 @@ td + td > p, th + th {
   list-style: disc;
   padding: 15px;
 }
-.content-wrapper p {
+.content-wrapper p, .content-wrapper ul, .content-wrapper ol {
   margin-bottom: 15px;
 }
 
