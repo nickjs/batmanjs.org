@@ -4,32 +4,55 @@ title: Batman.Model Associations
 sub: 
   - title: Batman.AssocationProxy
     tokens: []
-    id: 12_0_Batman.AssocationProxy
+    id: batman.assocationproxy
     html: "<p>Association accessors won&#39;t always return a <code>Batman.Set</code>. Generally they will return a <code>Batman.AssocationProxy</code> named after the association type,\nsuch as <code>Batman.BelongsToAssociationProxy</code> or <code>Batman.HasManyAssociationProxy</code>.</p>\n<p><code>Batman.AssociationProxy</code> defines useful methods such as <code>@load</code>, <code>@toJSON</code>, <code>@loadFromLocal</code>. It also defines accessors such as <code>%loaded</code> and <code>%target</code>.</p>\n"
   - title: Shared Options
     tokens: []
-    id: 12_1_Shared_Options
+    id: shared_options
     html: "<p>All assocations have a common set of options, as well as specific options for each type of relationship.</p>\n<h5><code>saveInline[= true] : boolean</code></h5>\n<p>Whether we should save the child objects as part of the parent object&#39;s JSON</p>\n<h5><code>autoload[= true] : boolean</code></h5>\n<p> Whether we should load the child objects when loading the parent object.</p>\n<h5><code>nestUrl[= false] : boolean</code></h5>\n<p>Whether the child models are persisted beneath the parent model&#39;s url structure.</p>\n<h5><code>name : string</code></h5>\n<p>The name of the child model for the association. (eg. App.Product)</p>\n<h5><code>inverseOf : string</code></h5>\n<p>The foreign association to set on load.</p>\n<h5><code>encoderKey : string</code></h5>\n<p>The key to encode and decode the assocation into/from JSON.</p>\n<h5><code>namespace[= Batman.currentApp] : string</code></h5>\n<p>The location of the model definition for the association.</p>\n<h5><code>polymorphic[= false] : boolean</code></h5>\n<p>Whether the association is polymorphic.</p>\n"
-  - title: "@hasMany(label[, options])"
+  - title: hasMany
     tokens: []
-    id: "12_2_%40hasMany(label%5B%2C_options%5D)"
+    meta: 
+      type: function
+      level: class
+      params: "label[, options]"
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_hasmany
     html: "<p><code>hasMany</code> assocations are used for expressing one-to-many relationships on a <code>Batman.Model</code>.</p>\n<ul>\n<li><code>label : string</code></li>\n<li><code>options : Object</code><ul>\n<li><code>primaryKey : string</code></li>\n<li><code>foreignKey : string</code></li>\n<li><code>as : string</code><ul>\n<li>the parent association name on child objects in a polymorphic association</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n"
-  - title: "@hasOne(label[, options])"
+  - title: hasOne
     tokens: []
-    id: "12_3_%40hasOne(label%5B%2C_options%5D)"
+    meta: 
+      type: function
+      level: class
+      params: "label[, options]"
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_hasone
     html: "<p><code>hasOne</code> associations are used for expressing one-to-one relationships on a <code>Batman.Model</code>.</p>\n<ul>\n<li><code>label : string</code></li>\n<li><code>options : Object</code><ul>\n<li><code>primaryKey : string</code></li>\n<li><code>foreignKey : string</code></li>\n<li><code>as : string</code><ul>\n<li>the parent association name on child objects in a polymorphic association</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n"
-  - title: "@belongsTo(label[, options])"
+  - title: belongsTo
     tokens: []
-    id: "12_4_%40belongsTo(label%5B%2C_options%5D)"
+    meta: 
+      type: function
+      level: class
+      params: "label[, options]"
+      returnType: !<tag:yaml.org,2002:js/undefined> ""
+    id: class_function_belongsto
     html: "<p><code>belongsTo</code> associatons are used for expressing one-to-one child relationships on a <code>Batman.Model</code>.</p>\n<ul>\n<li><code>label : string</code></li>\n<li><code>options : Object</code><ul>\n<li><code>primaryKey : string</code></li>\n<li><code>foreignKey : string</code></li>\n<li><code>encodeForeignKey[= true] boolean</code><ul>\n<li>whether to encode the foreignKey value when persisting the model</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n"
 tokens: []
-id: 12_Batman.Model_Associations
+id: batman.model_associations
 html: "<p>There are 3 types of assocations available on <code>Batman.Model</code>: <code>hasMany</code>, <code>belongsTo</code>, and <code>hasOne</code>.</p>\n"
 
 ---
 
 {{ page.html }}
 {% for s in page.sub %}
-  <h3 id="{{ s.id }}">{{ s.title }}</h3>
+  <h3>
+    <a id="{{ s.id }}" class="anchor-target"></a>
+    <a href="#{{ s.id }}" class="anchor-link">
+    <span class="{% if s.meta %}monospace-heading{% endif %}">
+      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
+      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
+    </span>
+    </a>
+  </h3>
   {{ s.html }}
 {% endfor %}

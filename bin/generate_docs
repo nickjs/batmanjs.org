@@ -17,9 +17,32 @@ parseTokens = (tokens, options) ->
   options = _.extend({}, marked.defaults, options)
   marked.Parser.parse(tokens, options)
 
-generateId = (title, index) ->
-  title = encodeURIComponent(title.replace(/\s/g, '_'))
-  "#{index}_#{title}"
+generateId = (title) -> encodeURIComponent(title.replace(/\s/g, '_').toLowerCase())
+
+parseHeading = (title) ->
+  if title.match(/^@/)
+    level = "class"
+    title = title.match(/^@(.*)/)[1]
+  else if title.match(/^::/)
+    level = "prototype"
+    title = title.match(/^::(.*)/)[1]
+  else return { title }
+
+  type = 'property' if title[0] is '.'
+  type = 'accessor' if title[0] is '%'
+  title = title.substr(1) if type
+  type ||= 'function'
+
+  res = title.match(/(.+?)([[( :].*)/)
+  if res
+    [match, title, meta] = res
+    [match, params, returnType] = meta.match(/(?:\((.*)\))?\s*:?\s*(.*)/)
+    unless params?
+      [match, params, returnType] = meta.match(/(\[.*\])?\s*:?\s*(.*)/)
+
+    returnType = undefined unless returnType
+
+  {title, meta: {type, level, params, returnType}}
 
 writeTemplate = (template, destination, replacements) ->
   content = fs.readFileSync("#{__dirname}/../_templates/#{template}").toString()
@@ -58,11 +81,29 @@ files.forEach (f) ->
         section.tokens.push(token)
 
 sections.forEach (section, index) ->
-  section.id = generateId(section.title, index)
+  section.id = generateId(section.title)
   section.html = parseTokens(section.tokens, options)
 
+  usedIds = {}
+
   section.sub.forEach (sub, subIndex) ->
-    sub.id = "#{index}_#{generateId(sub.title, subIndex)}"
+    {title, meta} = parseHeading(sub.title)
+
+    if meta
+      id = generateId("#{meta.level}_#{meta.type}_#{title}")
+      sub.meta = meta
+    else
+      id = generateId(title)
+
+    sub.id = id
+    offset = 0
+    while usedIds[sub.id]
+      offset++
+      sub.id = "#{id}_#{offset}"
+
+    usedIds[sub.id] = true
+
+    sub.title = title
     sub.html = parseTokens(sub.tokens, options)
 
   writeTemplate('api.html', "docs/api/#{section.id}.html", api_doc: yaml.dump(section))
