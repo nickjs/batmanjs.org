@@ -123,7 +123,7 @@ c 'first_binding', ->
   @title "Baby's First Binding"
   @say "A big chunk of the power of batman.js lies in its data bindings. You can use them"
   @say "to hook up your HTML to your model and app data, without writing glue code."
-  @say "Add `data-bind=\"playlists.length\"` to the `span` insude the `h1` element."
+  @say "Add `data-bind=\"playlists.length\"` to the `span` inside the `h1` element."
 
   @focus '/app/assets/batman/html/playlists/index.html'
 
@@ -133,7 +133,7 @@ c 'first_binding', ->
 
 c 'showif_binding', ->
   @title "Show/Hide Bindings"
-  @say "Oftentimes, you'll want to show or hide part of your page when data chances."
+  @say "Oftentimes, you'll want to show or hide part of your page when data changes."
   @say "Let's add a blank slate for when there are 0 playlists."
   @say "Add `data-showif=\"playlists.isEmpty\"` to the `h3` element."
 
