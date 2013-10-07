@@ -76,7 +76,7 @@
     this.title("Baby's First Binding");
     this.say("A big chunk of the power of batman.js lies in its data bindings. You can use them");
     this.say("to hook up your HTML to your model and app data, without writing glue code.");
-    this.say("Add `data-bind=\"playlists.length\"` to the `span` insude the `h1` element.");
+    this.say("Add `data-bind=\"playlists.length\"` to the `span` inside the `h1` element.");
     this.focus('/app/assets/batman/html/playlists/index.html');
     this.after("The span will automatically observe the length of the playlist array and update when it changes.");
     this.after("All data bindings start with `data-*` and reference model or app data directly.");
@@ -85,7 +85,7 @@
 
   c('showif_binding', function() {
     this.title("Show/Hide Bindings");
-    this.say("Oftentimes, you'll want to show or hide part of your page when data chances.");
+    this.say("Oftentimes, you'll want to show or hide part of your page when data changes.");
     this.say("Let's add a blank slate for when there are 0 playlists.");
     this.say("Add `data-showif=\"playlists.isEmpty\"` to the `h3` element.");
     this.focus('/app/assets/batman/html/playlists/index.html');
