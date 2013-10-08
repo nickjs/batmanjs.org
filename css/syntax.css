@@ -5,8 +5,6 @@ div.highlight {
   margin-bottom: 25px;
 }
 
-.highlight code { font-size: 100%; }
-
 div.highlight pre{
   width: 100%;
   overflow: auto;
