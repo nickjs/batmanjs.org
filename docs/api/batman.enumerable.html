@@ -19,7 +19,7 @@ sub:
       params: func
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: prototype_function_foreach
-    html: "<p>Calls <code>func</code> once for each element.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"forEach runs n times\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>)\n  <span class=\"aggregate\">count</span> = <span class=\"number\">0</span>\n  <span class=\"keyword\">set</span>.forEach -&gt; <span class=\"aggregate\">count</span>++\n  equal <span class=\"aggregate\">count</span>, <span class=\"number\">2</span></code></pre>\n"
+    html: "<p>Calls <code>func</code> once for each element.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"forEach runs n times\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>)\n  count = <span class=\"number\">0</span>\n  set.forEach -&gt; count++\n  equal count, <span class=\"number\">2</span></code></pre>\n"
   - title: map
     tokens: []
     meta: 
@@ -28,7 +28,7 @@ sub:
       params: "func[, context = Batman.container]"
       returnType: Array
     id: prototype_function_map
-    html: "<p>Calls <code>func</code> once for each element, and returns an array composed of the return\nvalue at each iteration.  <code>func</code> receives the arguments <code>(element, value,\nthis)</code></p>\n<pre><code><span class=\"comment\">test</span> <span class=\"comment\">\"forEach</span> <span class=\"comment\">runs</span> <span class=\"comment\">n</span> <span class=\"comment\">times\"</span>, <span class=\"literal\">-</span>&gt;\n  <span class=\"comment\">set</span> <span class=\"comment\">=</span> <span class=\"comment\">new</span> <span class=\"comment\">Batman</span>.<span class=\"comment\">Set(1</span>, <span class=\"comment\">2)</span>\n  <span class=\"comment\">deepEqual</span> <span class=\"title\">[</span><span class=\"comment\">2</span>, <span class=\"comment\">3</span>]<span class=\"string\">,</span> <span class=\"comment\">set</span>.<span class=\"comment\">map</span> <span class=\"comment\">(x)</span> <span class=\"literal\">-</span>&gt; <span class=\"comment\">x</span> <span class=\"literal\">+</span> <span class=\"comment\">1</code></pre>\n"
+    html: "<p>Calls <code>func</code> once for each element, and returns an array composed of the return\nvalue at each iteration.  <code>func</code> receives the arguments <code>(element, value,\nthis)</code></p>\n<pre><code>test <span class=\"string\">\"forEach runs n times\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"number\">1</span>, <span class=\"number\">2</span>)\n  deepEqual [<span class=\"number\">2</span>, <span class=\"number\">3</span>], set.map (x) -&gt; x + <span class=\"number\">1</span></code></pre>\n"
   - title: mapToProperty
     tokens: []
     meta: 
@@ -37,7 +37,7 @@ sub:
       params: "key : string"
       returnType: Array
     id: prototype_function_maptoproperty
-    html: "<p>Returns an array composed of the property specified of each item.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"mapToProperty pulls out the property specified\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>({<span class=\"keyword\">key</span>: <span class=\"string\">'a'</span>}, {<span class=\"keyword\">key</span>: <span class=\"string\">'b'</span>})\n  deepEqual [<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>], <span class=\"keyword\">set</span>.mapToProperty(<span class=\"string\">'key'</span>)</code></pre>\n"
+    html: "<p>Returns an array composed of the property specified of each item.\n<code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"mapToProperty pulls out the property specified\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set({key: <span class=\"string\">'a'</span>}, {key: <span class=\"string\">'b'</span>})\n  deepEqual [<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>], set.mapToProperty(<span class=\"string\">'key'</span>)</code></pre>\n"
   - title: every
     tokens: []
     meta: 
@@ -46,7 +46,7 @@ sub:
       params: "func[, context = Batman.container]"
       returnType: boolean
     id: prototype_function_every
-    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nevery iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"every is false when any element doesn't satisfy the selector function\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"keyword\">true</span>, <span class=\"keyword\">false</span>, <span class=\"keyword\">true</span>)\n  equal <span class=\"keyword\">false</span>, <span class=\"keyword\">set</span>.every (x) -&gt; x</code></pre>\n"
+    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nevery iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"every is false when any element doesn't satisfy the selector function\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"literal\">true</span>, <span class=\"literal\">false</span>, <span class=\"literal\">true</span>)\n  equal <span class=\"literal\">false</span>, set.every (x) -&gt; x</code></pre>\n"
   - title: some
     tokens: []
     meta: 
@@ -55,7 +55,7 @@ sub:
       params: "func[, context = Batman.container]"
       returnType: boolean
     id: prototype_function_some
-    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nany iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test \"some is true when any element satisfies the selector function\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"keyword\">true</span>, <span class=\"keyword\">false</span>, <span class=\"keyword\">true</span>)\n  equal <span class=\"keyword\">true</span>, <span class=\"keyword\">set</span>.<span class=\"keyword\">some</span> (x) -&gt; x</code></pre>\n"
+    html: "<p>Calls <code>func</code> once for each element, and returns true if <code>func</code> returns true for\nany iteration.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"some is true when any element satisfies the selector function\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"literal\">true</span>, <span class=\"literal\">false</span>, <span class=\"literal\">true</span>)\n  equal <span class=\"literal\">true</span>, set.some (x) -&gt; x</code></pre>\n"
   - title: reduce
     tokens: []
     meta: 
@@ -64,7 +64,7 @@ sub:
       params: "func[, accumulator]"
       returnType: Array
     id: prototype_function_reduce
-    html: "<p>Calls <code>func</code> once for each element, accumulating the result as it goes along.\nIf you pass your own <code>accumulator</code> it will retain its initial value, otherwise\nthe first element will become the initial accumulator value.  <code>func</code> receives\nthe arguments <code>(accumulator, element, value, index, this)</code></p>\n<pre><code>test \"reduce can implement a sum\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">6</span>, <span class=\"keyword\">set</span>.reduce (accumulator, x) -&gt; accumulator + x</code></pre>\n"
+    html: "<p>Calls <code>func</code> once for each element, accumulating the result as it goes along.\nIf you pass your own <code>accumulator</code> it will retain its initial value, otherwise\nthe first element will become the initial accumulator value.  <code>func</code> receives\nthe arguments <code>(accumulator, element, value, index, this)</code></p>\n<pre><code>test <span class=\"string\">\"reduce can implement a sum\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">6</span>, set.reduce (accumulator, x) -&gt; accumulator + x</code></pre>\n"
   - title: filter
     tokens: []
     meta: 
@@ -73,7 +73,7 @@ sub:
       params: func
       returnType: Object
     id: prototype_function_filter
-    html: "<p>Creates a new instance of the current type, and adds every element for which\n<code>func</code> returns true.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"filter strips out the crud\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"attribute\">'wheat</span>', <span class=\"attribute\">'crud</span>', <span class=\"attribute\">'grain</span>')\n  deepEqual [<span class=\"attribute\">'wheat</span>', <span class=\"attribute\">'grain</span>'], (set.filter (x) -&gt; x != <span class=\"attribute\">'crud</span>').toArray()</code></pre>\n"
+    html: "<p>Creates a new instance of the current type, and adds every element for which\n<code>func</code> returns true.  <code>func</code> receives the arguments <code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"filter strips out the crud\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"string\">'wheat'</span>, <span class=\"string\">'crud'</span>, <span class=\"string\">'grain'</span>)\n  deepEqual [<span class=\"string\">'wheat'</span>, <span class=\"string\">'grain'</span>], (set.filter (x) -&gt; x != <span class=\"string\">'crud'</span>).toArray()</code></pre>\n"
   - title: count
     tokens: []
     meta: 
@@ -82,7 +82,7 @@ sub:
       params: func
       returnType: number
     id: prototype_function_count
-    html: "<p>Returns the number of elements for which <code>func</code> returns true, or the total\nnumber of elements if you don&#39;t pass a <code>func</code>.  <code>func</code> receives the arguments\n<code>(element, value, this)</code></p>\n<pre><code>test \"count counts\", -&gt;\n  <span class=\"operator\"><span class=\"keyword\">set</span> = new Batman.<span class=\"keyword\">Set</span>(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">3</span>, <span class=\"keyword\">set</span>.<span class=\"aggregate\">count</span>()\n  equal <span class=\"number\">2</span>, <span class=\"keyword\">set</span>.<span class=\"aggregate\">count</span> (x) -&gt; x &gt; <span class=\"number\">1</span></code></pre>\n"
+    html: "<p>Returns the number of elements for which <code>func</code> returns true, or the total\nnumber of elements if you don&#39;t pass a <code>func</code>.  <code>func</code> receives the arguments\n<code>(element, value, this)</code></p>\n<pre><code>test <span class=\"string\">\"count counts\"</span>, -&gt;\n  set = <span class=\"keyword\">new</span> Batman.Set(<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>)\n  equal <span class=\"number\">3</span>, set.count()\n  equal <span class=\"number\">2</span>, set.count (x) -&gt; x &gt; <span class=\"number\">1</span></code></pre>\n"
   - title: "Implementing your own `Batman.Enumerable`"
     tokens: []
     id: "implementing_your_own_%60batman.enumerable%60"
@@ -94,15 +94,16 @@ html: "<p><code>Batman.Enumerable</code> is a mixin that defines methods availab
 ---
 
 {{ page.html }}
+<ul class="api-list">
 {% for s in page.sub %}
-  <h3>
-    <a id="{{ s.id }}" class="anchor-target"></a>
-    <a href="#{{ s.id }}" class="anchor-link">
-    <span class="{% if s.meta %}monospace-heading{% endif %}">
-      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
-      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
-    </span>
-    </a>
-  </h3>
-  {{ s.html }}
+  <li class="api-list-item">
+    <h3 class="api-title">
+      <a id="{{ s.id }}" class="anchor-target"></a>
+      <a href="#{{ s.id }}" class="anchor-link">
+      <span class="{% if s.meta %}monospace-heading{% endif %}">{% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}{% if s.meta.type == 'property' %}<span class="params">{{ s.meta.params }}</span>{% else %}<span class="params">({{ s.meta.params }})</span>  {% endif %}{% endif %}{% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}</span>
+      </a>
+    </h3>
+    {{ s.html }}
+  </li>
 {% endfor %}
+</ul>

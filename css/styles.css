@@ -51,11 +51,11 @@ a { color: #a2a2ba; }
 a:hover { color: #fff; }
 ol { list-style-type: decimal; padding-left: 20px; }
 code {
-  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
   color: #333;
-  padding: 0 3px;
   background: #fff;
   font-size: 85%;
+  padding: 0 5px;
 }
 .code-highlight {
   background: #fff8d4;
@@ -124,7 +124,6 @@ div[class*="span"] {
 /* helpers */
 .clearfix:before,.clearfix:after{content:"\0020";display:block;height:0;visibility:hidden}.clearfix:after{clear:both}.clearfix{zoom:1}
 
-.p { padding: 10px; }
 .pp { padding: 20px; }
 .ppt { padding-top: 20px; }
 .ppr { padding-right: 20px; }
@@ -369,7 +368,7 @@ td + td > p, th + th {
 
 .current:before {
   content: "▶";
-  margin-left: -42px;
+  margin-left: -41px;
   font-size: 16px;
   padding-right: 23px;
   color: #f3f4fb;
@@ -531,6 +530,12 @@ td + td > p, th + th {
   margin-bottom: 15px;
 }
 
+.content-wrapper .api-list {
+  padding: 0;
+}
+
+.api-list-item ul { padding-bottom: 0; }
+
 
 /* footer */
 .footer{
@@ -672,19 +677,12 @@ td + td > p, th + th {
 }
 
 /* API Docs */
-.api-docs {
-  font-size: 14px;
-}
-
 .api-docs.box {
   padding-left: 60px;
 }
 
 .api-docs h3 {
-  background-color: #eaebfb;
   color: #5c5c6e;
-  padding: 10px;
-  margin-top: 40px;
 }
 
 .api-docs h3 .anchor-link {
@@ -704,16 +702,27 @@ td + td > p, th + th {
 }
 
 .api-docs .monospace-heading {
-  font-family: "Courier New",Courier,monospace;
+  font-family: Menlo, "Courier New", Courier, monospace;
   font-size: 0.8em;
+  color: #8077C4;
 }
 
 .api-docs .params {
-  color: #b09100;
+  color: #444;
 }
 
 .api-docs .return-type {
-  color: #dbb500;
+  color: #aaa;
+}
+
+.api-title {
+  border-bottom: 1px solid #D9D6F0;
+}
+
+.api-list-item {
+  list-style-type: none;
+  padding-top: 10px;
+  margin-top: 40px;
 }
 
 @media all and (min-width: 1340px) {

@@ -19,7 +19,7 @@ sub:
       params: "node : Node, property : string,value : string, importance : string"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_setstyleproperty
-    html: "<p>Sets the style property or attribute on the supplied node.  This method will prefer <code>setProperty</code> over <code>setAttribute</code>.</p>\n<pre><code>test <span class=\"string\">\"setStyleProperty\"</span>, -&gt;\n  node = document.createElement('<span class=\"keyword\">div</span>')\n  Batman.DOM.setStyleProperty( node, <span class=\"string\">\"color\"</span>, <span class=\"string\">\"white\"</span>, <span class=\"string\">\"important\"</span>)\n  <span class=\"keyword\">equal</span> node.style.getPropertyValue(<span class=\"string\">\"color\"</span>), <span class=\"string\">\"white\"</span>\n  <span class=\"keyword\">equal</span> <span class=\"string\">\"important\"</span>, node.style.getPropertyPriority(<span class=\"string\">\"color\"</span>)</code></pre>\n"
+    html: "<p>Sets the style property or attribute on the supplied node.  This method will prefer <code>setProperty</code> over <code>setAttribute</code>.</p>\n<pre><code>test <span class=\"string\">\"setStyleProperty\"</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  Batman.DOM.setStyleProperty( node, <span class=\"string\">\"color\"</span>, <span class=\"string\">\"white\"</span>, <span class=\"string\">\"important\"</span>)\n  equal node.style.getPropertyValue(<span class=\"string\">\"color\"</span>), <span class=\"string\">\"white\"</span>\n  equal <span class=\"string\">\"important\"</span>, node.style.getPropertyPriority(<span class=\"string\">\"color\"</span>)</code></pre>\n"
   - title: valueForNode
     tokens: []
     meta: 
@@ -28,7 +28,7 @@ sub:
       params: "node: Node [, value = '', escapeValue = true ]"
       returnType: string
     id: class_function_valuefornode
-    html: "<p>Gets the value of a node and optionally sets it as well.  <code>escapeValue</code> will escape the value via <code>Batman.escapeHTML</code></p>\n<pre><code>test <span class=\"attribute\">'valueForNode</span>', -&gt;\n  node = document.createElement(<span class=\"attribute\">'input</span>')\n  val = Batman.DOM.valueForNode(node, <span class=\"attribute\">'stuff</span>' )\n  equal val, <span class=\"string\">\"stuff\"</span>\n  equal node.value, <span class=\"string\">\"stuff\"</span></code></pre>\n"
+    html: "<p>Gets the value of a node and optionally sets it as well.  <code>escapeValue</code> will escape the value via <code>Batman.escapeHTML</code></p>\n<pre><code>test <span class=\"string\">'valueForNode'</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'input'</span>)\n  val = Batman.DOM.valueForNode(node, <span class=\"string\">'stuff'</span> )\n  equal val, <span class=\"string\">\"stuff\"</span>\n  equal node.value, <span class=\"string\">\"stuff\"</span></code></pre>\n"
   - title: nodeIsEditable
     tokens: []
     meta: 
@@ -37,7 +37,7 @@ sub:
       params: node
       returnType: boolean
     id: class_function_nodeiseditable
-    html: "<p>Returns whether a node is editable or not.</p>\n<pre><code>test <span class=\"string\">'nodeIsEditable'</span>, -&gt;\n  node = <span class=\"transposed_variable\">document.</span>createElement(<span class=\"string\">'div'</span>)\n  ok !<span class=\"transposed_variable\">Batman.</span><span class=\"transposed_variable\">DOM.</span>nodeIsEditable(node)\n  node = <span class=\"transposed_variable\">document.</span>createElement(<span class=\"string\">'input'</span>)\n  ok <span class=\"transposed_variable\">Batman.</span><span class=\"transposed_variable\">DOM.</span>nodeIsEditable(node)</code></pre>\n"
+    html: "<p>Returns whether a node is editable or not.</p>\n<pre><code>test <span class=\"string\">'nodeIsEditable'</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  ok !Batman.DOM.nodeIsEditable(node)\n  node = document.createElement(<span class=\"string\">'input'</span>)\n  ok Batman.DOM.nodeIsEditable(node)</code></pre>\n"
   - title: addEventListener
     tokens: []
     meta: 
@@ -68,7 +68,7 @@ sub:
   - title: ".hasAddEventListener : boolean"
     tokens: []
     id: ".hasaddeventlistener_%3A_boolean"
-    html: "<p>Returns the whether the <code>window</code> object contains addEventListener.</p>\n<pre><code>test <span class=\"string\">\"does the window have an event listener\"</span>, -&gt;\n  ok Batman<span class=\"variable\">.DOM</span><span class=\"variable\">.hasAddEventListener</span></code></pre>\n"
+    html: "<p>Returns the whether the <code>window</code> object contains addEventListener.</p>\n<pre><code>test <span class=\"string\">\"does the window have an event listener\"</span>, -&gt;\n  ok Batman.DOM.hasAddEventListener</code></pre>\n"
   - title: preventDefault
     tokens: []
     meta: 
@@ -77,7 +77,7 @@ sub:
       params: "e : Event"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_preventdefault
-    html: "<p>Prevents the default event from happening.  If preventDefault isn&#39;t a <code>function</code> then it will set the <code>returnValue</code> to false</p>\n<pre><code>test <span class=\"string\">\"preventDefault\"</span>, -&gt;\n  e = { returnValue: <span class=\"literal\">true</span> }\n  Batman<span class=\"variable\">.DOM</span><span class=\"variable\">.preventDefault</span>(e)\n  ok !e<span class=\"variable\">.returnValue</span>\n\n  e = { preventDefault: -&gt; ok <span class=\"literal\">true</span> }\n  Batman<span class=\"variable\">.DOM</span><span class=\"variable\">.preventDefault</span>(e)</code></pre>\n"
+    html: "<p>Prevents the default event from happening.  If preventDefault isn&#39;t a <code>function</code> then it will set the <code>returnValue</code> to false</p>\n<pre><code>test <span class=\"string\">\"preventDefault\"</span>, -&gt;\n  e = { returnValue: <span class=\"literal\">true</span> }\n  Batman.DOM.preventDefault(e)\n  ok !e.returnValue\n\n  e = { preventDefault: -&gt; ok <span class=\"literal\">true</span> }\n  Batman.DOM.preventDefault(e)</code></pre>\n"
   - title: stopPropagation
     tokens: []
     meta: 
@@ -86,7 +86,7 @@ sub:
       params: "e : Event"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_stoppropagation
-    html: "<p>Stops the event from propogating.  If the stopPropgation isn&#39;t a <code>function</code> then it will set <code>cancelBubble</code> to true</p>\n<pre><code>test <span class=\"string\">\"stopPropagation\"</span>, -&gt;\n  e = { cancelBubble: <span class=\"literal\">false</span> }\n  Batman<span class=\"variable\">.DOM</span><span class=\"variable\">.stopPropagation</span>(e)\n  ok e<span class=\"variable\">.cancelBubble</span>\n\n  e = {stopPropagation: -&gt; ok <span class=\"literal\">true</span> }\n  Batman<span class=\"variable\">.DOM</span><span class=\"variable\">.stopPropagation</span>(e)</code></pre>\n<h3>The following methods are only available with the jQuery platform or a polyfill</h3>\n"
+    html: "<p>Stops the event from propogating.  If the stopPropgation isn&#39;t a <code>function</code> then it will set <code>cancelBubble</code> to true</p>\n<pre><code>test <span class=\"string\">\"stopPropagation\"</span>, -&gt;\n  e = { cancelBubble: <span class=\"literal\">false</span> }\n  Batman.DOM.stopPropagation(e)\n  ok e.cancelBubble\n\n  e = {stopPropagation: -&gt; ok <span class=\"literal\">true</span> }\n  Batman.DOM.stopPropagation(e)</code></pre>\n<h3>The following methods are only available with the jQuery platform or a polyfill</h3>\n"
   - title: querySelectorAll
     tokens: []
     meta: 
@@ -113,7 +113,7 @@ sub:
       params: "node : Node"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_destroynode
-    html: "<p>Calls <code>Batman.DOM.cleanupNode</code> and  removes node and anything inside from the document tree.</p>\n<pre><code>test <span class=\"string\">'destroyNode'</span>, -&gt;\n  node1 = <span class=\"transposed_variable\">document.</span>createElement(<span class=\"string\">'div'</span>)\n  node2 = <span class=\"transposed_variable\">document.</span>createElement(<span class=\"string\">'div'</span>)\n  node3 = <span class=\"transposed_variable\">document.</span>createElement(<span class=\"string\">'div'</span>)\n  <span class=\"transposed_variable\">node1.</span>appendChild(node2)\n  <span class=\"transposed_variable\">node2.</span>appendChild(node3)\n\n  <span class=\"transposed_variable\">Batman.</span><span class=\"transposed_variable\">DOM.</span>destroyNode( node1 )\n  equal <span class=\"transposed_variable\">node1.</span><span class=\"transposed_variable\">childNodes.</span><span class=\"built_in\">length</span>, <span class=\"number\">1</span></code></pre>\n"
+    html: "<p>Calls <code>Batman.DOM.cleanupNode</code> and  removes node and anything inside from the document tree.</p>\n<pre><code>test <span class=\"string\">'destroyNode'</span>, -&gt;\n  node1 = document.createElement(<span class=\"string\">'div'</span>)\n  node2 = document.createElement(<span class=\"string\">'div'</span>)\n  node3 = document.createElement(<span class=\"string\">'div'</span>)\n  node1.appendChild(node2)\n  node2.appendChild(node3)\n\n  Batman.DOM.destroyNode( node1 )\n  equal node1.childNodes.length, <span class=\"number\">1</span></code></pre>\n"
   - title: setInnerHtml
     tokens: []
     meta: 
@@ -122,7 +122,7 @@ sub:
       params: "node : Node, html : string"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_setinnerhtml
-    html: "<p>Set an element&#39;s content and any content that was in that element is completely replaced by the new content.\n<em>note</em> this can&#39;t be used on XML documents.</p>\n<pre><code><span class=\"title\">test</span> <span class=\"string\">\"innerHTML\"</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  Batman.DOM.setInnerHTML(node, <span class=\"string\">\"FOO\"</span>)\n  equal node.innerHTML, <span class=\"string\">\"FOO\"</span></code></pre>\n"
+    html: "<p>Set an element&#39;s content and any content that was in that element is completely replaced by the new content.\n<em>note</em> this can&#39;t be used on XML documents.</p>\n<pre><code>test <span class=\"string\">\"innerHTML\"</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  Batman.DOM.setInnerHTML(node, <span class=\"string\">\"FOO\"</span>)\n  equal node.innerHTML, <span class=\"string\">\"FOO\"</span></code></pre>\n"
   - title: textContent
     tokens: []
     meta: 
@@ -131,7 +131,7 @@ sub:
       params: node
       returnType: string
     id: class_function_textcontent
-    html: "<p>Returns the string of the text contained in the node.</p>\n<pre><code><span class=\"title\">test</span> <span class=\"string\">\"textContent\"</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  content = document.createTextNode(<span class=\"string\">\"FOO\"</span>)\n  node.appendChild(content)\n  equal Batman.DOM.textContent(node), <span class=\"string\">\"FOO\"</span></code></pre>\n"
+    html: "<p>Returns the string of the text contained in the node.</p>\n<pre><code>test <span class=\"string\">\"textContent\"</span>, -&gt;\n  node = document.createElement(<span class=\"string\">'div'</span>)\n  content = document.createTextNode(<span class=\"string\">\"FOO\"</span>)\n  node.appendChild(content)\n  equal Batman.DOM.textContent(node), <span class=\"string\">\"FOO\"</span></code></pre>\n"
 tokens: []
 id: batman.dom
 html: "<p>Batman includes some helper methods to assist in DOM manipulation.</p>\n<p>The following are included in the platform adapters:\n - <code>querySelector</code>\n - <code>querySelectorAll</code>\n - <code>destroyNode</code>\n - <code>setInnerHTML</code>\n - <code>textContent</code>\n - <code>addEventListener</code>\n - <code>removeEventListener</code></p>\n"
@@ -139,15 +139,16 @@ html: "<p>Batman includes some helper methods to assist in DOM manipulation.</p>
 ---
 
 {{ page.html }}
+<ul class="api-list">
 {% for s in page.sub %}
-  <h3>
-    <a id="{{ s.id }}" class="anchor-target"></a>
-    <a href="#{{ s.id }}" class="anchor-link">
-    <span class="{% if s.meta %}monospace-heading{% endif %}">
-      {% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}<span class="params">({{ s.meta.params }})</span>{% endif %}
-      {% if s.meta.returnType %}<span class="return-type">: {{ s.meta.returnType }}</span>{% endif %}
-    </span>
-    </a>
-  </h3>
-  {{ s.html }}
+  <li class="api-list-item">
+    <h3 class="api-title">
+      <a id="{{ s.id }}" class="anchor-target"></a>
+      <a href="#{{ s.id }}" class="anchor-link">
+      <span class="{% if s.meta %}monospace-heading{% endif %}">{% if s.meta.level == 'class' %}@{% endif %}{{ s.title }}{% if s.meta.params %}{% if s.meta.type == 'property' %}<span class="params">{{ s.meta.params }}</span>{% else %}<span class="params">({{ s.meta.params }})</span>  {% endif %}{% endif %}{% if s.meta.returnType %}<span class="return-type"> : {{ s.meta.returnType }}</span>{% endif %}</span>
+      </a>
+    </h3>
+    {{ s.html }}
+  </li>
 {% endfor %}
+</ul>

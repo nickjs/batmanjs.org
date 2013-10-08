@@ -57,7 +57,7 @@ for file in files
 
 sections = []
 files    = glob.sync("#{argv.dir}/**/*.litcoffee")
-options  = highlight: (code, lang) -> hljs.highlightAuto(code).value
+options  = highlight: (code, lang) -> hljs.highlight('coffeescript', code).value
 
 files.forEach (f) ->
   content = fs.readFileSync(f)
