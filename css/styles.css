@@ -529,6 +529,12 @@ td + td > p, th + th {
   margin-bottom: 15px;
 }
 
+.content-wrapper .api-list {
+  padding: 0;
+}
+
+.api-list-item ul { padding-bottom: 0; }
+
 
 /* footer */
 .footer{
@@ -712,8 +718,10 @@ td + td > p, th + th {
   border-bottom: 1px solid #D9D6F0;
 }
 
-.content-wrapper .api-list {
-  padding: 0;
+.api-list-item {
+  list-style-type: none;
+  padding-top: 10px;
+  margin-top: 40px;
 }
 
 @media all and (min-width: 1340px) {
