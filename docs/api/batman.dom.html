@@ -16,7 +16,7 @@ sub:
     meta: 
       type: function
       level: class
-      params: "node : Node,property : string,value : string, importance : string"
+      params: "node : Node, property : string,value : string, importance : string"
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_setstyleproperty
     html: "<p>Sets the style property or attribute on the supplied node.  This method will prefer <code>setProperty</code> over <code>setAttribute</code>.</p>\n<pre><code>test <span class=\"string\">\"setStyleProperty\"</span>, -&gt;\n  node = document.createElement('<span class=\"keyword\">div</span>')\n  Batman.DOM.setStyleProperty( node, <span class=\"string\">\"color\"</span>, <span class=\"string\">\"white\"</span>, <span class=\"string\">\"important\"</span>)\n  <span class=\"keyword\">equal</span> node.style.getPropertyValue(<span class=\"string\">\"color\"</span>), <span class=\"string\">\"white\"</span>\n  <span class=\"keyword\">equal</span> <span class=\"string\">\"important\"</span>, node.style.getPropertyPriority(<span class=\"string\">\"color\"</span>)</code></pre>\n"
@@ -25,7 +25,7 @@ sub:
     meta: 
       type: function
       level: class
-      params: "node: Node [, value = '',escapeValue = true ]"
+      params: "node: Node [, value = '', escapeValue = true ]"
       returnType: string
     id: class_function_valuefornode
     html: "<p>Gets the value of a node and optionally sets it as well.  <code>escapeValue</code> will escape the value via <code>Batman.escapeHTML</code></p>\n<pre><code>test <span class=\"attribute\">'valueForNode</span>', -&gt;\n  node = document.createElement(<span class=\"attribute\">'input</span>')\n  val = Batman.DOM.valueForNode(node, <span class=\"attribute\">'stuff</span>' )\n  equal val, <span class=\"string\">\"stuff\"</span>\n  equal node.value, <span class=\"string\">\"stuff\"</span></code></pre>\n"
