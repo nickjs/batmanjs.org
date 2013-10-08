@@ -53,8 +53,9 @@ ol { list-style-type: decimal; padding-left: 20px; }
 code {
   font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
   color: #333;
+  background: #fff;
   font-size: 85%;
-  font-weight: bold;
+  padding: 0 5px;
 }
 .code-highlight {
   background: #fff8d4;
