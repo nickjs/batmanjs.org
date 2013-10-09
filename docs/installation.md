@@ -41,7 +41,7 @@ The structure of this app will be exactly the same as described in [Directory St
 
 ## 2. Starter Application
 
-If you're not using Rails, you can [download](/downloads.html) either the Starter Application or simply a copy of batman.js itself. The Starter Application is simply a zip file which contains an empty batman.js project, very similar to what `batman-rails` would generate for you. It will contain all of the directories your project needs (described further in [Directory Structure](/docs/structure.html)), in addition to the actual batman.js source.
+If you're not using Rails, you can [download](/download.html) either the Starter Application or simply a copy of batman.js itself. The Starter Application is simply a zip file which contains an empty batman.js project, very similar to what `batman-rails` would generate for you. It will contain all of the directories your project needs (described further in [Directory Structure](/docs/structure.html)), in addition to the actual batman.js source.
 
 
 You can simply download the zip and start filling it with your own application code.
