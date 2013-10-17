@@ -9,7 +9,7 @@ sub:
   - title: "get(value, key) : value"
     tokens: []
     id: "get(value%2C_key)_%3A_value"
-    html: ""
+    html: "<p>Calls the get function on the input value with the specified key. Can be used with <code>Batman.Accessible</code> and <code>Batman.TerminalAccessible</code>:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"accessibleFunction | get 'item'\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "value[key] : value"
     tokens: []
     id: "value%5Bkey%5D_%3A_value"
@@ -17,71 +17,71 @@ sub:
   - title: "equals(left, right) : boolean"
     tokens: []
     id: "equals(left%2C_right)_%3A_boolean"
-    html: ""
+    html: "<p>Checks if left content is equal to right content:</p>\n<pre><code class=\"lang-html\">&lt;span data-showif=<span class=\"string\">\"title | equals 'Batman Views'\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "not(value) : boolean"
     tokens: []
     id: "not(value)_%3A_boolean"
-    html: ""
+    html: "<p>Inverts the truthiness of the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-hideif=<span class=\"string\">\"title | equals 'Batman Views' | not | and action | equals 'show'\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "matches(value, string) : boolean"
     tokens: []
     id: "matches(value%2C_string)_%3A_boolean"
-    html: ""
+    html: "<p>Tests a string against the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-showif=<span class=\"string\">\"title | matches 'Bat'\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "truncate(value, length, end = '...') : string"
     tokens: []
     id: "truncate(value%2C_length%2C_end_%3D_'...')_%3A_string"
-    html: ""
+    html: "<p>Limits the length of output to the specified length and appends the specified text if over the limit:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.title | truncate 5, '…'\"</span>&gt;&lt;/span&gt;</code></pre>\n<p>Would result in:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.title | truncate 5, '…'\"</span>&gt;About…&lt;/span&gt;</code></pre>\n"
   - title: "default(value, defaultValue) : value"
     tokens: []
     id: "default(value%2C_defaultvalue)_%3A_value"
-    html: ""
+    html: "<p>Provides a default value if the keypath is falsy:</p>\n<pre><code class=\"lang-html\">&lt;input type=<span class=\"string\">\"text\"</span> data-bind=<span class=\"string\">\"page.title | default 'About Us'\"</span>&gt;&lt;/input&gt;</code></pre>\n"
   - title: "prepend(value, string) : string"
     tokens: []
     id: "prepend(value%2C_string)_%3A_string"
-    html: ""
+    html: "<p>Prepends the string to the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind-class=<span class=\"string\">\"page.tag | prepend 'ico-'\"</span>&gt;&lt;/span&gt;</code></pre>\n<p>If page.tag is &#39;about&#39; this would result in:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind-class=<span class=\"string\">\"page.tag | prepend 'ico-'\"</span> class=<span class=\"string\">\"ico-about\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "append(value, string) : string"
     tokens: []
     id: "append(value%2C_string)_%3A_string"
-    html: ""
+    html: "<p>Appends the string to the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind-class=<span class=\"string\">\"page.tag | append '-ico'\"</span>&gt;&lt;/span&gt;</code></pre>\n<p>If page.tag is &#39;about&#39; this would result in:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind-class=<span class=\"string\">\"page.tag | append '-ico'\"</span> class=<span class=\"string\">\"about-ico\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "replace(value, searchString, replaceString[, flags]) : string"
     tokens: []
     id: "replace(value%2C_searchstring%2C_replacestring%5B%2C_flags%5D)_%3A_string"
-    html: ""
+    html: "<p>Replaces content in the input value matching the <code>searchString</code> with the <code>replaceString</code> value:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.title | replace 'html', 'HTML'\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "downcase(value) : string"
     tokens: []
     id: "downcase(value)_%3A_string"
-    html: ""
+    html: "<p>Downcases the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.title | downcase\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "upcase(value) : string"
     tokens: []
     id: "upcase(value)_%3A_string"
-    html: ""
+    html: "<p>Upcases the input value:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.title | upcase\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "pluralize(value, count) : string"
     tokens: []
     id: "pluralize(value%2C_count)_%3A_string"
-    html: ""
+    html: "<p>Pluralizes the input value based on the patterns specified in <code>Batman.helpers.inflector</code> and the count provided:</p>\n<pre><code class=\"lang-coffeescript\">( -&gt;\n  <span class=\"property\">@singular</span> <span class=\"regexp\">/(analysis)$/i</span>, <span class=\"string\">'$1'</span>\n  <span class=\"property\">@singular</span> <span class=\"regexp\">/(analy)ses$/i</span>, <span class=\"string\">'$1sis'</span>\n).call(Batman.helpers.inflector)</code></pre>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"'analysis' | pluralize page.comments.count\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "humanize(string) : string"
     tokens: []
     id: "humanize(string)_%3A_string"
-    html: ""
+    html: "<p>Takes a string and makes it human readable, for example &#39;an_underscored_string&#39; would become &#39;An underscored string&#39;.</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"'about_us_page' | humanize\"</span>&gt;&lt;/span&gt;</code></pre>\n<p>Would result in:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"'about_us_page' | humanize\"</span>&gt;About us page&lt;/span&gt;</code></pre>\n"
   - title: "join(value, separator = '') : string"
     tokens: []
     id: "join(value%2C_separator_%3D_'')_%3A_string"
-    html: ""
+    html: "<p>Joins an <code>array</code> of values into a single string:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"page.comments | map 'title' | join ', '\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "sort(value) : value"
     tokens: []
     id: "sort(value)_%3A_value"
-    html: ""
+    html: "<p>Sorts an <code>array</code> using the default comparison:</p>\n<pre><code class=\"lang-html\">&lt;span data-foreach-comment=<span class=\"string\">\"page.comments | sort\"</span> data-bind=<span class=\"string\">\"comment.title\"</span>&gt;&lt;span&gt;</code></pre>\n"
   - title: "map(iterable) : value"
     tokens: []
     id: "map(iterable)_%3A_value"
-    html: ""
+    html: "<p>Maps the specified keypath from an <code>array</code> of objects:</p>\n<pre><code class=\"lang-html\">&lt;span data-foreach-author=<span class=\"string\">\"page.comments | map 'author'\"</span> data-bind=<span class=\"string\">\"author\"</span>&gt;&lt;span&gt;</code></pre>\n"
   - title: "has(iterable, item) : boolean"
     tokens: []
     id: "has(iterable%2C_item)_%3A_boolean"
-    html: ""
+    html: "<p>Calls the <code>iterable</code>&#39;s <code>has</code> function to check for the existence of the specified <code>item</code>.</p>\n<pre><code class=\"lang-coffeescript\"><span class=\"class\"><span class=\"keyword\">class</span> <span class=\"title\">Sample</span>.<span class=\"title\">FirstController</span> <span class=\"keyword\">extends</span> <span class=\"title\">Batman</span>.<span class=\"title\">Controller</span></span>\n  index: -&gt;\n    <span class=\"property\">@set</span>(<span class=\"string\">'things'</span>, <span class=\"keyword\">new</span> Batman.Set(<span class=\"string\">'thing1'</span>, <span class=\"string\">'thing2'</span>))</code></pre>\n<pre><code class=\"lang-html\">&lt;input type=<span class=\"string\">\"checkbox\"</span> data-bind-checked=<span class=\"string\">\"things | has 'thing1'\"</span>&gt;&lt;/input&gt;</code></pre>\n<p>If you were to dispatch <code>first#index</code>:</p>\n<pre><code class=\"lang-html\">&lt;input type=<span class=\"string\">\"checkbox\"</span> data-bind-checked=<span class=\"string\">\"things | has 'thing1'\"</span> checked=<span class=\"string\">\"true\"</span>&gt;&lt;/input&gt;</code></pre>\n"
   - title: "first(iterable) : value"
     tokens: []
     id: "first(iterable)_%3A_value"
-    html: ""
+    html: "<p>Returns the first value from an <code>array</code>:</p>\n<pre><code class=\"lang-html\">&lt;span data-context-firstComment=<span class=\"string\">\"page.comments | first\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "meta(value, keypath) : value"
     tokens: []
     id: "meta(value%2C_keypath)_%3A_value"
@@ -89,22 +89,18 @@ sub:
   - title: "interpolate(string, valuesObject) : string"
     tokens: []
     id: "interpolate(string%2C_valuesobject)_%3A_string"
-    html: ""
+    html: "<p>Allows you to use string interpolation:</p>\n<pre><code class=\"lang-html\">&lt;span data-bind=<span class=\"string\">\"'The page title is %{title}%' | interpolate {'title': 'page.title'}\"</span>&gt;&lt;/span&gt;</code></pre>\n"
   - title: "withArguments(function, curriedArguments...) : function"
     tokens: []
     id: "witharguments(function%2C_curriedarguments...)_%3A_function"
-    html: ""
-  - title: "routeToAction(model, action) : string"
-    tokens: []
-    id: "routetoaction(model%2C_action)_%3A_string"
-    html: ""
+    html: "<p>Ensures that the function is called with the supplied arguments in addition to the arguments it would normally be called with. This is a form of currying. The argument order will be the curried arguments (those passed to withArguments) first, then the regular arguments. In the case of a click event, the regular arguments are node, event, view.</p>\n<pre><code class=\"lang-coffeescript\"><span class=\"class\"><span class=\"keyword\">class</span> <span class=\"title\">Sample</span>.<span class=\"title\">CloseWindowView</span> <span class=\"keyword\">extends</span> <span class=\"title\">Batman</span>.<span class=\"title\">View</span></span>\n  html: <span class=\"string\">'&lt;span data-event-click=\"closeWindow | withArguments true\"&gt;&lt;/span&gt;'</span>\n\n  closeWindow: (actuallyClose) -&gt;\n    window.close() <span class=\"keyword\">if</span> actuallyClose</code></pre>\n<pre><code class=\"lang-html\">&lt;div data-view=<span class=\"string\">\"CloseWindowView\"</span>&gt;&lt;/div&gt;</code></pre>\n"
   - title: "escape(value) : string"
     tokens: []
     id: "escape(value)_%3A_string"
-    html: ""
+    html: "<p>Escapes HTML in the input value:</p>\n<pre><code class=\"lang-html\">&lt;textarea data-bind=<span class=\"string\">\"page.body_html | escape\"</span>&gt;&lt;/textarea&gt;</code></pre>\n"
 tokens: []
 id: batman.view_filters
-html: ""
+html: "<p>Batman filters are evaluated from left to right, with the output of each filter being injected into the next. This allows you to form filter chains for display purposes. Accessor caching does not apply to filter chains. If any component of the chain changes, the entire chain will be recalculated for each binding in the template.</p>\n"
 
 ---
 

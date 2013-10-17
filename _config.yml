@@ -131,9 +131,9 @@ api_index:
       - id: batman.eventemitter
         title: Batman.EventEmitter
       - id: prototype_function_on
-        title: "on"
+        title: on
       - id: prototype_function_off
-        title: "off"
+        title: off
       - id: prototype_function_fire
         title: fire
       - id: prototype_function_hasevent
@@ -499,8 +499,6 @@ api_index:
         title: "interpolate(string, valuesObject) : string"
       - id: "witharguments(function%2C_curriedarguments...)_%3A_function"
         title: "withArguments(function, curriedArguments...) : function"
-      - id: "routetoaction(model%2C_action)_%3A_string"
-        title: "routeToAction(model, action) : string"
       - id: "escape(value)_%3A_string"
         title: "escape(value) : string"
   - id: batman.dom
