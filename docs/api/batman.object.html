@@ -156,7 +156,7 @@ sub:
     tokens: []
     id: batman.eventemitter
     html: "<p><code>EventEmitter</code> is a mixin which can be applied to any object to give it the ability to fire events and accept listeners for those events. All <code>Batman.Object</code>s, their subclasses and instances are <code>EventEmitter</code>s by default.</p>\n"
-  - title: on
+  - title: "on"
     tokens: []
     meta: 
       type: function
@@ -165,7 +165,7 @@ sub:
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: prototype_function_on
     html: "<p>Attaches a function <code>handler</code> to each event in the provided <code>keys</code> collection. This function will be executed when one of the specified events is fired.</p>\n<pre><code>test <span class=\"string\">'event handlers are added with `on`'</span>, -&gt;\n  results = []\n  dynamite = Batman.mixin {}, Batman.EventEmitter\n  ok dynamite.<span class=\"literal\">on</span> <span class=\"string\">'detonate'</span>, -&gt; results.push <span class=\"string\">'detonated'</span>\n  dynamite.fire <span class=\"string\">'detonate'</span>\n  equal results[<span class=\"number\">0</span>], <span class=\"string\">'detonated'</span></code></pre>\n"
-  - title: off
+  - title: "off"
     tokens: []
     meta: 
       type: function

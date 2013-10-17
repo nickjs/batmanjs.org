@@ -131,9 +131,9 @@ api_index:
       - id: batman.eventemitter
         title: Batman.EventEmitter
       - id: prototype_function_on
-        title: on
+        title: "on"
       - id: prototype_function_off
-        title: off
+        title: "off"
       - id: prototype_function_fire
         title: fire
       - id: prototype_function_hasevent
@@ -450,8 +450,6 @@ api_index:
         title: "data-yield"
       - id: "data-contentfor"
         title: "data-contentfor"
-      - id: "data-replace"
-        title: "data-replace"
   - id: batman.view_filters
     title: Batman.View Filters
     sub: 

@@ -16,5 +16,6 @@ To generate them yourself, make sure you've cloned the main repo, and execute th
 
 ```bash
 cd batmanjs.github.io # or wherever you keep it
+npm install # if you haven't installed the dependencies before
 bin/generate_docs --dir <path to the main batman.js repo>/docs
 ```
