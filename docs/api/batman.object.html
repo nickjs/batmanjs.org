@@ -59,6 +59,10 @@ sub:
     tokens: []
     id: "hashkey()_%3A_string"
     html: "<p><code>hashKey</code> returns a unique string identifying this particular <code>Batman.Object</code>. No two <code>Batman.Object</code>s will have the same <code>hashKey</code>. Feel free to override the implmentation of this function on your objects if you have a better hashing scheme for a domain object of yours.</p>\n"
+  - title: "batchAccessorChanges(key, wrappedFunction) : string"
+    tokens: []
+    id: "batchaccessorchanges(key%2C_wrappedfunction)_%3A_string"
+    html: "<p>Prevents accessor from being recalculated while the specified function is called. Only after <code>wrappedFunction</code> is complete will the accessor be recomputed. Returns the result of <code>wrappedFunction</code>.</p>\n<p>This can be useful when making multiple changes, and only want a single change event fired after the modifications are in place.</p>\n"
   - title: "accessor([keys...], objectOrFunction)"
     tokens: []
     id: "accessor(%5Bkeys...%5D%2C_objectorfunction)"

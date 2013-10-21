@@ -104,6 +104,8 @@ api_index:
         title: "toJSON() : object"
       - id: "hashkey()_%3A_string"
         title: "hashKey() : string"
+      - id: "batchaccessorchanges(key%2C_wrappedfunction)_%3A_string"
+        title: "batchAccessorChanges(key, wrappedFunction) : string"
       - id: "accessor(%5Bkeys...%5D%2C_objectorfunction)"
         title: "accessor([keys...], objectOrFunction)"
       - id: "mixin(objects...)_%3A_this"
@@ -255,14 +257,14 @@ api_index:
   - id: batman.app_routing
     title: Batman.App Routing
     sub: 
+      - id: class_function_route
+        title: route
       - id: class_function_resources
         title: resources
       - id: class_function_member
         title: member
       - id: class_function_collection
         title: collection
-      - id: class_function_route
-        title: route
       - id: class_function_root
         title: root
   - id: batman.controller

@@ -50,7 +50,7 @@ sub:
       params: !<tag:yaml.org,2002:js/undefined> ""
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_layout
-    html: ""
+    html: "<p><code>@layout</code> is the base view of the entire view hierarchy. By default, it will parse any data-* attributes in the entire document, excluding any <code>data-yield</code>&#39;s, when <code>App.run()</code> is called. Use <code>MyApp.layout = null</code> to disable the creation of this default view.</p>\n"
   - title: currentParams
     tokens: []
     meta: 
@@ -59,7 +59,7 @@ sub:
       params: !<tag:yaml.org,2002:js/undefined> ""
       returnType: !<tag:yaml.org,2002:js/undefined> ""
     id: class_function_currentparams
-    html: ""
+    html: "<p><code>@currentParams</code> contains the URL parameters for the current request, including the path relative to the app&#39;s base path (<code>Batman.config.pathToApp</code>). Some interesting parts to look at: <code>@currentParams.controller</code>, <code>@currentParams.action</code>.</p>\n"
   - title: paramsManager
     tokens: []
     meta: 
